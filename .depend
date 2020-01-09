@@ -1,0 +1,2 @@
+p.pdf : p.tex stepper.bib chapter1.tex chapter2.tex 3/chapter3.tex 4/chapter4.tex 5/chapter5.tex 5/experiment.tex 6/chapter6.tex\
+        title.tex syaji.tex appendix.tex abstract_en.tex abstract_jp.tex
