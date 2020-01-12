@@ -11,7 +11,7 @@ type e_t = Var of string               (* x *)
          | Raise of e_t                (* raise e *)
 \end{verbatim}
 \end{spacing}
-\caption{Syntax}
+\caption{対象言語の定義}
 \label{figure:typee}
 \end{figure}
 
@@ -59,7 +59,7 @@ let start e =
     Error v -> Raise v
 \end{verbatim}
 \end{spacing}
-\caption{Big-step interpreter}
+\caption{big-step インタプリタ}
 \label{figure:interpreter}
 \end{figure}
 

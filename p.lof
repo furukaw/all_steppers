@@ -1,8 +1,10 @@
 \addvspace {10\p@ }
+\contentsline {figure}{\numberline {1.1}{\ignorespaces DrRacket のステッパ}}{vi}
+\contentsline {figure}{\numberline {1.2}{\ignorespaces DrRacket のステッパを進めた様子}}{vii}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Syntax}}{3}
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Big-step interpreter}}{4}
+\contentsline {figure}{\numberline {3.1}{\ignorespaces 対象言語の定義}}{3}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces big-step インタプリタ}}{4}
 \contentsline {figure}{\numberline {3.3}{\ignorespaces コンテキストと再構成関数 (試作版)}}{6}
 \contentsline {figure}{\numberline {3.4}{\ignorespaces コンテキストと再構成関数 (最終版)}}{7}
 \contentsline {figure}{\numberline {3.5}{\ignorespaces ステッパ関数}}{9}
@@ -33,6 +35,6 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {B.1}{\ignorespaces CPS インタプリタを非関数化して CPS 変換したプログラム}}{50}
-\contentsline {figure}{\numberline {B.2}{\ignorespaces CPS インタプリタを非関数化して CPS 変換して非関数化したプログラム}}{51}
+\contentsline {figure}{\numberline {A.1}{\ignorespaces CPS インタプリタを非関数化して CPS 変換したプログラム}}{51}
+\contentsline {figure}{\numberline {A.2}{\ignorespaces CPS インタプリタを非関数化して CPS 変換して非関数化したプログラム}}{52}
 \addvspace {10\p@ }

@@ -1,7 +1,13 @@
 \relax 
-\@writefile{toc}{\contentsline {chapter}{\numberline {第1章}序論}{1}}
+\citation{clements01}
+\@writefile{toc}{\contentsline {chapter}{\numberline {第1章}序論}{vi}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
+\newlabel{chapter:intro}{{1}{vi}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1.1}{\ignorespaces DrRacket のステッパ}}{vi}}
+\newlabel{figure:racket1}{{1.1}{vi}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1.2}{\ignorespaces DrRacket のステッパを進めた様子}}{vii}}
+\newlabel{figure:racket2}{{1.2}{vii}}
 \@writefile{toc}{\contentsline {chapter}{\numberline {第2章}関連研究}{2}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
@@ -13,9 +19,9 @@
 \newlabel{section:try-with__intro}{{3.1}{3}}
 \@writefile{toc}{\contentsline {section}{\numberline {3.2}対象言語とインタプリタの定義}{3}}
 \newlabel{section:try-with__interpreter}{{3.2}{3}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.1}{\ignorespaces Syntax}}{3}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.1}{\ignorespaces 対象言語の定義}}{3}}
 \newlabel{figure:typee}{{3.1}{3}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.2}{\ignorespaces Big-step interpreter}}{4}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.2}{\ignorespaces big-step インタプリタ}}{4}}
 \newlabel{figure:interpreter}{{3.2}{4}}
 \citation{FF1986}
 \@writefile{toc}{\contentsline {section}{\numberline {3.3}ステッパの実装}{5}}
@@ -27,7 +33,7 @@
 \@writefile{lof}{\contentsline {figure}{\numberline {3.5}{\ignorespaces ステッパ関数}}{9}}
 \newlabel{figure:stepper}{{3.5}{9}}
 \@writefile{lof}{\contentsline {figure}{\numberline {3.6}{\ignorespaces 関数 \texttt  {memo} とメイン関数}}{10}}
-\newlabel{figure:memo}{{3.6}{10}}
+\newlabel{figure:try-with__memo}{{3.6}{10}}
 \@writefile{toc}{\contentsline {section}{\numberline {3.4}おわりに}{10}}
 \newlabel{section:try-with__conclusion}{{3.4}{10}}
 \citation{EPTCS294.3}
@@ -176,10 +182,14 @@
 \newlabel{figure:new-stepper}{{5.8}{44}}
 \@writefile{lof}{\contentsline {figure}{\numberline {5.9}{\ignorespaces ステッパのスキップ機能}}{44}}
 \newlabel{figure:skip}{{5.9}{44}}
-\citation{FCA19}
-\@writefile{toc}{\contentsline {chapter}{\numberline {第6章}結論}{45}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {第6章}実験}{45}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
+\newlabel{chapter:experiment}{{6}{45}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {第7章}結論}{46}}
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\newlabel{chapter:conclusion}{{7}{46}}
 \bibstyle{jplain}
 \bibdata{stepper}
 \bibcite{clements01}{1}
@@ -189,20 +199,17 @@
 \bibcite{10.1145/2500365.2500590}{5}
 \bibcite{PRETNAR201519}{6}
 \bibcite{EPTCS294.3}{7}
-\@writefile{toc}{\contentsline {chapter}{\numberline {付 録A }実験でもちいたデータ}{48}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {付 録A }インタプリタの変換過程}{50}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {chapter}{\numberline {付 録B }インタプリタの変換過程}{49}}
+\@writefile{lof}{\contentsline {figure}{\numberline {A.1}{\ignorespaces CPS インタプリタを非関数化して CPS 変換したプログラム}}{51}}
+\newlabel{figure:3cps}{{A.1}{51}}
+\@writefile{lof}{\contentsline {figure}{\numberline {A.2}{\ignorespaces CPS インタプリタを非関数化して CPS 変換して非関数化したプログラム}}{52}}
+\newlabel{figure:4defun}{{A.2}{52}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {付 録B }学生の実行ログから得られたデータ}{53}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{lof}{\contentsline {figure}{\numberline {B.1}{\ignorespaces CPS インタプリタを非関数化して CPS 変換したプログラム}}{50}}
-\newlabel{figure:3cps}{{B.1}{50}}
-\@writefile{lof}{\contentsline {figure}{\numberline {B.2}{\ignorespaces CPS インタプリタを非関数化して CPS 変換して非関数化したプログラム}}{51}}
-\newlabel{figure:4defun}{{B.2}{51}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {付 録C }学生の実行ログから得られたデータ}{52}}
-\@writefile{lof}{\addvspace {10\p@ }}
-\@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{lot}{\contentsline {table}{\numberline {C.1}{\ignorespaces Number of uses of the stepper (step.) among all the executions (all) in 2017 and 2018. The columns try, mod., print, and ref represent number of uses of the stepper for programs that contain exception handling, modules, printing (and sequential execution), and references (including arrays), respectively. The rightmost column shows representative topics handled in the week.}}{52}}
-\newlabel{TableUsage}{{C.1}{52}}
-\@writefile{lot}{\contentsline {table}{\numberline {C.2}{\ignorespaces Result of one-sided t-test with p-values comparing the time between the beginning of the class and the moment that students submitted a correct solution. The column +/- shows whether the average time increased or decreased. The p-values below $0.05$ are colored.}}{53}}
-\newlabel{TableTTest}{{C.2}{53}}
+\@writefile{lot}{\contentsline {table}{\numberline {B.1}{\ignorespaces ステッパが使用された回数}}{53}}
+\newlabel{TableUsage}{{B.1}{53}}
+\@writefile{lot}{\contentsline {table}{\numberline {B.2}{\ignorespaces 拡張されたステッパを利用した年と他の年の学生が正答するまでの時間の比較}}{54}}
+\newlabel{TableTTest}{{B.2}{54}}

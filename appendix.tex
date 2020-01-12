@@ -1,12 +1,8 @@
-\chapter{実験でもちいたデータ}
-
-ここには，実験のデータなど，論文の本文中に載せられなかったが，
-読者にとって役に立つとおもわれるデータなどを付録として掲載する．
-
 \chapter{インタプリタの変換過程}
 
 \begin{figure}
   % code/3cps/eval.ml より
+  \begin{spacing}{0.8}
 \begin{verbatim}
 (* CPS インタプリタを非関数化して CPS 変換した関数 *)
 let rec eval (exp : e) (k : k) (k2 : k2) : a = match exp with
@@ -18,7 +14,7 @@ let rec eval (exp : e) (k : k) (k2 : k2) : a = match exp with
 
 (* handle 節内の継続を適用する関数 *)
 and apply_in (k : k) (v : v) (k2 : k2) : a = match k with
-  | FId -> k2 (Return v)  (* 継続を適用 *)
+  | FId -> k2 (Return v)  (* 継続適用 *)
   | FApp2 (e1, k) -> let v2 = v in eval e1 (FApp1 (v2, k)) k2
   | FApp1 (v2, k) -> let v1 = v in
     (match v1 with
@@ -29,7 +25,7 @@ and apply_in (k : k) (v : v) (k2 : k2) : a = match k with
         (cont_value k) v2 k2
       | _ -> failwith "type error")
   | FOp (name, k) ->
-    k2 (OpCall (name, v, (fun v -> fun k2' -> apply_in k v k2'))) (* 継続を適用 *)
+    k2 (OpCall (name, v, (fun v -> fun k2' -> apply_in k v k2'))) (* 継続適用 *)
 
 (* handle 節内の実行結果をハンドラで処理する関数 *)
 and apply_handler (k : k) (h : h) (a : a) (k2 : k2) : a = match a with
@@ -37,27 +33,29 @@ and apply_handler (k : k) (h : h) (a : a) (k2 : k2) : a = match a with
     (match h with {return = (x, e)} ->
       let reduct = subst e [(x, v)] in
       eval reduct k k2)
-  | OpCall (name, v, va) ->
+  | OpCall (name, v, m) ->
     (match search_op name h with
       | None ->
-        k2 (OpCall (name, v, (fun v -> fun k2' ->  (* 継続を適用 *)
-          va v (fun a' -> apply_handler k h a' k2'))))  (* GHandle に変換 *)
+        k2 (OpCall (name, v, (fun v -> fun k2' ->  (* 継続適用 *)
+          m v (fun a' -> apply_handler k h a' k2'))))  (* GHandle に変換 *)
       | Some (x, y, e) ->
         let cont_value =
           Cont (fun k'' -> fun v -> fun k2 ->
-            va v (fun a' -> apply_handler k'' h a' k2)) in  (* GHandle に変換 *)
+            m v (fun a' -> apply_handler k'' h a' k2)) in  (* GHandle に変換 *)
         let reduct = subst e [(x, v); (y, cont_value)] in
         eval reduct k k2)
 
 (* 初期継続を渡して実行を始める *)
 let interpreter (e : e) : a = eval e FId (fun a -> a)  (* GId に変換される *)
 \end{verbatim}
+\end{spacing}
 \caption{CPS インタプリタを非関数化して CPS 変換したプログラム}
 \label{figure:3cps}
 \end{figure}
 
 \begin{figure}
   % code/4defun/syntax.ml より
+  \begin{spacing}{0.8}
 \begin{verbatim}
 (* CPS インタプリタを非関数化して CPS 変換して非関数化した関数 *)
 let rec eval (exp : e) (k : k) (k2 : k2) : a = match exp with
@@ -93,22 +91,23 @@ and apply_handler (k : k) (h : h) (a : a) (k2 : k2) : a = match a with
     (match search_op name h with
       | None ->
         apply_out k2 (OpCall (name, v,
-          (fun v -> fun k2' -> va v (GHandle (h, k, k2')))))
+          (fun v -> fun k2' -> m v (GHandle (h, k, k2')))))
       | Some (x, y, e) ->
         let cont_value =
-          Cont (fun k'' -> fun v -> fun k2 -> va v (GHandle (h, k'', k2))) in
+          Cont (fun k'' -> fun v -> fun k2 -> m v (GHandle (h, k'', k2))) in
         let reduct = subst e [(x, v); (y, cont_value)] in
         eval reduct k k2)
 
 (* 初期継続を渡して実行を始める *)
 let interpreter (e : e) : a = eval e FId GId
 \end{verbatim}
+\end{spacing}
 \caption{CPS インタプリタを非関数化して CPS 変換して非関数化したプログラム}
 \label{figure:4defun}
 \end{figure}
 
 \chapter{学生の実行ログから得られたデータ}
-\begin{table}[!b]
+\begin{table}[h]
 \begin{center}
   \begin{tabular}{|c||c|c|c|c|c|c||c|c|c|c|c|c||l|}
     \hline
@@ -132,13 +131,19 @@ let interpreter (e : e) : a = eval e FId GId
     15 & 517 & 6 & 0 & 0 & 0 & 0 & 1717 & 68 & 0 & 5 & 0 & 30 & heap\\ \hline
   \end{tabular}
 \end{center}
-  \caption{Number of uses of the stepper (step.) among all the
-  executions (all) in 2017 and 2018.  The columns try, mod., print,
-  and ref represent number of uses of the stepper for programs that
-  contain exception handling, modules, printing (and sequential
-  execution), and references (including arrays), respectively.
-  The rightmost column shows representative topics handled in the
-  week.}
+  % \caption{Number of uses of the stepper (step.) among all the
+  % executions (all) in 2017 and 2018.  The columns try, mod., print,
+  % and ref represent number of uses of the stepper for programs that
+  % contain exception handling, modules, printing (and sequential
+  % execution), and references (including arrays), respectively.
+  % The rightmost column shows representative handled in the
+  % week.}
+  \caption[ステッパが使用された回数]{
+    2017年度と2018年度の全ての実行 (all) のうちステッパの使用回数 (step.)。
+    try、mod.、print、ref の列はそれぞれ例外処理、モジュール、標準出力 (と逐次実行)、
+    書き換え可能な変数 (配列を含む) を表している。
+    右端の列はその週に取り上げた内容である。
+  }
   \label{TableUsage}
 \end{table}
 
@@ -332,6 +337,15 @@ let interpreter (e : e) : a = eval e FId GId
     & \\ \hline
   \end{tabular}
   \end{center}
-  \caption{Result of one-sided t-test with p-values comparing the time between the beginning of the class and the moment that students submitted a correct solution.  The column +/- shows whether the average time increased or decreased.  The p-values below $0.05$ are colored.}
+  % \caption{Result of one-sided t-test with p-values comparing
+  % the time between the beginning of the class and
+  % the moment that students submitted a correct solution.
+  % The column +/- shows whether the average time increased or decreased.
+  % The p-values below $0.05$ are colored.}
+  \caption[拡張されたステッパを利用した年と他の年の学生が正答するまでの時間の比較]{
+    授業開始から学生が正解を提出するまでにかかった時間を比較した片側 t 検定の結果と p 値。
+    列 +/- は平均値が増加したか減少したかを表している。
+    $0.05$ 未満の p 値に色を付けた。
+  } 
   \label{TableTTest}
 \end{table}

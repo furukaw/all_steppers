@@ -92,8 +92,8 @@ let rec plug expr ctxt = match ctxt with
 % an additional argument representing the context,
 % we should be able to display all the steps of
 % the arithmetic expression \texttt{(1 + 2 * 3) + 4}.
-Now、■■関数 \texttt{eval} がコンテキストを表す追加の引数を受け取るようにすれば、
-算術式 \texttt{eval} のステップ表示ができるようになるはずである。
+これで■■、関数 \texttt{eval} がコンテキストを表す追加の引数を受け取るようにすれば、
+\texttt{(1 + 2 * 3) + 4} のような式のステップ表示ができるようになるはずである。
 % For instance, when evaluating the subexpression \texttt{2 * 3},
 % the extra argument will be a two-element list
 % \texttt{[(1 + [.]);\ ([.]\ + 4)]},
@@ -107,12 +107,12 @@ Now、■■関数 \texttt{eval} がコンテキストを表す追加の引数�
 % evaluation context is the continuation.
 最終的に得られるステッパ■■は、式を control string■■、評価文脈を継続とみなすと、本質的にCK 機械 \cite{FF1986} であるといえる。
 % Substitution is used to implement $\beta$-reduction.
-代入は $\beta$ 簡約の実装のために用いられている。
+代入は $\beta$ 簡約の実装のために用いられている■■。
 % We did not implement the abstract machine directly but augmented a
 % big-step interpreter, because we want to keep the correspondence between
 % big-step execution and small-step execution.
 big-step インタプリタと small-step インタプリタの実行の対応を維持するため、
-抽象機械を直接実装するのsurunoではなく big-step インタプリタを拡張することで実装した。
+抽象機械を直接実装するのではなく big-step インタプリタの拡張によって実装した。
 % 抽象マシンを直接実装するのではなく、
 % 大きなステップの実行と小さなステップの実行との対応を維持したいため、
 % 大きなステップのインタープリターを追加しました。
@@ -125,7 +125,6 @@ big-step インタプリタを基にすることで、ユーザが指定した�
 % this na\"ive implementation does not work
 % in the presence of exception handlers.
 しかし、この実装は例外処理について正しく機能しない。
-
 % Consider \texttt{try (2 + 3 * (raise 4) + 5) with x -> x}.
 例えば、 \texttt{try (2 + 3 * (raise 4) + 5) with x -> x} について考える。
 % When step-executing this expression, we expect to see the following steps:
@@ -150,7 +149,7 @@ big-step インタプリタを基にすることで、ユーザが指定した�
 % the context \emph{within} the tryee.
 しかし、最初のステップでハイライトされている式はそれよりも大きい式
 \texttt{(2 + 3 * (raise 4) + 5)} である。
-これは \texttt{raise} による■■簡約が tryee の内部のコンテキストを捨てるからである。
+これは \texttt{raise 4} の実行で例外を起こす際に、この式の外側にある、tryee の内部のコンテキストを捨てるからである。
 % Since context frames are collected in a single list,
 % the second argument at this point will be
 % \texttt{[(3 * [.]); (2 + [.]);\ ([.]\ + 5);\ (try [.]\ with x -> x)]},
@@ -225,8 +224,8 @@ let rec plug expr (clist, tries) =
 新しい \texttt{frame\_t} 型の定義は、 \texttt{CTry} を含まないようになっている。
 % When evaluating a program that uses try-with constructs,
 % these frames are used to build a delimited context within a tryee.
-これらのフレームは、try-with 構文を使うプログラムを実行するときに tryee の内部の
-限定されたコンテキストを構成するために使う。
+\texttt{frame\_t} 型のフレームは、try-with 構文を使うプログラムを実行において
+tryee の内部に限定されたコンテキストを表すために使う。
 % We next find a separate datatype \texttt{ctry\_t},
 % which can be understood as meta contexts.
 次に、別の型 \texttt{ctry\_t} が定義されており、これはメタコンテキストを表す型である。
@@ -281,14 +280,14 @@ eval (4 + 6) ([2 * [.]], CHole)
 すなわち \texttt{3 + (raise [.])\ - 5} が捨てられている。
 
 % Now we present our stepping interpreter in Figure \ref{figure:stepper}.
-以上を踏まえ、ステッパ関数を図 \ref{figure:stepper} に示す。
+以上を踏まえ、ステッパ関数を図 \ref{figure:stepper} および図 \ref{figure:try-with__memo} に示す。
 % The function extends the big-step interpreter in two ways
 % (as shaded in the figure):
 この関数は通常の big-step インタプリタを以下の 2 点において拡張したものである (図中の灰色の部分)。
 % (i) it receives an argument representing the evaluation context;
 (i) コンテキストを表す引数を受け取るようにする。
 % and (ii) it outputs the current program every time reduction takes place.
-(ii) 簡約が行われる全ての箇所で現在のプログラムを出力する。
+(ii) 簡約が行われる全ての箇所で簡約前後のプログラムをそれぞれ出力する。
 
 \begin{figure}
 %(* add a non-try frame *)
@@ -332,27 +331,27 @@ let rec eval expr \colorbox{lightgray}{ctxt} = match expr with    (* コンテ�
     let v = eval e0 \colorbox{lightgray}{(add ctxt CRaise)} in            (* コンテキスト情報を足す *)
     \colorbox{lightgray}{begin match ctxt with                   }
 \end{alltt}
-\vspace{-28pt}
+\vspace{-27pt}
 \begin{alltt}
     \colorbox{lightgray}{    | ([], _) -> ()                     }
 \end{alltt}
-\vspace{-28pt}
+\vspace{-27pt}
 \begin{alltt}
     \colorbox{lightgray}{    | (clist, tries) ->                 }
 \end{alltt}
-\vspace{-28pt}
+\vspace{-27pt}
 \begin{alltt}
     \colorbox{lightgray}{      memo (plug_in_try (Raise v) clist)}                        (* 出力 *)
 \end{alltt}
-\vspace{-28pt}
+\vspace{-27pt}
 \begin{alltt}
     \colorbox{lightgray}{           (Raise v)                    }
 \end{alltt}
-\vspace{-28pt}
+\vspace{-27pt}
 \begin{alltt}
     \colorbox{lightgray}{           ([], tries)                  }
 \end{alltt}
-\vspace{-28pt}
+\vspace{-27pt}
 \begin{alltt}
     \colorbox{lightgray}{end;                                    }
     raise (Error (v))
@@ -383,7 +382,7 @@ let start e =
 \end{spacing}
 % \caption{\texttt{memo} and main functions}
 \caption{関数 \texttt{memo} とメイン関数}
-\label{figure:memo}
+\label{figure:try-with__memo}
 \end{figure}
 
 % Let us observe the application case.
@@ -402,7 +401,7 @@ let start e =
 % we have an additional function call to the \texttt{memo} function
 % defined in Figure \ref{figure:memo}.
 それに対しステッパでは、
-図 \ref{figure:memo} で定義された関数 \texttt{memo} の呼び出しが追加されている。
+図 \ref{figure:try-with__memo} で定義された関数 \texttt{memo} の呼び出しが追加されている。
 % This function receives three arguments:
 % the redex we have just found, its reduct, and the current evaluation context.
 この関数は 3 つの引数を受け取る。
@@ -415,7 +414,7 @@ let start e =
 \footnote{
     % In the actual implementation,
     % we annotate redexes and reducts using OCaml's \emph{attributes}.
-    実際の実装においては、簡約基と簡約後の式の注釈をつけるのに
+    実際の実装においては、簡約基と簡約後の式の範囲を表す情報をつけるのに
     OCaml の \emph{attributes} という機能を利用している。
     % Here, we write \texttt{green expr1} to mean \texttt{expr1[@stepper.redex]},
     % and similarly for \texttt{purple}.
@@ -448,7 +447,8 @@ let start e =
 それにもかかわらずこれらを別の規則として扱っていることに注目してほしい。
 % The reason is that we need the latter to reduce
 % a raise construct with no matching try clause:
-その理由は、次のような対応する try 節が無い \texttt{raise} 式を簡約するのに 3 つ目の規則が必要だからである。
+その理由は、例えば \texttt{3 + (raise 4) - 5} $\leadsto$ \texttt{raise 4} のように
+対応する try 節が無い \texttt{raise} 式の簡約に 3 つ目の規則が必要だからである。
 % \eg, \texttt{3 + (raise 4) - 5} $\leadsto$ \texttt{raise 4}.
 % Separating the two reductions also has an educational benefit:
 % it clearly tells us that exception handling consists of two tasks:
