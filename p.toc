@@ -1,19 +1,56 @@
 \contentsline {chapter}{\numberline {第1章}序論}{1}
 \contentsline {chapter}{\numberline {第2章}関連研究}{2}
 \contentsline {chapter}{\numberline {第3章}try-with 構文のステップ実行}{3}
-\contentsline {chapter}{\numberline {第4章}４}{4}
-\contentsline {chapter}{\numberline {第5章}５}{5}
-\contentsline {section}{\numberline {5.1}Stepping OCaml in the Classroom}{5}
-\contentsline {subsection}{\numberline {5.1.1}The OCaml Course}{5}
-\contentsline {subsection}{\numberline {5.1.2}The Uses of the Stepper}{6}
-\contentsline {subsection}{\numberline {5.1.3}Effects of Stepper}{9}
-\contentsline {paragraph}{Threats to validity.}{10}
-\contentsline {subsection}{\numberline {5.1.4}Students' Evaluation}{10}
-\contentsline {paragraph}{Understanding of the behavior of programs.}{11}
-\contentsline {paragraph}{Debugging.}{11}
-\contentsline {chapter}{\numberline {第6章}結論}{13}
-\contentsline {chapter}{\numberline {付 録A }実験でもちいたデータ}{16}
-\contentsline {chapter}{\numberline {付 録B }ふろく}{17}
-\contentsline {section}{\numberline {B.1}section}{17}
-\contentsline {section}{\numberline {B.2}2}{17}
-\contentsline {chapter}{\numberline {付 録C }furoku}{18}
+\contentsline {section}{\numberline {3.1}はじめに}{3}
+\contentsline {section}{\numberline {3.2}対象言語とインタプリタの定義}{3}
+\contentsline {section}{\numberline {3.3}ステッパの実装}{5}
+\contentsline {section}{\numberline {3.4}おわりに}{10}
+\contentsline {chapter}{\numberline {第4章}４}{12}
+\contentsline {section}{\numberline {4.1}ステッパの実装方法とコンテキスト}{12}
+\contentsline {section}{\numberline {4.2}algebraic effects とインタプリタの定義}{13}
+\contentsline {subsection}{\numberline {4.2.1}algebraic effects}{13}
+\contentsline {subsection}{\numberline {4.2.2}構文の定義}{15}
+\contentsline {subsection}{\numberline {4.2.3}CPS インタプリタによる意味論}{15}
+\contentsline {section}{\numberline {4.3}インタプリタの変換}{19}
+\contentsline {subsection}{\numberline {4.3.1}非関数化}{19}
+\contentsline {subsection}{\numberline {4.3.2}CPS 変換}{21}
+\contentsline {subsection}{\numberline {4.3.3}非関数化}{21}
+\contentsline {subsection}{\numberline {4.3.4}出力}{23}
+\contentsline {subsection}{\numberline {4.3.5}CPSインタプリタに基づいたステッパ}{23}
+\contentsline {section}{\numberline {4.4}他の言語への対応}{24}
+\contentsline {subsection}{\numberline {4.4.1}型無し$\lambda $計算}{26}
+\contentsline {subsection}{\numberline {4.4.2}try-with}{26}
+\contentsline {subsection}{\numberline {4.4.3}shift/reset}{26}
+\contentsline {subsection}{\numberline {4.4.4}Multicore OCaml}{26}
+\contentsline {section}{\numberline {4.5}まとめ}{26}
+\contentsline {chapter}{\numberline {第5章}５}{28}
+\contentsline {section}{\numberline {5.1}ステッパの動作}{28}
+\contentsline {subsection}{\numberline {5.1.1}DrRacketのステッパ}{28}
+\contentsline {subsection}{\numberline {5.1.2}incremental でない OCaml ステッパ}{28}
+\contentsline {subsection}{\numberline {5.1.3}提案するステッパ}{28}
+\contentsline {section}{\numberline {5.2}OCaml の attribute}{29}
+\contentsline {subsection}{\numberline {5.2.1}式の attribute}{29}
+\contentsline {subsection}{\numberline {5.2.2}プログラムの attribute}{30}
+\contentsline {section}{\numberline {5.3}生じる問題と解決方法}{31}
+\contentsline {subsection}{\numberline {5.3.1}情報の消失}{31}
+\contentsline {subsubsection}{問題点}{31}
+\contentsline {subsubsection}{解決方法}{31}
+\contentsline {subsection}{\numberline {5.3.2}表示の崩れ}{32}
+\contentsline {subsubsection}{問題点}{32}
+\contentsline {subsubsection}{解決方法}{32}
+\contentsline {section}{\numberline {5.4}$\lambda $計算に対する実装}{33}
+\contentsline {subsection}{\numberline {5.4.1}incremental でないステッパ}{34}
+\contentsline {subsection}{\numberline {5.4.2}incremental なステッパ}{35}
+\contentsline {subsubsection}{情報の付加}{36}
+\contentsline {subsubsection}{情報の利用}{37}
+\contentsline {subsection}{\numberline {5.4.3}実際のステッパ}{38}
+\contentsline {subsection}{\numberline {5.4.4}ツールの実装}{38}
+\contentsline {section}{\numberline {5.5}予想される問題点}{39}
+\contentsline {subsection}{\numberline {5.5.1}文字数の爆発}{39}
+\contentsline {subsection}{\numberline {5.5.2}実行時間}{39}
+\contentsline {subsection}{\numberline {5.5.3}関数適用評価スキップ後の前ステップ出力}{39}
+\contentsline {section}{\numberline {5.6}まとめと今後の課題}{40}
+\contentsline {chapter}{\numberline {第6章}結論}{45}
+\contentsline {chapter}{\numberline {付 録A }実験でもちいたデータ}{48}
+\contentsline {chapter}{\numberline {付 録B }インタプリタの変換過程}{49}
+\contentsline {chapter}{\numberline {付 録C }学生の実行ログから得られたデータ}{52}

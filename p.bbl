@@ -1,5 +1,17 @@
 \begin{thebibliography}{1}
 
+\bibitem{clements01}
+John Clements, Matthew Flatt, and Matthias Felleisen.
+\newblock Modeling an algebraic stepper.
+\newblock In {\em European symposium on programming}, pp. 320--334. Springer,
+  2001.
+
+\bibitem{FF1986}
+Matthias Felleisen and Daniel~P. Friedman.
+\newblock Control operators, the secd-machine, and the $\lambda$-calculus.
+\newblock In M.~Wirsing, editor, {\em Formal Description of Programming
+  Concepts III}, pp. 193--219. Elsevier, 1986.
+
 \bibitem{FCA19}
 Tsukino Furukawa, Youyou Cong, and Kenichi Asai.
 \newblock Stepping {OCaml}.
@@ -7,5 +19,36 @@ Tsukino Furukawa, Youyou Cong, and Kenichi Asai.
   Functional Programming in Education, {\rm Chalmers University, Gothenburg,
   Sweden, 14th June 2018}}, Vol. 295 of {\em Electronic Proceedings in
   Theoretical Computer Science}, pp. 17--34, 2019.
+
+\bibitem{e6cb0c3222794e48bf38cf44e46fe4aa}
+Daniel Hillerstr{\"o}m, Sam Lindley, Robert Atkey, and KC~Sivaramakrishnan.
+\newblock Continuation passing style for effect handlers.
+\newblock In Dale Miller, editor, {\em 2nd International Conference on Formal
+  Structures for Computation and Deduction (FSCD 2017)}, Leibniz International
+  Proceedings in Informatics (LIPIcs), pp. 18:1--18:19, 9 2017.
+
+\bibitem{10.1145/2500365.2500590}
+Ohad Kammar, Sam Lindley, and Nicolas Oury.
+\newblock Handlers in action.
+\newblock In {\em Proceedings of the 18th ACM SIGPLAN International Conference
+  on Functional Programming}, ICFP '13, pp. 145--158, New York, NY, USA, 2013.
+  Association for Computing Machinery.
+
+\bibitem{PRETNAR201519}
+Matija Pretnar.
+\newblock An introduction to algebraic effects and handlers. invited tutorial
+  paper.
+\newblock {\em Electronic Notes in Theoretical Computer Science}, Vol. 319, pp.
+  19--35, 2015.
+\newblock The 31st Conference on the Mathematical Foundations of Programming
+  Semantics (MFPS XXXI).
+
+\bibitem{EPTCS294.3}
+John Whitington and Tom Ridge.
+\newblock Direct interpretation of functional programs for debugging.
+\newblock In Sam Lindley and Gabriel Scherer, editors, {\em {\rm Proceedings}
+  ML Family / OCaml Users and Developers workshops, {\rm Oxford, UK, 7th
+  September 2017}}, Vol. 294 of {\em Electronic Proceedings in Theoretical
+  Computer Science}, pp. 41--73, 2019.
 
 \end{thebibliography}

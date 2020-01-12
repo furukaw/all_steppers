@@ -1,12 +1,38 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Syntax}}{3}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Big-step interpreter}}{4}
+\contentsline {figure}{\numberline {3.3}{\ignorespaces コンテキストと再構成関数 (試作版)}}{6}
+\contentsline {figure}{\numberline {3.4}{\ignorespaces コンテキストと再構成関数 (最終版)}}{7}
+\contentsline {figure}{\numberline {3.5}{\ignorespaces ステッパ関数}}{9}
+\contentsline {figure}{\numberline {3.6}{\ignorespaces 関数 \texttt {memo} とメイン関数}}{10}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {4.1}{\ignorespaces 型無し$\lambda $計算とそのインタプリタ}}{13}
+\contentsline {figure}{\numberline {4.2}{\ignorespaces 型無し$\lambda $計算に対するステッパ}}{14}
+\contentsline {figure}{\numberline {4.3}{\ignorespaces 対象言語の構文}}{16}
+\contentsline {figure}{\numberline {4.4}{\ignorespaces 対象言語の定義}}{17}
+\contentsline {figure}{\numberline {4.5}{\ignorespaces 継続渡し形式で書かれたインタプリタ}}{18}
+\contentsline {figure}{\numberline {4.6}{\ignorespaces 非関数化後の継続の型}}{20}
+\contentsline {figure}{\numberline {4.7}{\ignorespaces CPS インタプリタを非関数化したプログラム}}{20}
+\contentsline {figure}{\numberline {4.8}{\ignorespaces 2回目の非関数化後の継続の型}}{21}
+\contentsline {figure}{\numberline {4.9}{\ignorespaces 変換の後、出力関数を足して得られるステッパ}}{22}
+\contentsline {figure}{\numberline {4.10}{\ignorespaces 継続を外側に拡張する関数}}{23}
+\contentsline {figure}{\numberline {4.11}{\ignorespaces 継続の情報を保持するための言語やコンテキストの定義}}{24}
+\contentsline {figure}{\numberline {4.12}{\ignorespaces 変換の結果得られた、CPSインタプリタを基にしたステッパ}}{25}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {5.1}{\ignorespaces attribute を含む構文木の例}}{29}
+\contentsline {figure}{\numberline {5.2}{\ignorespaces ハイライトのための attribute の利用}}{30}
+\contentsline {figure}{\numberline {5.3}{\ignorespaces 対象言語の定義}}{34}
+\contentsline {figure}{\numberline {5.4}{\ignorespaces 既存のステッパの実装}}{41}
+\contentsline {figure}{\numberline {5.5}{\ignorespaces ステップ出力関数}}{42}
+\contentsline {figure}{\numberline {5.6}{\ignorespaces 実行の種類とステップ番号の定義}}{42}
+\contentsline {figure}{\numberline {5.7}{\ignorespaces incremental なステッパのための出力関数}}{43}
+\contentsline {figure}{\numberline {5.8}{\ignorespaces incremental なステッパ}}{44}
+\contentsline {figure}{\numberline {5.9}{\ignorespaces ステッパのスキップ機能}}{44}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces Frequency of standard execution (light-colored) and step execution (dark-colored) in each week in 2017 and 2018. The stepper was not used at all toward the end of the course in 2017, but it was used in some degree in 2018.}}{7}
-\contentsline {figure}{\numberline {5.2}{\ignorespaces Number of times the stepper was used to evaluate a program with ``try'', ``module'', ``print'' or ``ref'' in 2018.}}{8}
-\contentsline {figure}{\numberline {5.3}{\ignorespaces Number of questions where students arrived at a correct answer significantly faster in 2017 and 2018 than 2016.}}{9}
 \addvspace {10\p@ }
-\addvspace {10\p@ }
-\addvspace {10\p@ }
+\contentsline {figure}{\numberline {B.1}{\ignorespaces CPS インタプリタを非関数化して CPS 変換したプログラム}}{50}
+\contentsline {figure}{\numberline {B.2}{\ignorespaces CPS インタプリタを非関数化して CPS 変換して非関数化したプログラム}}{51}
 \addvspace {10\p@ }

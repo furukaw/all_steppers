@@ -3,10 +3,335 @@
 ここには，実験のデータなど，論文の本文中に載せられなかったが，
 読者にとって役に立つとおもわれるデータなどを付録として掲載する．
 
-\chapter{ふろく}
+\chapter{インタプリタの変換過程}
 
-\section{section}
+\begin{figure}
+  % code/3cps/eval.ml より
+\begin{verbatim}
+(* CPS インタプリタを非関数化して CPS 変換した関数 *)
+let rec eval (exp : e) (k : k) (k2 : k2) : a = match exp with
+  | Val (v) -> apply_in k v k2
+  | App (e1, e2) -> eval e2 (FApp2 (e1, k)) k2
+  | Op (name, e) -> eval e (FOp (name, k)) k2
+  | With (h, e) ->
+    eval e FId (fun a -> apply_handler k h a k2)  (* GHandle に変換される *)
 
-\section{2}
+(* handle 節内の継続を適用する関数 *)
+and apply_in (k : k) (v : v) (k2 : k2) : a = match k with
+  | FId -> k2 (Return v)  (* 継続を適用 *)
+  | FApp2 (e1, k) -> let v2 = v in eval e1 (FApp1 (v2, k)) k2
+  | FApp1 (v2, k) -> let v1 = v in
+    (match v1 with
+      | Fun (x, e) ->
+        let reduct = subst e [(x, v2)] in
+        eval reduct k k2
+      | Cont (cont_value) ->
+        (cont_value k) v2 k2
+      | _ -> failwith "type error")
+  | FOp (name, k) ->
+    k2 (OpCall (name, v, (fun v -> fun k2' -> apply_in k v k2'))) (* 継続を適用 *)
 
-\chapter{furoku}
+(* handle 節内の実行結果をハンドラで処理する関数 *)
+and apply_handler (k : k) (h : h) (a : a) (k2 : k2) : a = match a with
+  | Return v ->
+    (match h with {return = (x, e)} ->
+      let reduct = subst e [(x, v)] in
+      eval reduct k k2)
+  | OpCall (name, v, va) ->
+    (match search_op name h with
+      | None ->
+        k2 (OpCall (name, v, (fun v -> fun k2' ->  (* 継続を適用 *)
+          va v (fun a' -> apply_handler k h a' k2'))))  (* GHandle に変換 *)
+      | Some (x, y, e) ->
+        let cont_value =
+          Cont (fun k'' -> fun v -> fun k2 ->
+            va v (fun a' -> apply_handler k'' h a' k2)) in  (* GHandle に変換 *)
+        let reduct = subst e [(x, v); (y, cont_value)] in
+        eval reduct k k2)
+
+(* 初期継続を渡して実行を始める *)
+let interpreter (e : e) : a = eval e FId (fun a -> a)  (* GId に変換される *)
+\end{verbatim}
+\caption{CPS インタプリタを非関数化して CPS 変換したプログラム}
+\label{figure:3cps}
+\end{figure}
+
+\begin{figure}
+  % code/4defun/syntax.ml より
+\begin{verbatim}
+(* CPS インタプリタを非関数化して CPS 変換して非関数化した関数 *)
+let rec eval (exp : e) (k : k) (k2 : k2) : a = match exp with
+  | Val (v) -> apply_in k v k2
+  | App (e1, e2) -> eval e2 (FApp2 (e1, k)) k2
+  | Op (name, e) -> eval e (FOp (name, k)) k2
+  | With (h, e) -> eval e FId (GHandle (h, k, k2))
+
+(* handle 節内の継続を適用する関数 *)
+and apply_in (k : k) (v : v) (k2 : k2) : a = match k with
+  | FId -> apply_out k2 (Return v)
+  | FApp2 (e1, k) -> let v2 = v in eval e1 (FApp1 (v2, k)) k2
+  | FApp1 (v2, k) -> let v1 = v in (match v1 with
+    | Fun (x, e) ->
+      let reduct = subst e [(x, v2)] in
+      eval reduct k k2
+    | Cont (cont_value) ->
+      (cont_value k) v2 k2
+    | _ -> failwith "type error")
+  | FOp (name, k) ->
+    apply_out k2 (OpCall (name, v, (fun v -> fun k2' -> apply_in k v k2')))
+
+(* 全体の継続を適用する関数 *)
+and apply_out (k2 : k2) (a : a) : a = match k2 with
+  | GId -> a
+  | GHandle (h, k, k2) -> apply_handler k h a k2
+
+(* handle 節内の実行結果をハンドラで処理する関数 *)
+and apply_handler (k : k) (h : h) (a : a) (k2 : k2) : a = match a with
+  | Return v -> (match h with {return = (x, e)} ->
+    let reduct = subst e [(x, v)] in eval reduct k k2)
+  | OpCall (name, v, va) ->
+    (match search_op name h with
+      | None ->
+        apply_out k2 (OpCall (name, v,
+          (fun v -> fun k2' -> va v (GHandle (h, k, k2')))))
+      | Some (x, y, e) ->
+        let cont_value =
+          Cont (fun k'' -> fun v -> fun k2 -> va v (GHandle (h, k'', k2))) in
+        let reduct = subst e [(x, v); (y, cont_value)] in
+        eval reduct k k2)
+
+(* 初期継続を渡して実行を始める *)
+let interpreter (e : e) : a = eval e FId GId
+\end{verbatim}
+\caption{CPS インタプリタを非関数化して CPS 変換して非関数化したプログラム}
+\label{figure:4defun}
+\end{figure}
+
+\chapter{学生の実行ログから得られたデータ}
+\begin{table}[!b]
+\begin{center}
+  \begin{tabular}{|c||c|c|c|c|c|c||c|c|c|c|c|c||l|}
+    \hline
+    & \multicolumn{6}{|c||}{2017} & \multicolumn{6}{|c||}{2018} & \\ \cline{2-13}
+    \hspace{-1mm}week\hspace{-1mm} & all & step. & try & \hspace{-1mm}mod.\hspace{-1mm} & \hspace{-1mm}print\hspace{-1mm} & ref
+    & all & step. & try & \hspace{-1mm}mod.\hspace{-1mm} & \hspace{-1mm}print\hspace{-1mm} & ref & contents\\ \hline
+    1 & 1293 & 504 & 0 & 0 & 0 & 0 & 1233 & 627 & 0 & 0 & 0 & 0 & fun.\ def.\\ \hline
+    2 & 1511 & 235 & 0 & 0 & 0 & 0 & 1375 & 189 & 0 & 0 & 0 & 0 & if\\ \hline
+    3 & 1618 & 144 & 0 & 0 & 0 & 0 & 1641 & 179 & 0 & 0 & 0 & 0 & record\\ \hline
+    4 & 2364 & 169 & 0 & 0 & 0 & 0 & 2517 & 332 & 0 & 0 & 0 & 0 & list\\ \hline
+    5 & 2556 & 193 & 0 & 0 & 0 & 0 & 3173 & 213 & 0 & 0 & 0 & 0 & list 2\\ \hline
+    6 & 1596 & 43 & 0 & 0 & 0 & 0 & 1369 & 41 & 0 & 0 & 0 & 0 & Dijkstra\\ \hline
+    7 & 2621 & 92 & 0 & 0 & 0 & 0 & 3570 & 86 & 0 & 0 & 0 & 0 & map\\ \hline
+    8 & 1874 & 81 & 0 & 0 & 0 & 0 & 2028 & 75 & 0 & 0 & 0 & 0 & filter\\ \hline
+    9 & 2184 & 34 & 0 & 0 & 0 & 0 & 3300 & 98 & 0 & 0 & 0 & 0 & gen.\ rec.\\ \hline
+    10 & 2254 & 48 & 0 & 0 & 0 & 0 & 3298 & 106 & 3 & 0 & 0 & 0 & tree\\ \hline
+    11 & 1783 & 20 & 10 & 0 & 0 & 0 & 2790 & 37 & 22 & 0 & 0 & 0 & exception\\ \hline
+    12 & 1785 & 12 & 8 & 4 & 0 & 0 & 3501 & 37 & 3 & 26 & 3 & 0 & module\\ \hline
+    13 & 1678 & 10 & 0 & 7 & 2 & 0 & 2943 & 22 & 0 & 3 & 16 & 0 & seq.\ exec.\\ \hline
+    14 & 1280 & 11 & 0 & 0 & 0 & 1 & 1511 & 65 & 0 & 4 & 0 & 56 & ref\\ \hline
+    15 & 517 & 6 & 0 & 0 & 0 & 0 & 1717 & 68 & 0 & 5 & 0 & 30 & heap\\ \hline
+  \end{tabular}
+\end{center}
+  \caption{Number of uses of the stepper (step.) among all the
+  executions (all) in 2017 and 2018.  The columns try, mod., print,
+  and ref represent number of uses of the stepper for programs that
+  contain exception handling, modules, printing (and sequential
+  execution), and references (including arrays), respectively.
+  The rightmost column shows representative topics handled in the
+  week.}
+  \label{TableUsage}
+\end{table}
+
+\begin{table}
+\begin{center}  
+\small
+  \begin{tabular}{|l||c|c|c||c|c|c||l|}
+    \hline
+    week.
+    & \multicolumn{3}{|c||}{2016 to 2017}
+    & \multicolumn{3}{|c||}{2016 to 2018}
+    &
+    \\ \cline{2-7}
+    problem & t & p & +/- & t & p & +/- & contents
+    \\ \hline
+    2.r1
+    & t(55)=2.098 & p=\textcolor{red}{0.020} & dec
+    & t(60)=0.635 & p=0.264 & dec
+    & if\\ \cline{1-7}
+    2.r2
+    & t(56)=2.364 & p=\textcolor{red}{0.011} & dec
+    & t(57)=1.831 & p=\textcolor{red}{0.036} & dec
+    & \\ \cline{1-7}
+    2.r3
+    & t(54)=1.896 & p=\textcolor{red}{0.032} & dec
+    & t(59)=0.751 & p=0.228 & dec
+    & \\ \cline{1-7}
+    2.1
+    & t(66)=3.006 & p=\textcolor{red}{0.002} & dec
+    & t(74)=3.372 & p=\textcolor{red}{0.001} & dec
+    & \\ \cline{1-7}
+    2.2
+    & t(56)=3.672 & p=\textcolor{red}{0.000} & dec
+    & t(62)=3.036 & p=\textcolor{red}{0.002} & dec
+    & \\ \hline
+    3.r1
+    & t(52)=3.222 & p=\textcolor{red}{0.001} & dec
+    & t(61)=2.936 & p=\textcolor{red}{0.002} & dec
+    & record\\ \cline{1-7}
+    3.r2
+    & t(42)=2.339 & p=\textcolor{red}{0.012} & dec
+    & t(56)=3.467 & p=\textcolor{red}{0.001} & dec
+    & \\ \cline{1-7}
+    3.r3
+    & t(41)=1.373 & p=0.089 & dec
+    & t(51)=2.688 & p=\textcolor{red}{0.005} & dec
+    & \\ \cline{1-7}
+    3.1
+    & t(28)=5.610 & p=\textcolor{red}{0.000} & dec
+    & t(38)=2.753 & p=\textcolor{red}{0.004} & dec
+    & \\ \cline{1-7}
+    3.2
+    & t(17)=1.655 & p=0.058 & dec
+    & t(27)=0.105 & p=0.459 & dec
+    & \\ \cline{1-7}
+    3.3
+    & t(16)=1.546 & p=0.071 & dec
+    & t(13)=0.603 & p=0.279 & dec
+    & \\ \hline
+    4.r1
+    & t(47)=2.088 & p=\textcolor{red}{0.021} & dec
+    & t(61)=2.446 & p=\textcolor{red}{0.009} & dec
+    & list\\ \cline{1-7}
+    4.r2
+    & t(48)=1.909 & p=\textcolor{red}{0.031} & dec
+    & t(60)=2.267 & p=\textcolor{red}{0.014} & dec
+    & \\ \cline{1-7}
+    4.1
+    & t(51)=2.134 & p=\textcolor{red}{0.019} & dec
+    & t(60)=2.473 & p=\textcolor{red}{0.008} & dec
+    & \\ \cline{1-7}
+    4.2
+    & t(18)=3.033 & p=\textcolor{red}{0.004} & dec
+    & t(20)=0.489 & p=0.315 & dec
+    & \\ \hline
+    5.r1
+    & t(42)=1.037 & p=0.153 & dec
+    & t(55)=0.257 & p=0.399 & inc
+    & list 2\\ \cline{1-7}
+    5.1
+    & t(49)=1.592 & p=0.059 & dec
+    & t(61)=0.904 & p=0.185 & dec
+    & \\ \cline{1-7}
+    5.2
+    & t(55)=4.138 & p=\textcolor{red}{0.000} & dec
+    & t(62)=1.631 & p=0.054 & dec
+    & \\ \cline{1-7}
+    5.3
+    & t(47)=3.305 & p=\textcolor{red}{0.001} & dec
+    & t(50)=1.940 & p=\textcolor{red}{0.029} & dec
+    & \\ \hline
+    6.r1
+    & t(30)=0.322 & p=0.375 & inc
+    & t(51)=2.011 & p=\textcolor{blue}{0.025} & inc
+    & Dijkstra's algorithm\\ \cline{1-7}
+    6.1
+    & t(41)=1.678 & p=0.050 & dec
+    & t(61)=1.155 & p=0.126 & dec
+    & \\ \cline{1-7}
+    6.2
+    & t(45)=1.415 & p=0.082 & dec
+    & t(62)=0.976 & p=0.166 & dec
+    & \\ \cline{1-7}
+    6.3
+    & t(34)=2.296 & p=\textcolor{red}{0.014} & dec
+    & t(42)=0.548 & p=0.293 & dec
+    & \\ \hline
+    7.r1
+    & t(42)=0.462 & p=0.323 & inc
+    & t(56)=0.314 & p=0.377 & dec
+    & map\\ \cline{1-7}
+    7.r2
+    & t(41)=0.286 & p=0.388 & inc
+    & t(54)=1.181 & p=0.121 & dec
+    & \\ \cline{1-7}
+    7.r3
+    & t(40)=0.677 & p=0.251 & inc
+    & t(51)=1.492 & p=0.071 & dec
+    & \\ \cline{1-7}
+    7.1
+    & t(21)=0.965 & p=0.173 & dec
+    & t(20)=0.372 & p=0.357 & dec
+    & \\ \cline{1-7}
+    7.2
+    & t(12)=0.380 & p=0.355 & inc
+    & \, t(7)=0.686 & p=0.258 & dec
+    & \\ \hline
+    8.r1
+    & t(46)=1.162 & p=0.126 & inc
+    & t(58)=2.694 & p=\textcolor{red}{0.005} & dec
+    & filter\\ \cline{1-7}
+    8.1
+    & t(16)=0.844 & p=0.205 & dec
+    & t(22)=0.841 & p=0.205 & dec
+    & \\ \hline
+    9.r1
+    & t(44)=1.294 & p=0.101 & dec
+    & t(55)=0.678 & p=0.250 & dec
+    & general recursion\\ \hline
+    10.r1
+    & t(48)=0.312 & p=0.378 & dec
+    & t(51)=1.308 & p=0.098 & dec
+    & tree\\ \cline{1-7}
+    10.r2
+    & t(48)=0.457 & p=0.325 & dec
+    & t(50)=1.760 & p=\textcolor{red}{0.042} & dec
+    & \\ \cline{1-7}
+    10.1
+    & t(33)=0.976 & p=0.168 & dec
+    & t(38)=0.845 & p=0.202 & dec
+    & \\ \cline{1-7}
+    10.2
+    & t(19)=1.498 & p=0.075 & dec
+    & t(19)=0.871 & p=0.197 & dec
+    & \\ \cline{1-7}
+    10.3
+    & t(15)=1.538 & p=0.072 & dec
+    & t(12)=2.240 & p=\textcolor{red}{0.022} & dec
+    & \\ \hline
+    11.r1
+    & t(43)=0.272 & p=0.393 & dec
+    & t(53)=1.555 & p=0.063 & dec
+    & exception\\ \cline{1-7}
+    11.r2
+    & t(37)=0.454 & p=0.326 & dec
+    & t(44)=1.906 & p=\textcolor{red}{0.032} & dec
+    & \\ \cline{1-7}
+    11.r3
+    & t(31)=0.050 & p=0.480 & inc
+    & t(40)=1.208 & p=0.117 & dec
+    & \\ \cline{1-7}
+    11.1
+    & t(34)=1.567 & p=0.063 & dec
+    & t(46)=1.518 & p=0.068 & dec
+    & \\ \cline{1-7}
+    11.2
+    & t(28)=2.204 & p=\textcolor{red}{0.018} & dec
+    & t(36)=1.563 & p=0.063 & dec
+    & \\ \cline{1-7}
+    11.3
+    & t(17)=0.604 & p=0.277 & dec
+    & t(21)=0.384 & p=0.352 & dec
+    & \\ \hline
+    12.r1
+    & t(39)=2.229 & p=\textcolor{red}{0.016} & dec
+    & t(52)=4.009 & p=\textcolor{red}{0.000} & dec
+    & module\\ \hline
+    all
+    & t(1778)=2.819 & p=\textcolor{red}{0.002} & dec
+    & t(2111)=2.592 & p=\textcolor{red}{0.005} & dec
+    & \\ \hline
+  \end{tabular}
+  \end{center}
+  \caption{Result of one-sided t-test with p-values comparing the time between the beginning of the class and the moment that students submitted a correct solution.  The column +/- shows whether the average time increased or decreased.  The p-values below $0.05$ are colored.}
+  \label{TableTTest}
+\end{table}

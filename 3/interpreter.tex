@@ -1,0 +1,124 @@
+ \section{対象言語とインタプリタの定義}
+\label{section:try-with__interpreter}
+
+\begin{figure}
+\begin{spacing}{0.8}
+\begin{verbatim}
+type e_t = Var of string               (* x *)
+         | Fun of string * e_t         (* fun x -> e *)
+         | App of e_t * e_t            (* e e *)
+         | Try of e_t * string * e_t   (* try e with x -> e *)
+         | Raise of e_t                (* raise e *)
+\end{verbatim}
+\end{spacing}
+\caption{Syntax}
+\label{figure:typee}
+\end{figure}
+
+\begin{figure}
+\begin{spacing}{0.8}
+\begin{verbatim}
+(* 入力プログラムの例外の値を持った例が *)
+exception Error of e_t
+
+(* 式を実行する *)
+(* eval : e_t -> e_t *)
+let rec eval expr = match expr with
+  | Var (x) -> failwith ("unbound variable: " ^ x)  (* ここには来ない *)
+  | Fun (x, e) -> Fun (x, e)
+  | App (e1, e2) ->
+    begin
+      let v2 = eval e2 in
+      let v1 = eval e1 in
+      match v1 with
+      | Fun (x, e) ->
+        let e' = subst e x v2 in   (* e[v2/x] *)
+        let v = eval e' in
+        v
+      | _ -> failwith "not a function"
+    end
+  | Try (e1, x, e2) ->
+    begin
+      try
+        let v1 = eval e1 in
+        v1
+      with Error (v) ->
+        let e2' = subst e2 x v in   (* e2[v/x] *)
+        eval e2'
+    end
+  | Raise (e) ->
+    let v = eval e in
+    raise (Error (v))
+
+(* 実行を開始する *)
+(* start : e_t -> e_t *)
+let start e =
+  try
+    eval e
+  with
+    Error v -> Raise v
+\end{verbatim}
+\end{spacing}
+\caption{Big-step interpreter}
+\label{figure:interpreter}
+\end{figure}
+
+
+%In Figures \ref{figure:typee} and \ref{figure:interpreter},
+%we define the object language as well as a big-step interpreter.
+%The \texttt{eval} function evaluates a given expression following OCaml's call-by-value, right-to-left strategy.
+型無し$\lambda$計算と try-with から成る言語の OCaml による定義を
+図 \ref{figure:typee} に示す。
+そしてこの言語に対する call-by-value かつ right-to-left のインタプリタは図 \ref{figure:interpreter} のように定義できる。
+%For instance, when given an application \texttt{e1 e2},
+%it first evaluates the argument \texttt{e2}, then evaluates the function \texttt{e1}.
+%Once the application has been turned into a redex, we perform $\beta$-reduction, and evaluate the post-reduction expression.
+例えば関数適用 \texttt{e1 e2} を実行するときには、
+まず引数部分 \texttt{e2} を実行して、次に関数部分 \texttt{e1} を実行する。
+両方が値になったら $\beta$ 簡約を行い、簡約後の式を実行する。
+%Note that, when the top-level expression is an executable, closed program, the input of the \texttt{eval} function cannot be a variable.  The reason is that we never touch a function's body before it receives an argument, and that $\beta$-reduction replaces lambda-bound variables with values.
+引数 \texttt{expr} が変数 \texttt{Var} だった場合はエラー終了するように書かれているが、
+これは入力されたプログラム全体が実行可能な閉じた式だった場合に
+関数 \texttt{eval} の引数に変数がくることはありえないからである。
+なぜありえないかというと、関数の本体の実行は必ず、引数を受け取って仮引数を実引数に置き換えた後に行うからである。
+
+%Object-level exception handling is performed by the meta-level \texttt{try} and \texttt{raise} constructs.
+入力プログラムの例外処理は、インタプリタで実際に(OCaml の機能の) \texttt{try} と \texttt{raise} を使って実行する。
+%Specifically, when evaluating \texttt{raise e},
+%we first evaluate \texttt{e} to some value \texttt{v},
+%and then raise a meta-level (OCaml) exception \texttt{Error v}.
+具体的には、式 \texttt{raise e} を実行する場合、
+まず \texttt{e} を実行してその値 \texttt{v} を得る。
+そしてメタレベルの (OCaml の) 例外 \texttt{Error v} を起こす。
+
+%If an exception \texttt{Error v} was raised
+%during evaluation of \texttt{e1} in \texttt{try e1 with x -> e2},
+%the \texttt{eval} function ignores the rest of the computation in \texttt{e1},
+%and evaluates \texttt{e2} with \texttt{v} substituted for \texttt{x}.
+式 \texttt{try e1 with x -> e2} の \texttt{e1} を実行している間に
+例外 \texttt{Error v} が発生した場合は、
+関数 \texttt{eval} は \texttt{e1} の中の残りの計算を無視して、
+\texttt{e2} の中の変数 \texttt{x} に値 \texttt{v} を代入した
+式 \texttt{e2[v/x]} の実行に移る。
+% This is exactly how OCaml's try-with construct works.
+このように、OCaml の try-with 構文を利用して OCaml の try-with 構文と同じような動作を実現することができる。
+%For convenience, we will hereafter call \texttt{e1} a \emph{tryee};
+%the intention is that \texttt{e1} is
+%the expression being ``tried'' by the handler.
+説明を簡単にするため、 \texttt{try e1 with x -> e2} の \texttt{e1} のことを
+以後 \emph{tryee} と呼ぶ。
+これは、 try ハンドラによって「try されている」ということを意図している。
+
+
+%The main function \texttt{start} calls \texttt{eval}
+%in an exception handling context.
+メイン関数である \texttt{start} が \texttt{eval} を呼び出すとき、
+その呼び出しは try-with で囲まれている。
+%From the construction,
+%we can see that any expression that has a \texttt{raise e}
+%with no matching \texttt{try} clause will be evaluated to \texttt{raise v}.
+\texttt{Error v -> raise v} とあるように、
+対応する \texttt{try} 節が無い \texttt{raise e} の実行結果は、
+\texttt{e} の実行結果を \texttt{v} として \texttt{raise v} とする。
+%For example, \texttt{2 + 3 + (raise 4) + 5} evaluates to \texttt{raise 4}.
+例えば、 \texttt{2 + 3 + (raise 4) + 5} の実行結果は \texttt{raise 4} である。

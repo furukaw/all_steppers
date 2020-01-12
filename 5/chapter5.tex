@@ -1,4 +1,45 @@
 \chapter{５}
-\label{chapter:experiment}
+\label{chapter:incremental}
 
-\input{5/experiment}
+\input{5/spec}
+
+\input{5/attribute}
+
+\input{5/solution}
+
+\section{$\lambda$計算に対する実装}
+
+\begin{figure}
+\begin{verbatim}
+(* 式の種類の定義 *)
+type expression_desc = Var of string                   (* x *)
+                     | Fun of string * expression      (* λx. e *)
+                     | App of expression * expression  (* e1 e2 *)
+                              
+and expression = {desc : expression_desc;  (* 式の内容 *)
+                  attr : attribute list}   (* attribute [@name ... ] *)
+
+and attribute = (string * payload)       (* 名前と内容のペア *)
+and payload = (int * expression) option  (* ステップ番号と簡約前の式 *)
+\end{verbatim}
+\caption{対象言語の定義}
+\label{figure:lambda}
+\end{figure}
+
+本節では、既存の OCaml ステッパ\cite{FSA18}の実装を紹介し、新しい OCaml ステッパの実装を示す。対象言語は型無しの$\lambda$式で、さらに実際の OCaml を模して任意の部分式に複数の attribute を付けられるものとするが、各 attribute の第一引数は attribute の名前とし、第二引数には\ref{生じる問題と解決方法-情報の消失-解決方法}節で定めた簡約の情報を簡単に表すために \texttt{Some (整数, 式)} または情報を持たないことを示す \texttt{None} のどちらか（\texttt{payload} 型）をとる\footnote{\texttt{[@x ]} は \texttt{("x", None)}、\texttt{[@stepper.reduct (1, 5 * 7)]} は \texttt{("stepper.reduct", Some (1, 5 * 7))} である。}。これらの型を図\ref{figure:lambda}のように定義する。式は \texttt{expression} 型であり、式本体の内容を表す \texttt{desc} と任意の個数の attribute を表す \texttt{attr} の2つの要素を持つ。
+
+\input{5/old_implementation}
+
+\input{5/new_implementation}
+
+\input{5/actual}
+
+\input{5/interface}
+
+\input{5/problem}
+
+\section{まとめと今後の課題}
+
+本研究では、OCaml のプログラムの簡約による書き換えを１ステップずつ見せるプログラムであるステッパを、１度の実行で１つの簡約のみを行うように変更し、ステッパの起動時間を短縮した。またそのためにあるステップのプログラムからそれ以前のステップのプログラムを計算できるようにする必要が生まれたので、それまでの簡約の内容を全て記録したプログラムを出力することで入力プログラムの情報が失われないように変更した。
+
+今後は、一部の副作用を伴うプログラムに対応することを目指す。incremental でない OCaml ステッパ\cite{FSA18} はこれらに対応しているが、incremental になり、ストアや標準出力された文字列の情報をステッパのプロセスが保持できなくなったことで、ストアの情報もステッパの出力に含める必要が生じた。これは恐らく、プログラムの attribute （\ref{OCamlのattribute-プログラムのattribute}節）を利用することで解決できるであろう。

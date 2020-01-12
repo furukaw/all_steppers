@@ -3,8 +3,9 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {5.1}{\ignorespaces Students' scoring of the stepper in 2018. 38 students out of 42 answered. The average is 2.3.}}{11}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
+\contentsline {table}{\numberline {C.1}{\ignorespaces Number of uses of the stepper (step.) among all the executions (all) in 2017 and 2018. The columns try, mod., print, and ref represent number of uses of the stepper for programs that contain exception handling, modules, printing (and sequential execution), and references (including arrays), respectively. The rightmost column shows representative topics handled in the week.}}{52}
+\contentsline {table}{\numberline {C.2}{\ignorespaces Result of one-sided t-test with p-values comparing the time between the beginning of the class and the moment that students submitted a correct solution. The column +/- shows whether the average time increased or decreased. The p-values below $0.05$ are colored.}}{53}

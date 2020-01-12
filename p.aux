@@ -9,45 +9,200 @@
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
 \newlabel{chapter:try-with}{{3}{3}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {第4章}４}{4}}
-\@writefile{lof}{\addvspace {10\p@ }}
-\@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {chapter}{\numberline {第5章}５}{5}}
-\@writefile{lof}{\addvspace {10\p@ }}
-\@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{chapter:experiment}{{5}{5}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.1}Stepping OCaml in the Classroom}{5}}
-\newlabel{sec:exp}{{5.1}{5}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.1}The OCaml Course}{5}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.2}The Uses of the Stepper}{6}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.1}{\ignorespaces Frequency of standard execution (light-colored) and step execution (dark-colored) in each week in 2017 and 2018. The stepper was not used at all toward the end of the course in 2017, but it was used in some degree in 2018.}}{7}}
-\newlabel{figure:allExecution}{{5.1}{7}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.2}{\ignorespaces Number of times the stepper was used to evaluate a program with ``try'', ``module'', ``print'' or ``ref'' in 2018.}}{8}}
-\newlabel{figure:stepExecution}{{5.2}{8}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.3}{\ignorespaces Number of questions where students arrived at a correct answer significantly faster in 2017 and 2018 than 2016.}}{9}}
-\newlabel{figure:p}{{5.3}{9}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.3}Effects of Stepper}{9}}
-\@writefile{toc}{\contentsline {paragraph}{Threats to validity.}{10}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.4}Students' Evaluation}{10}}
-\@writefile{lot}{\contentsline {table}{\numberline {5.1}{\ignorespaces Students' scoring of the stepper in 2018. 38 students out of 42 answered. The average is 2.3.}}{11}}
-\newlabel{TableScore}{{5.1}{11}}
-\@writefile{toc}{\contentsline {paragraph}{Understanding of the behavior of programs.}{11}}
-\@writefile{toc}{\contentsline {paragraph}{Debugging.}{11}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.1}はじめに}{3}}
+\newlabel{section:try-with__intro}{{3.1}{3}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.2}対象言語とインタプリタの定義}{3}}
+\newlabel{section:try-with__interpreter}{{3.2}{3}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.1}{\ignorespaces Syntax}}{3}}
+\newlabel{figure:typee}{{3.1}{3}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.2}{\ignorespaces Big-step interpreter}}{4}}
+\newlabel{figure:interpreter}{{3.2}{4}}
+\citation{FF1986}
+\@writefile{toc}{\contentsline {section}{\numberline {3.3}ステッパの実装}{5}}
+\newlabel{section:try-with__stepper}{{3.3}{5}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.3}{\ignorespaces コンテキストと再構成関数 (試作版)}}{6}}
+\newlabel{figure:simpleplug}{{3.3}{6}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.4}{\ignorespaces コンテキストと再構成関数 (最終版)}}{7}}
+\newlabel{figure:typec}{{3.4}{7}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.5}{\ignorespaces ステッパ関数}}{9}}
+\newlabel{figure:stepper}{{3.5}{9}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.6}{\ignorespaces 関数 \texttt  {memo} とメイン関数}}{10}}
+\newlabel{figure:memo}{{3.6}{10}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.4}おわりに}{10}}
+\newlabel{section:try-with__conclusion}{{3.4}{10}}
+\citation{EPTCS294.3}
 \citation{FCA19}
-\@writefile{toc}{\contentsline {chapter}{\numberline {第6章}結論}{13}}
+\citation{clements01}
+\citation{FCA19}
+\@writefile{toc}{\contentsline {chapter}{\numberline {第4章}４}{12}}
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{toc}{\contentsline {section}{\numberline {4.1}ステッパの実装方法とコンテキスト}{12}}
+\newlabel{section:context}{{4.1}{12}}
+\citation{PRETNAR201519}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.1}{\ignorespaces 型無し$\lambda $計算とそのインタプリタ}}{13}}
+\newlabel{figure:lambda}{{4.1}{13}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.2}algebraic effects とインタプリタの定義}{13}}
+\newlabel{section:definition}{{4.2}{13}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.1}algebraic effects}{13}}
+\newlabel{subsection:algebraic effects}{{4.2.1}{13}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.2}{\ignorespaces 型無し$\lambda $計算に対するステッパ}}{14}}
+\newlabel{figure:lambda_stepper}{{4.2}{14}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.2}構文の定義}{15}}
+\newlabel{subsection:syntax}{{4.2.2}{15}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.3}CPS インタプリタによる意味論}{15}}
+\newlabel{subsection:1cps}{{4.2.3}{15}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.3}{\ignorespaces 対象言語の構文}}{16}}
+\newlabel{figure:abstract_syntax}{{4.3}{16}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.4}{\ignorespaces 対象言語の定義}}{17}}
+\newlabel{figure:syntax}{{4.4}{17}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.5}{\ignorespaces 継続渡し形式で書かれたインタプリタ}}{18}}
+\newlabel{figure:1cps}{{4.5}{18}}
+\citation{10.1145/2500365.2500590}
+\citation{PRETNAR201519}
+\citation{e6cb0c3222794e48bf38cf44e46fe4aa}
+\@writefile{toc}{\contentsline {section}{\numberline {4.3}インタプリタの変換}{19}}
+\newlabel{section:transform}{{4.3}{19}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.1}非関数化}{19}}
+\newlabel{section:2defun}{{4.3.1}{19}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.6}{\ignorespaces 非関数化後の継続の型}}{20}}
+\newlabel{figure:k_2defun}{{4.6}{20}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.7}{\ignorespaces CPS インタプリタを非関数化したプログラム}}{20}}
+\newlabel{figure:2defun}{{4.7}{20}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.8}{\ignorespaces 2回目の非関数化後の継続の型}}{21}}
+\newlabel{figure:k2_4defun}{{4.8}{21}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.2}CPS 変換}{21}}
+\newlabel{subsection:3cps}{{4.3.2}{21}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.3}非関数化}{21}}
+\newlabel{subsection:4defun}{{4.3.3}{21}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.9}{\ignorespaces 変換の後、出力関数を足して得られるステッパ}}{22}}
+\newlabel{figure:5memo}{{4.9}{22}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.10}{\ignorespaces 継続を外側に拡張する関数}}{23}}
+\newlabel{figure:compose}{{4.10}{23}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.4}出力}{23}}
+\newlabel{subsection:memo}{{4.3.4}{23}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.5}CPSインタプリタに基づいたステッパ}{23}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.11}{\ignorespaces 継続の情報を保持するための言語やコンテキストの定義}}{24}}
+\newlabel{figure:k_6cps}{{4.11}{24}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.4}他の言語への対応}{24}}
+\newlabel{section:languages}{{4.4}{24}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.12}{\ignorespaces 変換の結果得られた、CPSインタプリタを基にしたステッパ}}{25}}
+\newlabel{figure:6cps}{{4.12}{25}}
+\citation{FCA19}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.1}型無し$\lambda $計算}{26}}
+\newlabel{subsection:lambda}{{4.4.1}{26}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.2}try-with}{26}}
+\newlabel{subsection:try_with}{{4.4.2}{26}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.3}shift/reset}{26}}
+\newlabel{subsection:shift/reset}{{4.4.3}{26}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.4}Multicore OCaml}{26}}
+\newlabel{subsection:multicore_ocaml}{{4.4.4}{26}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.5}まとめ}{26}}
+\newlabel{section:conclusion}{{4.5}{26}}
+\citation{FSA18}
+\citation{clements01}
+\citation{FSA18}
+\@writefile{toc}{\contentsline {chapter}{\numberline {第5章}５}{28}}
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\newlabel{chapter:incremental}{{5}{28}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.1}ステッパの動作}{28}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.1}DrRacketのステッパ}{28}}
+\newlabel{ステッパの動作-DrRacketのステッパ}{{5.1.1}{28}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.2}incremental でない OCaml ステッパ}{28}}
+\newlabel{ステッパの動作-incrementalでないOCamlステッパ}{{5.1.2}{28}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.3}提案するステッパ}{28}}
+\newlabel{ステッパの動作-提案するステッパ}{{5.1.3}{28}}
+\citation{FSA18}
+\citation{FSA18}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.1}{\ignorespaces attribute を含む構文木の例}}{29}}
+\newlabel{figure:attribute}{{5.1}{29}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.2}OCaml の attribute}{29}}
+\newlabel{OCamlのattribute}{{5.2}{29}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2.1}式の attribute}{29}}
+\newlabel{OCamlのattribute-式のattribute}{{5.2.1}{29}}
+\citation{FSA18}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.2}{\ignorespaces ハイライトのための attribute の利用}}{30}}
+\newlabel{figure:highlight}{{5.2}{30}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2.2}プログラムの attribute}{30}}
+\newlabel{OCamlのattribute-プログラムのattribute}{{5.2.2}{30}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.3}生じる問題と解決方法}{31}}
+\newlabel{生じる問題と解決方法}{{5.3}{31}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3.1}情報の消失}{31}}
+\newlabel{生じる問題と解決方法-情報の消失}{{5.3.1}{31}}
+\@writefile{toc}{\contentsline {subsubsection}{問題点}{31}}
+\newlabel{生じる問題と解決方法-情報の消失-問題点}{{5.3.1}{31}}
+\@writefile{toc}{\contentsline {subsubsection}{解決方法}{31}}
+\newlabel{生じる問題と解決方法-情報の消失-解決方法}{{5.3.1}{31}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3.2}表示の崩れ}{32}}
+\newlabel{生じる問題と解決方法-表示の崩れ}{{5.3.2}{32}}
+\@writefile{toc}{\contentsline {subsubsection}{問題点}{32}}
+\@writefile{toc}{\contentsline {subsubsection}{解決方法}{32}}
+\newlabel{生じた問題と解決方法-表示の崩れ-解決方法}{{5.3.2}{32}}
+\citation{FSA18}
+\@writefile{toc}{\contentsline {section}{\numberline {5.4}$\lambda $計算に対する実装}{33}}
+\citation{FSA18}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.3}{\ignorespaces 対象言語の定義}}{34}}
+\newlabel{figure:lambda}{{5.3}{34}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.4.1}incremental でないステッパ}{34}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.4.2}incremental なステッパ}{35}}
+\@writefile{toc}{\contentsline {subsubsection}{情報の付加}{36}}
+\@writefile{toc}{\contentsline {subsubsection}{情報の利用}{37}}
+\citation{FSA18}
+\citation{FSA18}
+\citation{clements01}
+\citation{FSA18}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.4.3}実際のステッパ}{38}}
+\newlabel{実装-実際のステッパ}{{5.4.3}{38}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.4.4}ツールの実装}{38}}
+\citation{FSA18}
+\@writefile{toc}{\contentsline {section}{\numberline {5.5}予想される問題点}{39}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.5.1}文字数の爆発}{39}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.5.2}実行時間}{39}}
+\newlabel{予想される問題点-実行時間}{{5.5.2}{39}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.5.3}関数適用評価スキップ後の前ステップ出力}{39}}
+\citation{FSA18}
+\citation{FSA18}
+\@writefile{toc}{\contentsline {section}{\numberline {5.6}まとめと今後の課題}{40}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.4}{\ignorespaces 既存のステッパの実装}}{41}}
+\newlabel{figure:old-stepper}{{5.4}{41}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.5}{\ignorespaces ステップ出力関数}}{42}}
+\newlabel{figure:memo}{{5.5}{42}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.6}{\ignorespaces 実行の種類とステップ番号の定義}}{42}}
+\newlabel{figure:mode}{{5.6}{42}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.7}{\ignorespaces incremental なステッパのための出力関数}}{43}}
+\newlabel{figure:new-memo}{{5.7}{43}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.8}{\ignorespaces incremental なステッパ}}{44}}
+\newlabel{figure:new-stepper}{{5.8}{44}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.9}{\ignorespaces ステッパのスキップ機能}}{44}}
+\newlabel{figure:skip}{{5.9}{44}}
+\citation{FCA19}
+\@writefile{toc}{\contentsline {chapter}{\numberline {第6章}結論}{45}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
 \bibstyle{jplain}
 \bibdata{stepper}
-\bibcite{FCA19}{1}
-\@writefile{toc}{\contentsline {chapter}{\numberline {付 録A }実験でもちいたデータ}{16}}
+\bibcite{clements01}{1}
+\bibcite{FF1986}{2}
+\bibcite{FCA19}{3}
+\bibcite{e6cb0c3222794e48bf38cf44e46fe4aa}{4}
+\bibcite{10.1145/2500365.2500590}{5}
+\bibcite{PRETNAR201519}{6}
+\bibcite{EPTCS294.3}{7}
+\@writefile{toc}{\contentsline {chapter}{\numberline {付 録A }実験でもちいたデータ}{48}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {chapter}{\numberline {付 録B }ふろく}{17}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {付 録B }インタプリタの変換過程}{49}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {B.1}section}{17}}
-\@writefile{toc}{\contentsline {section}{\numberline {B.2}2}{17}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {付 録C }furoku}{18}}
+\@writefile{lof}{\contentsline {figure}{\numberline {B.1}{\ignorespaces CPS インタプリタを非関数化して CPS 変換したプログラム}}{50}}
+\newlabel{figure:3cps}{{B.1}{50}}
+\@writefile{lof}{\contentsline {figure}{\numberline {B.2}{\ignorespaces CPS インタプリタを非関数化して CPS 変換して非関数化したプログラム}}{51}}
+\newlabel{figure:4defun}{{B.2}{51}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {付 録C }学生の実行ログから得られたデータ}{52}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{lot}{\contentsline {table}{\numberline {C.1}{\ignorespaces Number of uses of the stepper (step.) among all the executions (all) in 2017 and 2018. The columns try, mod., print, and ref represent number of uses of the stepper for programs that contain exception handling, modules, printing (and sequential execution), and references (including arrays), respectively. The rightmost column shows representative topics handled in the week.}}{52}}
+\newlabel{TableUsage}{{C.1}{52}}
+\@writefile{lot}{\contentsline {table}{\numberline {C.2}{\ignorespaces Result of one-sided t-test with p-values comparing the time between the beginning of the class and the moment that students submitted a correct solution. The column +/- shows whether the average time increased or decreased. The p-values below $0.05$ are colored.}}{53}}
+\newlabel{TableTTest}{{C.2}{53}}

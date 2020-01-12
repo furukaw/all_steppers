@@ -1,0 +1,483 @@
+\section{ステッパの実装}
+\label{section:try-with__stepper}
+
+% As stated in Section \ref{sec:intro},
+% a stepper must display the whole program at each reduction step.
+ステッパは各簡約ステップでのプログラムの全体を表示する必要がある。
+% Consider the simple arithmetic expression \texttt{(1 + 2 * 3) + 4}.
+% When step-executing this expression,
+% we want to see the following reduction sequence:
+例えば単純な算術式 \texttt{(1 + 2 * 3) + 4} をステップ実行するとき、
+我々が期待するステップ列は以下である。
+\[
+\begin{array}{cl}
+            & \mathtt{(1 + 2 * 3) + 4} \\
+\rightarrow & \mathtt{(1 + 6) + 4} \\
+\rightarrow & \mathtt{7 + 4} \\
+\rightarrow & \mathtt{11}
+\end{array}
+\]
+
+% The interpreter in Figure \ref{figure:interpreter}, however,
+% does not immediately give us these steps.
+しかし、図\ref{figure:interpreter} のプログラムに出力機能を加えても、
+直ちにこのようなステップ出力は得られない。
+% Suppose the \texttt{eval} function is evaluating
+% the subexpression \texttt{2 * 3}.
+関数 \texttt{eval} が部分式 \texttt{2 * 3} を実行している時のことを考えてみよう。
+% We can display this subexpression using a printing function,
+% but we do not have enough information to reconstruct the whole program.
+式を出力する関数を用意すれば実行中の部分式 \texttt{2 * 3} は表示できるが、
+プログラム全体を再構成するには情報が足りていない。
+% What is missing here is the \emph{context} surrounding \texttt{2 * 3},
+% namely \texttt{(1 + [.])\ + 4}
+% (where \texttt{[.]} denotes the hole of the context).
+ここで欠けているのは \texttt{2 * 3} を囲んでいる \emph{コンテキスト} すなわち
+\texttt{(1 + [.])\ + 4} である。
+(コンテキストの穴を \texttt{[.]} と表記する。)
+% Hence, to implement a stepper,
+% we need to keep track of every evaluation context we have traversed.  
+したがって、ステッパを実装するためには、
+それまでの評価文脈を追い続ける必要がある。■■
+
+% In Figure \ref{figure:simpleplug},
+% we define context frames as algebraic data of type \texttt{frame\_t}.
+図 \ref{figure:simpleplug} で、 \texttt{frame\_t} 型の代数的データとしてコンテキストフレームを定義している。
+% Each frame represents evaluation of some subexpression:
+各フレームがなんらかの部分式の実行を表しており、
+% \eg, \texttt{CAppR (e1)} tells us that we are evaluating
+% the argument part of an application, whose function part is \texttt{e1}.
+例えば \texttt{CAppR (e1)} は、関数部分が \texttt{e1} である関数適用の引数部分を
+実行していることを表す。
+% Evaluation contexts are defined as lists of these frames
+% (spoiler alert: this does not work for exceptions).
+評価文脈はこのフレームのリストで定義される。
+(後ほど触れるが、このコンテキスト定義は例外処理を含む言語には使えない。■■)
+
+% We then define the \texttt{plug} function,
+% which reconstructs a program by wrapping the expression
+% \texttt{expr} with context frames in \texttt{ctxt}. 
+そして、式 \texttt{expr} をコンテキストフレーム列 \texttt{ctxt} で囲んで
+プログラムを再構成する関数 \texttt{plug} も定義する。
+
+\begin{figure}
+\begin{spacing}{0.8}
+\begin{verbatim}
+(* コンテキストフレーム *)
+type frame_t = 
+             | CAppR of e_t           (* e [.] *)
+             | CAppL of e_t           (* [.] v  *)
+             | CTry of string * e_t   (* try [.] with x -> e *)
+             | CRaise                 (* raise [.] *)
+
+(* コンテキスト *)
+type c_t = frame_t list
+
+(* 式全体を再構成する *)
+(* plug : e_t -> c_t -> e_t *)
+let rec plug expr ctxt = match ctxt with
+  | [] -> expr
+  | CAppR (e1) :: rest -> plug (App (e1, expr)) rest
+  | CAppL (e2) :: rest -> plug (App (expr, e2)) rest
+  | CTry (x, e2) :: rest -> plug (Try (expr, x, e2)) rest
+  | CRaise :: rest -> plug (Raise expr) rest
+\end{verbatim}
+\end{spacing}
+%\caption{Contexts and reconstruction function; first attempt}
+\caption{コンテキストと再構成関数 (試作版)}
+\label{figure:simpleplug}
+\end{figure}
+
+% Now, if we let the evaluation function receive
+% an additional argument representing the context,
+% we should be able to display all the steps of
+% the arithmetic expression \texttt{(1 + 2 * 3) + 4}.
+Now、■■関数 \texttt{eval} がコンテキストを表す追加の引数を受け取るようにすれば、
+算術式 \texttt{eval} のステップ表示ができるようになるはずである。
+% For instance, when evaluating the subexpression \texttt{2 * 3},
+% the extra argument will be a two-element list
+% \texttt{[(1 + [.]);\ ([.]\ + 4)]},
+% and we can obtain the whole program using the \texttt{plug} function.
+例えば、部分式 \texttt{2 * 3} を実行している時、その新しい引数の値は
+\texttt{[(1 + [.]);\ ([.]\ + 4)]} であり、
+これを関数 \texttt{plug} に渡せばプログラム全体を得ることができる。
+
+% The resulting stepper is essentially the CK abstract machine
+% \cite{FF1986}, where the expression is the control string and the
+% evaluation context is the continuation.
+最終的に得られるステッパ■■は、式を control string■■、評価文脈を継続とみなすと、本質的にCK 機械 \cite{FF1986} であるといえる。
+% Substitution is used to implement $\beta$-reduction.
+代入は $\beta$ 簡約の実装のために用いられている。
+% We did not implement the abstract machine directly but augmented a
+% big-step interpreter, because we want to keep the correspondence between
+% big-step execution and small-step execution.
+big-step インタプリタと small-step インタプリタの実行の対応を維持するため、
+抽象機械を直接実装するのsurunoではなく big-step インタプリタを拡張することで実装した。
+% 抽象マシンを直接実装するのではなく、
+% 大きなステップの実行と小さなステップの実行との対応を維持したいため、
+% 大きなステップのインタープリターを追加しました。
+% It enables us to skip evaluation of user-specified function application,
+% as we elaborate in Section~\ref{sec:imp:ocaml}.
+big-step インタプリタを基にすることで、ユーザが指定した関数適用をスキップすることができる
+(\ref{section:experiment__language} 節で触れる)。
+
+% Unfortunately,
+% this na\"ive implementation does not work
+% in the presence of exception handlers.
+しかし、この実装は例外処理について正しく機能しない。
+
+% Consider \texttt{try (2 + 3 * (raise 4) + 5) with x -> x}.
+例えば、 \texttt{try (2 + 3 * (raise 4) + 5) with x -> x} について考える。
+% When step-executing this expression, we expect to see the following steps:
+この式をステップ実行する時、我々が期待するステップは以下である。
+
+\vspace{0.2cm}
+
+\noindent \texttt{(* Step 0 *) try (\colorbox{lightgreen}{2 + (3 * (raise 4)) + 5}) with x -> x\\
+  (* Step 1 *) try (\colorbox{purple}{raise 4}) with x -> x\\
+  (* Step 1 *) \colorbox{lightgreen}{try (raise 4) with x -> x}\\
+  (* Step 2 *) \colorbox{purple}{4}\\
+}
+
+\vspace{0.2cm}
+
+% \noindent The first reduction happens when the input
+% to the stepping interpreter is \texttt{raise 4}.
+\noindent 最初の簡約はステッパ関数に \texttt{raise 4} が渡されたときに起こる。
+% However, observe that the highlighted redex is a bigger expression
+% \texttt{(2 + 3 * (raise 4) + 5)},
+% because reduction of a \texttt{raise} construct discards
+% the context \emph{within} the tryee.
+しかし、最初のステップでハイライトされている式はそれよりも大きい式
+\texttt{(2 + 3 * (raise 4) + 5)} である。
+これは \texttt{raise} による■■簡約が tryee の内部のコンテキストを捨てるからである。
+% Since context frames are collected in a single list,
+% the second argument at this point will be
+% \texttt{[(3 * [.]); (2 + [.]);\ ([.]\ + 5);\ (try [.]\ with x -> x)]},
+% \ie, it contains the context \emph{outside} the tryee.
+コンレキストフレームは 1 つのリストに入っているので、この時点での関数 \texttt{eval} の第2引数は
+\texttt{[(3 * [.]); (2 + [.]);\ ([.]\ + 5);\ (try [.]\ with x -> x)]} であり、
+すなわち tryee の外側のコンテキストを含んでいる。
+% This suggests that, when dealing with exception handlers,
+% we have to distinguish between contexts inside and outside a tryee.
+例外処理を扱う場合には、tryee の内側と外側のコンテキストを区別する必要があるということである。
+\footnote{
+% The destination is not necessary,
+% if we want to support only exception handling.
+例外処理をサポートするだけならばこの■■必要はない。
+% We could simply search for the enclosing handler in the evaluation
+% context.
+コンテキストフレームのリストを単純に検索すれば最も内側のハンドラを見つけることができるからである。
+% However, it requires a linear search through the evaluation context.
+しかし、それには評価文脈を線形探索する必要がある。
+% Furthermore, distinction is necessary if we want to implement
+% more general control operators,
+% such as shift and reset \cite{DF1990}.
+さらに、shift/reset のようなより一般的な制御オペレータ■■を実装する場合には
+この区別が必要になる。
+}
+
+\begin{figure}
+\begin{spacing}{0.8}
+\begin{verbatim}
+(* コンテキストフレーム *)
+type frame_t = 
+             | CAppR of e_t          (* e [.] *)
+             | CAppL of e_t          (* [.] v *)
+             | CRaise                (* raise [.] *)
+
+(* try フレーム *)
+type ctry_t = 
+            | CHole                        (* [.] *)
+            | CTry of string * e_t * c_t   (* try [.] with x -> e *)
+
+(* コンテキスト *)
+and c_t = frame_t list * ctry_t
+
+(* tryee を再構成する *)
+(* plug_in_try : e_t -> frame_t list -> e_t *)
+let rec plug_in_try expr ctxt = match ctxt with
+  | [] -> expr
+  | first :: rest -> match first with
+    | CAppR (e1) -> plug_in_try (App (e1, expr)) rest
+    | CAppL (e2) -> plug_in_try (App (expr, e2)) rest
+    | CRaise -> plug_in_try (Raise (expr)) rest
+
+(* プログラム全体を再構成する *)
+(* plug : e_t -> c_t -> e_t *)
+let rec plug expr (clist, tries) =
+  let tryee = plug_in_try expr clist in
+  match tries with
+  | CHole -> tryee
+  | CTry (x, e2, outer) -> plug (Try (tryee, x, e2)) outer
+\end{verbatim}
+\end{spacing}
+%   \caption{Contexts and reconstruction function; final version}
+  \caption{コンテキストと再構成関数 (最終版)}
+  \label{figure:typec}
+\end{figure}
+
+% In Figure \ref{figure:typec},
+% we present a refined definition of evaluation contexts.
+図 \ref{figure:typec} に、改良したコンテキスト定義を示す。
+% We see a new definition of context frames \texttt{frame\_t},
+% where \texttt{CTry} is missing.
+新しい \texttt{frame\_t} 型の定義は、 \texttt{CTry} を含まないようになっている。
+% When evaluating a program that uses try-with constructs,
+% these frames are used to build a delimited context within a tryee.
+これらのフレームは、try-with 構文を使うプログラムを実行するときに tryee の内部の
+限定されたコンテキストを構成するために使う。
+% We next find a separate datatype \texttt{ctry\_t},
+% which can be understood as meta contexts.
+次に、別の型 \texttt{ctry\_t} が定義されており、これはメタコンテキストを表す型である。
+% Then we define evaluation contexts as pairs of delimited and meta contexts.
+そしてコンテキストは tryee 内部に限定されたコンテキストとメタコンテキストの 2 つ組として定義される。
+% As an example, when evaluating \texttt{raise 4} in the following expression:
+例として、以下のプログラムの中の \texttt{raise 4} を実行しているとき、
+
+\begin{verbatim}
+0 + (try 1 + 2 * (try (3 + raise 4) - 5 with x -> x + 6) with y -> y)
+\end{verbatim}
+% \noindent the current context looks like:
+\noindent 現在のコンテキストは以下のようになっている。
+\begin{verbatim}
+([(3 + [.]); ([.] - 5)],
+  CTry ("x", x + 6,
+    ([2 * [.]; 1 + [.]],
+      CTry ("y", y,
+        ([0 + [.]], CHole)))))
+\end{verbatim}
+
+% The refined contexts allow us to first reconstruct the expression up to
+% the tryee using the \texttt{frame\_t} contexts,
+% and then build up the whole program using the \texttt{ctry\_t} contexts.
+このようにコンテキスト定義を改良すると、
+まず \texttt{frame\_t} 型のコンテキストを使って tryee 式を再構成し、
+その後 \texttt{ctry\_t} 型のコンテキストを使ってプログラム全体を作ることができる。
+% In our particular example, the stepper reconstructs \texttt{(3 + raise 4) - 5},
+% highlights it, and reconstructs the whole program.
+上の例でいうと、ステッパはまず \texttt{(3 + raise 4) - 5} を再構成して
+ハイライトしてから、プログラム全体を再構成している。
+
+% To give the reader a better idea how context frames are accumulated,
+% let us demonstrate the evaluation of an expression involving exception handling:
+コンテキストフレームが蓄積されていく様子を具体的に紹介するため、
+例外処理を含んだ式の実行で関数 \texttt{eval} がどのような順で再帰呼び出しされるかを以下に示す。
+
+\begin{verbatim}
+eval (2 * (try 3 + (raise 4) - 5 with x -> x + 6)) ([], CHole)
+eval (try 3 + (raise 4) - 5 with x -> x + 6) ([2 * [.]], CHole)
+eval (3 + (raise 4) - 5) ([], CTry ("x", x + 6, ([2 * [.]], CHole)))
+eval 5 ([3 + (raise 4) - [.]], CTry ("x", x + 6, ([2 * [.]], CHole)))
+eval (3 + (raise 4)) ([[.] - 5], CTry ("x", x + 6, ([2 * [.]], CHole)))
+eval (raise 4) ([3 + [.]; [.] - 5], CTry ("x", x + 6, ([2 * [.]], CHole)))
+eval 4 ([raise [.]; 3 + [.]; [.] - 5], CTry ("x", x + 6, ([2 * [.]], CHole)))
+eval (4 + 6) ([2 * [.]], CHole)
+\end{verbatim}
+
+% \noindent Observe that we discard the context within the tryee,
+% namely \texttt{3 + (raise [.])\ - 5}, at the last step.
+\noindent 最後のステップにおいて、tryee の内部のコンテキスト
+すなわち \texttt{3 + (raise [.])\ - 5} が捨てられている。
+
+% Now we present our stepping interpreter in Figure \ref{figure:stepper}.
+以上を踏まえ、ステッパ関数を図 \ref{figure:stepper} に示す。
+% The function extends the big-step interpreter in two ways
+% (as shaded in the figure):
+この関数は通常の big-step インタプリタを以下の 2 点において拡張したものである (図中の灰色の部分)。
+% (i) it receives an argument representing the evaluation context;
+(i) コンテキストを表す引数を受け取るようにする。
+% and (ii) it outputs the current program every time reduction takes place.
+(ii) 簡約が行われる全ての箇所で現在のプログラムを出力する。
+
+\begin{figure}
+%(* add a non-try frame *)
+%(* add : c_t -> frame_t -> c_t *)
+%let rec add (list, outer) ctxt = (ctxt :: list, outer)
+%
+%(* add a try frame *)
+%(* add_try : c_t -> string -> e_t -> c_t *)
+%let rec add_try ctxt var expr = ([], CTry (var, expr, ctxt))  
+\begin{spacing}{0.8}
+\begin{alltt}
+(* ステッパ関数 *)
+(* eval : e_t -> c_t -> e_t *)
+let rec eval expr \colorbox{lightgray}{ctxt} = match expr with    (* コンテキストのための引数を増やす *)
+  | Var (x) -> failwith ("unbound variable: " ^ x)
+  | Lam (x, e) -> Lam (x, e)
+  | App (e1, e2) ->
+    begin
+      let v2 = eval e2 \colorbox{lightgray}{(add ctxt (CAppR e1))} in     (* コンテキスト情報を足す *)
+      let v1 = eval e1 \colorbox{lightgray}{(add ctxt (CAppL v2))} in     (* コンテキスト情報を足す *)
+      match v1 with
+      | Lam (x, e) ->
+        let e' = subst e x v2 in
+        \colorbox{lightgray}{memo (App (v1, v2)) e' ctxt;}                                (* 出力 *)
+        let v = eval e' \colorbox{lightgray}{ctxt} in                     (* コンテキスト情報を足す *)
+        v
+      | _ -> failwith "not a function"
+    end
+  | Try (e1, x, e2) ->
+    begin
+      try
+        let v1 = eval e1 \colorbox{lightgray}{(add_try ctxt x e2)} in     (* コンテキスト情報を足す *)
+        \colorbox{lightgray}{memo (Try (v1, x, e2)) v1 ctxt;}                             (* 出力 *)
+        v1
+      with Error (v) ->
+        let e2' = subst e2 x v in
+        \colorbox{lightgray}{memo (Try (Raise v, x, e2)) e2' ctxt;}                       (* 出力 *)
+        eval e2' \colorbox{lightgray}{ctxt}                               (* コンテキスト情報を足す *)
+    end
+  | Raise (e0) ->
+    let v = eval e0 \colorbox{lightgray}{(add ctxt CRaise)} in            (* コンテキスト情報を足す *)
+    \colorbox{lightgray}{begin match ctxt with                   }
+\end{alltt}
+\vspace{-28pt}
+\begin{alltt}
+    \colorbox{lightgray}{    | ([], _) -> ()                     }
+\end{alltt}
+\vspace{-28pt}
+\begin{alltt}
+    \colorbox{lightgray}{    | (clist, tries) ->                 }
+\end{alltt}
+\vspace{-28pt}
+\begin{alltt}
+    \colorbox{lightgray}{      memo (plug_in_try (Raise v) clist)}                        (* 出力 *)
+\end{alltt}
+\vspace{-28pt}
+\begin{alltt}
+    \colorbox{lightgray}{           (Raise v)                    }
+\end{alltt}
+\vspace{-28pt}
+\begin{alltt}
+    \colorbox{lightgray}{           ([], tries)                  }
+\end{alltt}
+\vspace{-28pt}
+\begin{alltt}
+    \colorbox{lightgray}{end;                                    }
+    raise (Error (v))
+\end{alltt}
+\end{spacing}
+% \caption{Stepping evaluator}
+\caption{ステッパ関数}
+\label{figure:stepper}
+\end{figure}
+
+\begin{figure}
+\begin{spacing}{0.8}
+\begin{alltt}
+(* 簡約前の式と簡約後の式とコンテキストを受け取ってステップを出力する *)
+(* memo : e_t -> e_t -> c_t -> unit *)
+let memo expr1 expr2 ctxt =
+  print_exp (plug (green expr1) ctxt);
+  print_exp (plug (purple expr2) ctxt)
+
+(* ステップ実行を始める *)
+(* start : e_t -> e_t *)
+let start e =
+  try
+    eval e \colorbox{lightgray}{([], CHole)}    (* 空のコンテキスト *)
+  with
+    Error (v) -> (Raise v)
+\end{alltt}
+\end{spacing}
+% \caption{\texttt{memo} and main functions}
+\caption{関数 \texttt{memo} とメイン関数}
+\label{figure:memo}
+\end{figure}
+
+% Let us observe the application case.
+まず関数適用 \texttt{e1 e2} のケースの動作を見ると、以下のようになっている。
+% As in the big-step interpreter,
+% we first evaluate \texttt{e2}, and then \texttt{e1}.
+通常のインタプリタと同じように、最初に \texttt{e2} を実行してその後に \texttt{e1} を実行する。
+% When \texttt{e1} has reduced to a function,
+% we know that the application is a $\beta$-redex.
+\texttt{e1} の実行結果が関数であれば、関数適用式は $\beta$ 簡約基になっている。
+% In the standard interpreter,
+% what we do is to perform the substitution \texttt{subst e x v2}
+% and then evaluate the result.
+通常のインタプリタでは、そこで代入 \texttt{subst e x v2} をしてその結果を実行する。
+% In the stepper, on the other hand,
+% we have an additional function call to the \texttt{memo} function
+% defined in Figure \ref{figure:memo}.
+それに対しステッパでは、
+図 \ref{figure:memo} で定義された関数 \texttt{memo} の呼び出しが追加されている。
+% This function receives three arguments:
+% the redex we have just found, its reduct, and the current evaluation context.
+この関数は 3 つの引数を受け取る。
+見つかった簡約基と、その簡約結果と、現時点のコンテキストである。
+% When given these arguments,
+% the \texttt{memo} function reconstructs and prints the pre- and post-reduction programs,
+% using the \texttt{plug} and \texttt{print\_exp} functions
+関数 \texttt{memo} はこれらの引数を受け取ったら、
+関数 \texttt{plug} と \texttt{print\_exp} を使って簡約前と後のプログラムをそれぞれ再構成して出力する。
+\footnote{
+    % In the actual implementation,
+    % we annotate redexes and reducts using OCaml's \emph{attributes}.
+    実際の実装においては、簡約基と簡約後の式の注釈をつけるのに
+    OCaml の \emph{attributes} という機能を利用している。
+    % Here, we write \texttt{green expr1} to mean \texttt{expr1[@stepper.redex]},
+    % and similarly for \texttt{purple}.
+    ここでは \texttt{green expr1} は \texttt{expr1[@stepper.redex]} と出力される式を表し、
+    \texttt{purple} についても同様である。
+    % When displaying the steps,
+    % the Emacs Lisp program uses the attributes information
+    % to appropriately highlight expressions.
+    ステップを表示する際に、 Emacs Lisp のプログラムがその情報から
+    適切に式をハイライトする。
+    }
+    % .  After printing the programs, we continue evaluation as usual.
+    。プログラムを出力したら、普通の実行を再開する。
+
+% In the \texttt{eval} function, we find three more occurrences of \texttt{memo},
+% representing the following reduction rules:
+関数 \texttt{eval} では、これ以外にあと 3 箇所で関数 \texttt{memo} が呼び出されている。
+それらはそれぞれ以下の簡約規則を表している。
+
+\begin{itemize}
+  \item \texttt{try v with x -> e} $\leadsto$ \texttt{v}
+  \item \texttt{try raise v with x -> e2} $\leadsto$ \texttt{subst e2 x v}
+  \item \texttt{...\ (raise v) ...} $\leadsto$ \texttt{raise v}
+\end{itemize}
+
+% \noindent Note that,
+% although the second reduction always happens right after the third one,
+% we keep them as separate rules.
+\noindent 2 つ目の簡約は必ず 3 つ目の簡約の直後に起こるが、
+それにもかかわらずこれらを別の規則として扱っていることに注目してほしい。
+% The reason is that we need the latter to reduce
+% a raise construct with no matching try clause:
+その理由は、次のような対応する try 節が無い \texttt{raise} 式を簡約するのに 3 つ目の規則が必要だからである。
+% \eg, \texttt{3 + (raise 4) - 5} $\leadsto$ \texttt{raise 4}.
+% Separating the two reductions also has an educational benefit:
+% it clearly tells us that exception handling consists of two tasks:
+% discarding the context and substituting the value.
+また、これらの規則を別にしておくのは教育上の意義もある。
+それは、例外処理が「コンテキストを捨てること」と「例外の値を代入すること」
+の 2 つの動作で成り立っていることが明確にステップに表れることである。
+
+%% By observing what we pass to the \texttt{memo} function, we can see the reduction rules of the object language.  In the definition of \texttt{eval}, we have four occurrences \texttt{memo}, representing the following reduction rules:
+
+%% \begin{enumerate}
+%% \item
+%%   \texttt{(fun x -> e) v} $\leadsto$ \texttt{subst e x v}
+%%   \begin{itemize}
+%%   \item \texttt{\colorbox{lightgreen}{f 4} + 100} (where \texttt{f = fun x -> x * 2 + 1}) reduces to \texttt{(\colorbox{purple}{4 * 2 + 1}) + 100}.
+%%   \end{itemize}
+%% \item
+%%   \texttt{try v with x -> e} $\leadsto$ \texttt{v}
+%%   \begin{itemize}
+%%   \item \texttt{\colorbox{lightgreen}{try 2 with x -> x * x}} reduces to \texttt{\colorbox{purple}{2}}.
+%%   \end{itemize}
+%% \item
+%%   \texttt{try raise v with x -> e2} $\leadsto$ \texttt{subst e2 x v}
+%%   \begin{itemize}
+%%   \item \texttt{\colorbox{lightgreen}{try raise 4 with x -> x * x}} reduces to \texttt{\colorbox{purple}{4 * 4}}.
+%%   \end{itemize}
+%% \item
+%%   \texttt{try ...\ (raise v) ...\ with x -> e2} $\leadsto$ \texttt{try raise v with x -> e2}
+%%   \begin{itemize}
+%%   \item \texttt{try \colorbox{lightgreen}{1 + 2 + (raise 4) - 5} with x -> x * x} reduces to \texttt{try \colorbox{purple}{raise 4} with x -> x * x}.
+%%   \end{itemize}
+%% \end{enumerate}
