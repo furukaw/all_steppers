@@ -4,46 +4,46 @@ The top-level auxiliary file: p.aux
 The style file: jplain.bst
 Database file #1: stepper.bib
 Warning--I didn't find a database entry for "FSA18"
-You've used 7 entries,
+You've used 12 entries,
             2620 wiz_defined-function locations,
-            654 strings with 6280 characters,
-and the built_in function-call counts, 3816 in all, are:
-= -- 351
-> -- 119
-< -- 10
-+ -- 48
-- -- 40
-* -- 217
-:= -- 500
-add.period$ -- 25
-call.type$ -- 7
-change.case$ -- 39
+            686 strings with 7174 characters,
+and the built_in function-call counts, 6152 in all, are:
+= -- 562
+> -- 203
+< -- 17
++ -- 82
+- -- 69
+* -- 352
+:= -- 819
+add.period$ -- 42
+call.type$ -- 12
+change.case$ -- 67
 chr.to.int$ -- 0
-cite$ -- 7
-duplicate$ -- 207
-empty$ -- 327
-format.name$ -- 62
-if$ -- 911
+cite$ -- 12
+duplicate$ -- 332
+empty$ -- 517
+format.name$ -- 106
+if$ -- 1453
 int.to.chr$ -- 0
-int.to.str$ -- 7
-missing$ -- 7
-newline$ -- 39
-num.names$ -- 20
-pop$ -- 60
+int.to.str$ -- 12
+missing$ -- 13
+newline$ -- 64
+num.names$ -- 32
+pop$ -- 108
 preamble$ -- 1
-purify$ -- 32
+purify$ -- 56
 quote$ -- 0
-skip$ -- 200
+skip$ -- 313
 stack$ -- 0
-substring$ -- 239
-swap$ -- 76
-text.length$ -- 10
+substring$ -- 360
+swap$ -- 112
+text.length$ -- 17
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 28
+type$ -- 46
 warning$ -- 0
-while$ -- 36
-width$ -- 8
-write$ -- 89
-is.kanji.str$ -- 94
+while$ -- 56
+width$ -- 14
+write$ -- 147
+is.kanji.str$ -- 156
 (There was 1 warning)

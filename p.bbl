@@ -1,10 +1,21 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
+
+\bibitem{10.1145/3158096}
+Dariusz Biernacki, Maciej Pir\'{o}g, Piotr Polesiuk, and Filip Sieczkowski.
+\newblock Handle with care: Relational interpretation of algebraic effects and
+  handlers.
+\newblock {\em Proc. ACM Program. Lang.}, Vol.~2, No. POPL, December 2017.
 
 \bibitem{clements01}
 John Clements, Matthew Flatt, and Matthias Felleisen.
 \newblock Modeling an algebraic stepper.
 \newblock In {\em European symposium on programming}, pp. 320--334. Springer,
   2001.
+
+\bibitem{felleisen09}
+Matthias Felleisen, Robert~Bruce Findler, and Matthew Flatt.
+\newblock {\em Semantics engineering with PLT Redex}.
+\newblock MIT Press, 2009.
 
 \bibitem{FF1986}
 Matthias Felleisen and Daniel~P. Friedman.
@@ -19,6 +30,12 @@ Tsukino Furukawa, Youyou Cong, and Kenichi Asai.
   Functional Programming in Education, {\rm Chalmers University, Gothenburg,
   Sweden, 14th June 2018}}, Vol. 295 of {\em Electronic Proceedings in
   Theoretical Computer Science}, pp. 17--34, 2019.
+
+\bibitem{10.1007/978-3-030-02768-1_22}
+Daniel Hillerstr{\"o}m and Sam Lindley.
+\newblock Shallow effect handlers.
+\newblock In Sukyoung Ryu, editor, {\em Programming Languages and Systems}, pp.
+  415--435, Cham, 2018. Springer International Publishing.
 
 \bibitem{e6cb0c3222794e48bf38cf44e46fe4aa}
 Daniel Hillerstr{\"o}m, Sam Lindley, Robert Atkey, and KC~Sivaramakrishnan.
@@ -43,6 +60,13 @@ Matija Pretnar.
 \newblock The 31st Conference on the Mathematical Foundations of Programming
   Semantics (MFPS XXXI).
 
+\bibitem{tunnell18}
+Preston Tunnell~Wilson, Kathi Fisler, and Shriram Krishnamurthi.
+\newblock Evaluating the tracing of recursion in the substitution notional
+  machine.
+\newblock In {\em Proceedings of the 49th ACM Technical Symposium on Computer
+  Science Education}, SIGCSE '18, pp. 1023--1028. ACM, 2018.
+
 \bibitem{EPTCS294.3}
 John Whitington and Tom Ridge.
 \newblock Direct interpretation of functional programs for debugging.
@@ -50,5 +74,11 @@ John Whitington and Tom Ridge.
   ML Family / OCaml Users and Developers workshops, {\rm Oxford, UK, 7th
   September 2017}}, Vol. 294 of {\em Electronic Proceedings in Theoretical
   Computer Science}, pp. 41--73, 2019.
+
+\bibitem{NI2009}
+根岸純一, 岩崎英哉.
+\newblock Haskellプログラムの開発を支援する{GHCi}デバッガフロントエンド.
+\newblock 情報処理学会論文誌プログラミング, Vol.~2, No.~3, pp. 48--56, July
+  2009.
 
 \end{thebibliography}
