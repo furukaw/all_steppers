@@ -1,4 +1,75 @@
 \chapter*{Abstract}
+% \chapter{要旨}
+
+% ステッパとはプログラミング教育やデバッグのために使うツールであり、
+% プログラムが代数的に書き換わる様子を出力することで実行過程を見せるものである。
+Steppers, which display all the reduction steps of a given program,
+are a novice-friendly tool for understanding program behavior and debugging.
+% これまでに Racket \cite{clements01} の教育用に制限した構文
+% などを対象にステッパが作られてきたが、
+% 継続を扱うことができる代数的効果 \cite{PRETNAR201519} のような、
+% 複雑なプログラム制御をする言語機能に対応したステッパは作られていなかった。
+The tool was only available in
+the pedagogical languages of the DrRacket programming environment.
+Therefore, we cannot step through programs that uses advanced features
+such as exception handling.
+% そのような複雑な機能を含むプログラムの挙動を理解するのは特に困難なので、
+% ステッパでプログラムの動きを観察できるようにしたい。
+% 本研究では例外処理や継続操作の機能を含む言語に対応したステッパを実装した。
+We implemented steppers for constructs of exception handling and
+some control operators.
+
+We need information of context surrounding the redex
+to implement a stepper,
+because stepper is a kind of interpreter which outputs
+the whole programs at each reduction step.
+% ステッパは簡約のたびにその時点でのプログラム全体を出力するインタプリタなので、
+% 実行している部分式のコンテキスト(周りの式)の情報が常に必要になる。
+The biggest problem in implementing a stepper
+is how to get the information.
+% このコンテキストの情報をどのように得るかというのが、
+% ステッパの実装における最大の問題である。
+In this paper, we suggest two ways for that.
+% 本研究ではコンテキストを自分で設計する方法と
+% 機械的に導出する方法の 2 つを示す。
+
+Using the stepper,
+we realized it takes so long time to evaluate programs with big expressions.
+In order to solve this,
+an "incremental stepper" that can be used
+without waiting for the end of the step execution process.
+This made it possible to create a stepper in a server-client system.
+% 実装したステッパを利用してみると、
+% 大きなデータを含むプログラムを入力すると実行に長い時間がかかってしまい
+% 使用できないことが分かった。
+% その解決の為、
+% ステップ実行処理の終了を待たずに利用できる「incremental なステッパ」を実装した。
+% これによってステッパをサーバクライアント方式で作ることも可能になった。
+
+% In addition, we asked students to use a part of
+% the OCaml syntax stepper in a university class,
+% and examined the educational effects of the stepper
+% from the execution logs and showed that
+% there were situations where the stepper was useful.
+Moreover, we asked university students
+to use our OCaml stepper in a course,
+and examined the educational effects of the stepper
+from the execution logs and their comments.
+We showed that there were some situations where the stepper was useful.
+% また、OCaml の一部の構文のステッパを大学の授業で学生に使用してもらい、
+% その実行ログなどからステッパの教育上の効果について考察し、
+% ステッパが有用な場面があることを示した。
+
+Through these attempts,
+we have gained knowledge so that steppers can be used
+in more languages or environments.
+% 以上の試みによって、ステッパがより多くの言語や環境で利用されるための知見を得た。
+
+\vspace{10mm}
+
+% {\bf キーワード：}
+% プログラミング教育、デバッグ、OCaml、algebraic effects、CPS 変換、非関数化、インタプリタ\ 
 
 
-{\bf Keywords:}\ 
+{\bf Keywords:}
+programming education, debugging, OCaml, algebraic effects, CPS transformation, defunctionalization, interpreter
