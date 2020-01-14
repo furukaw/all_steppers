@@ -1,8 +1,18 @@
 \section{結果}
 \label{section:experiment__result}
 
-何か書く■■
-アンケートをとったことも書く■■
+ステッパの学習的効果を評価するため、我々は以下の項目について調査した。
+
+\begin{itemize}
+\item ステッパがどれほど使われていたか
+\item ステッパをよく使った年と使わなかった年で学生の解答の速さに違いがあったか
+\item 学生がステッパについてどう感じたか
+\end{itemize}
+
+ステッパがどれほど使われたかについては、 OCaml 実行ログからステッパによる実行とそうでない実行の数を数えた。
+解答の速さの差は、チェックシステムに記録されている時刻、
+すなわち学生が初めて正解のプログラムをチェックシステムに通した時刻から統計的に分析した。
+最後の項目については、学生にアンケートを取った。
 
 % \subsection{The Uses of the Stepper}
 \subsection{ステッパの使用状況}
@@ -14,7 +24,7 @@
 % almost the same user-interface as the one shown
 % in Figure \ref{figure:ocamlfac}, they differ in the following ways:
 当時のステッパは図 \ref{figure:ocamlfac} とほとんど同じインタフェースだったが、
-以下の点で \ref{section:experiment__stepper} 節で紹介したステッパと相違がある■■。
+以下の点で \ref{section:experiment__stepper} 節で紹介したステッパと異なる。
 \begin{description}
 % \item[2016] This first version supported function definitions,
 % conditionals, records, lists, and recursion.  However, there were
@@ -25,7 +35,7 @@
 より基本的な式しか実行できず、使いにくかった。
 % Moreover, when the instructor introduced the stepper to students, he
 % only mildly encouraged to use it.
-さらに、教員がステッパを学生に紹介する際に、ステッパの使用を強くは奨励しなかった。
+また、教員がステッパを学生に紹介する際に、ステッパの使用を強くは奨励しなかった。
 % Although we do not know how much the stepper was used in 2016 since we
 % did not log the execution of stepper, we expect it was used
 % only rarely in the first few weeks of the course.
@@ -89,7 +99,7 @@
 % how many times students used the stepper
 % among all the executions including the ones that ended up in an error.
 図 \ref{figure:allExecution} は、
-全受講生の全実行 (エラー終了の実行を含む) のうち何回がステッパでの実行だったかを示すグラフである。
+全受講生の全実行 (エラー終了した実行を含む) のうち何回がステッパでの実行だったかを示すグラフである。
 % In both 2017 and 2018, the stepper was used quite often until week 5.
 2017 年度と 2018 年度の両方で、5 週目まではステッパが頻繁に利用されている。
 % This is partly because
@@ -104,19 +114,20 @@
 
 % In 2017, the number of stepper uses decreases toward the end of the
 % course.
-2017 年度には、ステッパの使用回数は最後の授業に近づくにつれて減少している。
+2017 年度には、ステッパの使用回数は最後の授業に近づくにつれて減少している。
 % In contrast, in 2018, certain number of stepper uses is observed,
 % thanks to the support of exception handling, modules, and references.
 それに対して 2018 年度は、例外処理、モジュール、逐次実行、書き換え可能な変数に対応したので、
 ある程度の回数の使用が見られる。
 % Figure \ref{figure:stepExecution} shows the number of execution of
 % programs using these features during step-execution in 2018. % 足した execution を単数にした
-図 \ref{figure:stepExecution} は、ステップ実行のうち
-2018 年度に新しく対応した構文を利用したプログラムの実行の回数のグラフである。
+図 \ref{figure:stepExecution} は、2018 年度のステップ実行のうち
+この年に新しく対応した構文を利用したプログラムの実行の回数のグラフである。
 % From the figure, we can see that there is a demand for step
 % execution of advanced constructs such as exception handling and
 % modules.
-この図から、例外処理やモジュールのような高度な構文のステップ実行の需要があることが分かる。
+どの構文もいくらかステップ実行されており、
+例外処理やモジュールのような高度な構文のステップ実行の需要があることが分かる。
 
 % The exact numbers of execution are available in Table \ref{TableUsage} in the Appendix.
 図 \ref{figure:allExecution} と図 \ref{figure:stepExecution}
@@ -128,14 +139,14 @@
 
 % It is not easy to see the effect of a tool like a stepper on
 % the learning of students.
-学生の学習において、ステッパのようなツールの効果を測るのは簡単ではない。
+ステッパのようなツールの教育効果を測ることは簡単ではない。
 % In the case of improving error messages of a compiler, for example,
 % one can classify various errors and see how many of them are covered
 % by the improved error messages objectively.
 例えばコンパイラのエラーメッセージ改善の評価ならば、
 エラーを分類して改善されたエラーメッセージがそのうちどれほどに対応しているかを見ることができるだろう。
 % For the stepper, it is unclear how to show such numeric data.
-ステッパにおいては、どのようにそういった定量的なデータを示せばよいかが不明瞭である。
+ステッパにおいては、そういった定量的なデータをどのように示せばよいかが不明瞭である。
 
 \begin{figure}
   \begin{center}
@@ -157,15 +168,14 @@
 % submissions recorded in the check system that are within 100 minutes
 % from the beginning of the class and compared the average times among
 % 2016, 2017, and 2018.
-全ての正解提出の中から
-授業開始から100分以内のチェックシステムに記録された提出の時刻を収集し、
-2016年、2017年、2018年の時間を比較した。
+全ての問題のチェックシステムに記録されている「正答が初めて提出された時刻」の中から
+授業開始から100分以内の時刻を収集し、2016年、2017年、2018年の間で比較した。
 
 % Figure \ref{figure:p} shows the number of questions
 % for which students submitted a correct answer
 % within significantly shorter time in 2017 and 2018 compared to 2016.
 図 \ref{figure:p} は
-2017 年度と 2018　年度それぞれに、2016 年度よりも
+2017 年度と 2018 年度それぞれの、2016 年度よりも
 学生が有意に短い時間で正解を提出した問題の数を示している。
 % The data are based on one-sided t-testing with p-value $< 0.05$;
 % we refer the reader to Table \ref{TableTTest} of the appendix for details.
@@ -173,7 +183,7 @@
 詳しい数値は付録の表 \ref{TableTTest} にある。
 % Note that we did not include week 1
 % because we had a special pre-test in the first lecture in 2018.
-ただし、2018 年度の初回の授業には特別なテストを行ったので、
+ただし、2018 年度のみ初回の授業に特別なテストを行ったので、
 第 1 週はこの調査の対象から外した。
 
 % From the figure, we can see improvement of submission times
@@ -190,7 +200,7 @@
 該当する問題は、リストを受け取ったらそのリストの全要素に 1 を足したリストを返す
 再帰関数を書くという単純な問題である。
 % We do not know why it took so long in 2018.
-この問題の正答が 2018 年度に遅くなった理由は分からない。
+この問題の正答が 2018 年度に遅くなった理由は分からない■■。
 % The result of t-testing all the problems together is
 % t(1778) = 2.819 (p=0.002) in 2017 and t(2111) = 2.592 (p=0.005) in 2018.
 全問題の正答時間をまとめて t 検定した結果は、2017 年度が t(1778) = 2.819 (p=0.002)、
@@ -214,12 +224,14 @@
 \paragraph{有効性に対する脅威}
 % It is possible that the results of our experiment were affected
 % by the enrolled students in each year (there was no over-lapping).
-この調査の結果は、各年の学生の影響を受けた可能性がある (同じ学生が 2 度以上履修したことはない)。
-実験の結果は、毎年入学した学生の影響を受けた可能性があります（重複はありませんでした）。
-In all the three years, 
-the instructor started the class with some introductory comments that
-vary in length.
-3 年間を通して、教員は授業を少しの説明から始めており、その長さは毎回同じではなかった。
+この調査の結果は、各年の学生の影響を受けた可能性がある■■ (同じ学生が 2 度以上履修したことはない)。
+% 実験の結果は、毎年入学した学生の影響を受けた可能性があります（重複はありませんでした）。
+% In all the three years, 
+% the instructor started the class with some introductory comments that
+% vary in length.
+また、3 年間を通して
+毎回の授業時間の最初に教員が前回の課題や今回の内容などについて話す時間をとっており、
+その長さは毎回同じではなかった。
 % Although the instructor made similar comments in each year, they were
 % not exactly the same, which could have affected.
 毎年ほとんど同じようなコメントをしてはいるが完全に同じではないので、結果に影響した可能性がある。
@@ -262,29 +274,29 @@ vary in length.
 
 % At the end of the semester of 2018, we asked the students to share
 % their thoughts on the stepper.
-2018 年度前期の最後に、学生にステッパについてどう思うかのアンケートを実施した。
+2018 年度前期の最後に、学生にステッパについてのアンケートを実施した。
 % We received responses from 38 out of 42 students.
-42 人の学生のうち 38 人が回答した。
+42 人の受講者のうち 38 人が回答した。
 % We first asked whether the stepper was useful on the 0 to 4 point scale.
-その中で我々は、ステッパがどれくらい使えたかを 0 から 4 点で評価してもらった。
+その中で、ステッパがどれくらい便利だったか■■を 0 から 4 点で評価してもらった。
 % The results, which we present in Table \ref{TableScore}, suggest
 % that the stepper is not a silver bullet that is useful
 % for all the time.
 結果を表 \ref{TableScore} に示す。
-この表からはステッパは何にでも使える万能なツールではないことが分かる。
+この表からはステッパはいつでも役立つ万能なツールではないことが分かる。
 % However, most students could solve the problems at hand sometimes
 % using the stepper.
 しかし、多くの学生がステッパを使って時々問題を解決することができている。
 % We are encouraged to see some students choose ``the stepper was almost always useful''.
-「ステッパを使えばほぼ必ずプログラムの動きや間違いの原因が分かった」を選んだ学生もいた。
+「ステッパを使えばほぼ必ずプログラムの動きや間違いの原因が分かった」を選んだ学生もいた■■。
 
 % We next asked students to write when the stepper was useful (if any),
 % such as when they found their misunderstanding, or when they could
 % deepen their understanding.
-アンケートの次の質問で、
+他の質問で、
 プログラムの間違いの発見や理解のためにステッパを活用できた場面を (あれば) 答えてもらった。
 % We summarize the answers in two categories.
-その答えを 2 つに分類する。
+その答えを 2 つに分類して紹介する。
 
 % \paragraph{Understanding of the behavior of programs.}
 \paragraph{プログラムの挙動の理解}
@@ -293,12 +305,12 @@ vary in length.
 7 人の学生が、プログラムの挙動についての理解を深めることができたと答えた。
 % In particular, five students among them wrote explicitly that the
 % stepper helped them figure out how functions consume recursive data.
-特に、その内 5 人が関数がどのように再帰的なデータを消費するのかを把握するのに役立ったと書いている。
+特にその内 5 人が関数がどのように再帰的なデータを消費するのかを把握するのに役立ったと書いている。
 % 特に、そのうち5人の学生は、関数が再帰データをどのように消費するかを把握するのにステッパーが役立つと明示的に書いています。
 % We imagine it was particularly instructive to see how a recursive 
 % function definition is unfolded in nesting application.
-特に、再帰関数定義が展開されて関数適用の入れ子になっていく様子を見ることができることが
-有益だと我々は考えている。
+再帰関数定義が展開されて関数適用の入れ子になっていく様子を見ることができることは
+再帰の理解の助けになると考えられる。
 
 % Other students answered that they could observe the behavior of
 % programs in general.
@@ -316,27 +328,32 @@ vary in length.
 % \paragraph{Debugging.}
 \paragraph{デバッグ}
 % Many students found the stepper useful for debugging.
-多くの学生がステッパがデバッグに利用できたと回答した。
+多くの学生がデバッグにステッパを利用できたと回答した。
 % Sixteen students answered they could find what was wrong when their
 % program did not pass test cases.
 16 人の学生が、テストを通らなかった時にどこが間違っているのかを見つけることができたと回答した。
 % By observing each step of execution, they could identify when the
 % program behaved differently from their expectation.
-実行の各ステップを観察することで、期待と違う振る舞いをする箇所を特定することができたという。
+実行の各ステップを観察することで、期待と違った振る舞いをする箇所を特定することができたという。
 % This is an important step toward debugging in general.
 これは一般的なデバッグをする上で重要な過程である。
 % Because printing (and side effects) is handled at the end of the
 % course, the only debugging method for students had been unit testing:
-出力などの副作用を学習するのは学期の終盤で扱うのでデバッグの方法は単体テストしか無く、
-
 % they checked whether all the component functions worked as expected.
+この授業では出力などの副作用を終盤で学習するので、
+学生のデバッグの方法は単体テストで関数全体が正しい値を返すかどうかを見るしかなかった。
 % With the stepper, they can simply observe execution of the program and
 % see when it goes wrong.
+しかしステッパがあれば、
+学生は実行中のどこで間違いが起きているのかを単純に観察することができる。
 
-Three students found the stepper useful to understand why their
-program did not terminate.
-Without printing, it is not easy for students to identify the cause of
-infinite loops.
-Using the stepper, one of the students could not only observe
-the infinite loop, but also see how far her program went well
-and when it went wrong.
+% Three students found the stepper useful to understand why their
+% program did not terminate.
+% Without printing, it is not easy for students to identify the cause of
+% infinite loops.
+また、3 人の学生がプログラムが停止しない時にその原因をステッパで突き止めることができた。
+出力機能を使わずに無限ループの原因を特定することにもステッパは利用できる。
+% Using the stepper, one of the students could not only observe
+% the infinite loop, but also see how far her progr went well
+% and when it went wrong.
+% ここは書かない・・・

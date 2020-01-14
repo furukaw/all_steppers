@@ -1,4 +1,4 @@
-\contentsline {chapter}{\numberline {第1章}序論}{vi}
+\contentsline {chapter}{\numberline {第1章}序論}{vii}
 \contentsline {chapter}{\numberline {第2章}関連研究}{2}
 \contentsline {chapter}{\numberline {第3章}try-with 構文のステップ実行}{3}
 \contentsline {section}{\numberline {3.1}はじめに}{3}
@@ -50,17 +50,19 @@
 \contentsline {subsection}{\numberline {5.5.2}実行時間}{39}
 \contentsline {subsection}{\numberline {5.5.3}関数適用評価スキップ後の前ステップ出力}{39}
 \contentsline {section}{\numberline {5.6}まとめと今後の課題}{40}
-\contentsline {chapter}{\numberline {第6章}実験}{45}
-\contentsline {section}{\numberline {6.1}はじめに}{45}
-\contentsline {section}{\numberline {6.2}実際に使用したステッパ}{45}
-\contentsline {section}{\numberline {6.3}授業「関数型言語」}{46}
-\contentsline {section}{\numberline {6.4}結果}{48}
-\contentsline {subsection}{\numberline {6.4.1}ステッパの使用状況}{48}
-\contentsline {subsection}{\numberline {6.4.2}Effects of Stepper}{49}
-\contentsline {paragraph}{Threats to validity.}{51}
-\contentsline {subsection}{\numberline {6.4.3}Students' Evaluation}{51}
-\contentsline {paragraph}{Understanding of the behavior of programs.}{52}
-\contentsline {paragraph}{Debugging.}{52}
-\contentsline {chapter}{\numberline {第7章}結論}{54}
-\contentsline {chapter}{\numberline {付 録A }インタプリタの変換過程}{58}
-\contentsline {chapter}{\numberline {付 録B }学生の実行ログから得られたデータ}{61}
+\contentsline {chapter}{\numberline {第6章}評価}{45}
+\contentsline {section}{\numberline {6.1}実際に使用したステッパ}{45}
+\contentsline {subsection}{\numberline {6.1.1}型エラーについて}{45}
+\contentsline {subsection}{\numberline {6.1.2}対象構文}{46}
+\contentsline {subsection}{\numberline {6.1.3}関数適用のスキップ}{47}
+\contentsline {section}{\numberline {6.2}授業の内容}{47}
+\contentsline {section}{\numberline {6.3}結果}{49}
+\contentsline {subsection}{\numberline {6.3.1}ステッパの使用状況}{49}
+\contentsline {subsection}{\numberline {6.3.2}ステッパの効果}{51}
+\contentsline {paragraph}{有効性に対する脅威}{52}
+\contentsline {subsection}{\numberline {6.3.3}学生による評価}{53}
+\contentsline {paragraph}{プログラムの挙動の理解}{53}
+\contentsline {paragraph}{デバッグ}{53}
+\contentsline {chapter}{\numberline {第7章}結論}{55}
+\contentsline {chapter}{\numberline {付 録A }インタプリタの変換過程}{59}
+\contentsline {chapter}{\numberline {付 録B }学生の実行ログから得られたデータ}{62}
