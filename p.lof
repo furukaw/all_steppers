@@ -33,8 +33,15 @@
 \contentsline {figure}{\numberline {5.8}{\ignorespaces incremental なステッパ}}{44}
 \contentsline {figure}{\numberline {5.9}{\ignorespaces ステッパのスキップ機能}}{44}
 \addvspace {10\p@ }
+\contentsline {figure}{\numberline {6.1}{\ignorespaces 実際のステッパでプログラムを実行する様子}}{46}
+\contentsline {figure}{\numberline {6.2}{\ignorespaces 階乗関数をスキップする様子}}{46}
+\contentsline {figure}{\numberline {6.3}{\ignorespaces 関数適用をスキップするためのステッパ関数}}{47}
+\contentsline {figure}{\numberline {6.4}{\ignorespaces 関数適用をスキップするためのステッパ出力}}{47}
+\contentsline {figure}{\numberline {6.5}{\ignorespaces ステッパが使用された回数}}{49}
+\contentsline {figure}{\numberline {6.6}{\ignorespaces ステッパの実行のうち各構文を含むプログラムの実行の回数}}{50}
+\contentsline {figure}{\numberline {6.7}{\ignorespaces Number of questions where students arrived at a correct answer significantly faster in 2017 and 2018 than 2016.}}{51}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {A.1}{\ignorespaces CPS インタプリタを非関数化して CPS 変換したプログラム}}{51}
-\contentsline {figure}{\numberline {A.2}{\ignorespaces CPS インタプリタを非関数化して CPS 変換して非関数化したプログラム}}{52}
+\contentsline {figure}{\numberline {A.1}{\ignorespaces CPS インタプリタを非関数化して CPS 変換したプログラム}}{59}
+\contentsline {figure}{\numberline {A.2}{\ignorespaces CPS インタプリタを非関数化して CPS 変換して非関数化したプログラム}}{60}
 \addvspace {10\p@ }

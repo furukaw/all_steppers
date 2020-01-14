@@ -38,7 +38,7 @@
 % Hence, to implement a stepper,
 % we need to keep track of every evaluation context we have traversed.  
 したがって、ステッパを実装するためには、
-それまでの評価文脈を追い続ける必要がある。■■
+それまでの評価文脈を追い続ける必要がある。
 
 % In Figure \ref{figure:simpleplug},
 % we define context frames as algebraic data of type \texttt{frame\_t}.
@@ -52,12 +52,10 @@
 % Evaluation contexts are defined as lists of these frames
 % (spoiler alert: this does not work for exceptions).
 評価文脈はこのフレームのリストで定義される。
-(後ほど触れるが、このコンテキスト定義は例外処理を含む言語には使えない。■■)
-
 % We then define the \texttt{plug} function,
 % which reconstructs a program by wrapping the expression
 % \texttt{expr} with context frames in \texttt{ctxt}. 
-そして、式 \texttt{expr} をコンテキストフレーム列 \texttt{ctxt} で囲んで
+また■■、式 \texttt{expr} をコンテキストフレーム列 \texttt{ctxt} で囲んで
 プログラムを再構成する関数 \texttt{plug} も定義する。
 
 \begin{figure}
@@ -107,7 +105,7 @@ let rec plug expr ctxt = match ctxt with
 % evaluation context is the continuation.
 最終的に得られるステッパ■■は、式を control string■■、評価文脈を継続とみなすと、本質的にCK 機械 \cite{FF1986} であるといえる。
 % Substitution is used to implement $\beta$-reduction.
-代入は $\beta$ 簡約の実装のために用いられている■■。
+% 代入は $\beta$ 簡約の実装のために用いられている■■。
 % We did not implement the abstract machine directly but augmented a
 % big-step interpreter, because we want to keep the correspondence between
 % big-step execution and small-step execution.

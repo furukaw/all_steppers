@@ -69,7 +69,10 @@ let start e =
 %The \texttt{eval} function evaluates a given expression following OCaml's call-by-value, right-to-left strategy.
 型無し$\lambda$計算と try-with から成る言語の OCaml による定義を
 図 \ref{figure:typee} に示す。
-そしてこの言語に対する call-by-value かつ right-to-left のインタプリタは図 \ref{figure:interpreter} のように定義できる。
+そしてこの言語に対するインタプリタは図 \ref{figure:interpreter} のように定義できる。
+ただしOCaml に合わせて call-by-value かつ right-to-left とし、
+また環境を持つのではなく変数が束縛されることが分かった時点で値を代入するインタプリタとした。
+
 %For instance, when given an application \texttt{e1 e2},
 %it first evaluates the argument \texttt{e2}, then evaluates the function \texttt{e1}.
 %Once the application has been turned into a redex, we perform $\beta$-reduction, and evaluate the post-reduction expression.
