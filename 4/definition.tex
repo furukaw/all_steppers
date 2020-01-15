@@ -63,7 +63,7 @@ algebraic effects の特徴は、オペレーション呼び出しの意味が�
 \subsection{構文の定義}
 \label{subsection:syntax}
 型無し$\lambda$計算と algebraic effects からなる対象言語を図 \ref{figure:abstract_syntax}の \texttt{e} と定義する。
-\texttt{h} のオペレーション節に出てくる \texttt{op} たちは互いに
+\texttt{h} 型のハンドラのオペレーション節に出てくる \texttt{op} たちは互いに
 全て異ならくてはいけない。
 
 %型無し$\lambda$計算と algebraic effects からなる対象言語を図\ref{figure:abstract_syntax}の \texttt{e} と定義する。ただし継続 \texttt{fun x => e} は入力プログラムに含まれることはなく、実行の過程で現れる。
@@ -192,7 +192,7 @@ and apply_handler (k : k) (h : h) (a : a) : a = match a with
         eval reduct k)
 
 (* 初期継続を渡して実行を始める *)
-let interpreter (e : e) : a = eval e (fun v -> Return v) (* FIdに変換される関数 *)
+let interpreter (e : e) : a = eval e (fun v -> Return v) (*FIdに変換される関数*)
 \end{verbatim}
 \caption{継続渡し形式で書かれたインタプリタ}
 \label{figure:1cps}
