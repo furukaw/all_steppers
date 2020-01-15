@@ -1,6 +1,6 @@
 \section{OCaml の attribute}
 \label{OCamlのattribute}
-OCaml 4.02 以降では、OCaml の構文木中に attribute という情報を付加することができる。attribute はそれぞれ名前と、OCaml のプログラムやシグネチャなどの引数を持つ。著者らの incremental でないステッパ\cite{FSA18}および本研究で提案するステッパでは attribute を利用している。本節では、本研究のステッパの実装で利用する種類の attribute を紹介する。
+OCaml 4.02 以降では、OCaml の構文木中に attribute という情報を付加することができる。attribute はそれぞれ名前と、OCaml のプログラムやシグネチャなどの引数を持つ。著者らの incremental でないステッパ\cite{FCA19}および本研究で提案するステッパでは attribute を利用している。本節では、本研究のステッパの実装で利用する種類の attribute を紹介する。
 
 \subsection{式の attribute}
 \label{OCamlのattribute-式のattribute}
@@ -34,7 +34,7 @@ OCaml のプログラムでは、任意の部分式に attribute をつけるこ
 \label{figure:highlight}
 \end{figure}
 
-著者らが実装した incremental でないステッパ\cite{FSA18}では、各ステップで簡約が起こっている部分の式をハイライトして示すために attribute を利用している。例えば \texttt{(2 * 3) + (5 * 7)} というプログラムに対する incremental でないステッパの出力は図\ref{figure:highlight}の左の文字列である。インタフェースを受け持つプログラムはこの文字列を受け取り、図\ref{figure:highlight}の右側のように、 attribute が付いた式をハイライトし、さらに attribute を表す文字列を削除した上で表示している。
+著者らが実装した incremental でないステッパ\cite{FCA19}では、各ステップで簡約が起こっている部分の式をハイライトして示すために attribute を利用している。例えば \texttt{(2 * 3) + (5 * 7)} というプログラムに対する incremental でないステッパの出力は図\ref{figure:highlight}の左の文字列である。インタフェースを受け持つプログラムはこの文字列を受け取り、図\ref{figure:highlight}の右側のように、 attribute が付いた式をハイライトし、さらに attribute を表す文字列を削除した上で表示している。
 
 本研究の incremental なステッパでも、同様の方法で簡約部分のハイライトを行う。本稿ではこれ以降、ステッパの出力文字列中のハイライトのための attribute を省略したり、緑色および紫色のハイライトで現すことがある。
 

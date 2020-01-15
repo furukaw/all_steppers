@@ -35,7 +35,7 @@ let start (expr : expression) : expression =
 \label{figure:old-stepper}
 \end{figure}
 
-著者らの incremental でないステッパ\cite{FSA18}は big-step インタプリタ関数にステップ出力のための作用を追加することで構築されている。その実装は図\ref{figure:old-stepper}のようになる。関数 \texttt{eval} は OCaml の call-by-value かつ right-to-left の評価戦略に従った代入ベースの $\lambda$ 計算のインタプリタにステップ実行のための作用を追加したステッパである。背景に灰色が付いた部分がステップ実行のための作用であり、白い部分のみを読むと単なるインタプリタとして見ることができる。ただし関数 \texttt{subst} は代入の関数であり、\texttt{subst f x arg\_value} は式 \texttt{f} の中の変数 \texttt{x} を式 \texttt{arg\_value} に置換した式を返す。このステッパの出力は、例えば入力プログラム \texttt{2 * 3 + 5 * 7} に対して図\ref{figure:highlight}の左側の文字列（にステップ番号の表示を足したもの）である。
+著者らの incremental でないステッパ\cite{FCA19}は big-step インタプリタ関数にステップ出力のための作用を追加することで構築されている。その実装は図\ref{figure:old-stepper}のようになる。関数 \texttt{eval} は OCaml の call-by-value かつ right-to-left の評価戦略に従った代入ベースの $\lambda$ 計算のインタプリタにステップ実行のための作用を追加したステッパである。背景に灰色が付いた部分がステップ実行のための作用であり、白い部分のみを読むと単なるインタプリタとして見ることができる。ただし関数 \texttt{subst} は代入の関数であり、\texttt{subst f x arg\_value} は式 \texttt{f} の中の変数 \texttt{x} を式 \texttt{arg\_value} に置換した式を返す。このステッパの出力は、例えば入力プログラム \texttt{2 * 3 + 5 * 7} に対して図\ref{figure:highlight}の左側の文字列（にステップ番号の表示を足したもの）である。
 
 ステッパは実行可能なプログラムのみを受け付けるため、ステッパに渡される式の中に自由変数および型エラーは存在しない。さらにこのステッパの基となる代入ベースのインタプリタでは、関数の内部の式は必ず関数適用の簡約（すなわち実引数の代入）の後に実行するので、常に変数はその実行の前に束縛を解決されており、変数がインタプリタ関数の引数として実行されることはない。よって、関数 \texttt{eval} 中の \texttt{failwith} の呼び出しは起こり得ない。
 

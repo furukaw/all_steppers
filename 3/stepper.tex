@@ -55,7 +55,7 @@
 % We then define the \texttt{plug} function,
 % which reconstructs a program by wrapping the expression
 % \texttt{expr} with context frames in \texttt{ctxt}. 
-また■■、式 \texttt{expr} をコンテキストフレーム列 \texttt{ctxt} で囲んで
+また、式 \texttt{expr} をコンテキストフレーム列 \texttt{ctxt} で囲んで
 プログラムを再構成する関数 \texttt{plug} も定義する。
 
 \begin{figure}
@@ -90,7 +90,7 @@ let rec plug expr ctxt = match ctxt with
 % an additional argument representing the context,
 % we should be able to display all the steps of
 % the arithmetic expression \texttt{(1 + 2 * 3) + 4}.
-これで■■、関数 \texttt{eval} がコンテキストを表す追加の引数を受け取るようにすれば、
+これで、関数 \texttt{eval} がコンテキストを表す追加の引数を受け取るようにすれば、
 \texttt{(1 + 2 * 3) + 4} のような式のステップ表示ができるようになるはずである。
 % For instance, when evaluating the subexpression \texttt{2 * 3},
 % the extra argument will be a two-element list
@@ -103,9 +103,9 @@ let rec plug expr ctxt = match ctxt with
 % The resulting stepper is essentially the CK abstract machine
 % \cite{FF1986}, where the expression is the control string and the
 % evaluation context is the continuation.
-最終的に得られるステッパ■■は、式を control string■■、評価文脈を継続とみなすと、本質的にCK 機械 \cite{FF1986} であるといえる。
+最終的に得られるステッパは、式を control string、評価文脈を継続とみなすと、本質的にCK 機械 \cite{FF1986} であるといえる。
 % Substitution is used to implement $\beta$-reduction.
-% 代入は $\beta$ 簡約の実装のために用いられている■■。
+% 代入は $\beta$ 簡約の実装のために用いられている。
 % We did not implement the abstract machine directly but augmented a
 % big-step interpreter, because we want to keep the correspondence between
 % big-step execution and small-step execution.
@@ -161,7 +161,7 @@ big-step インタプリタを基にすることで、ユーザが指定した�
 \footnote{
 % The destination is not necessary,
 % if we want to support only exception handling.
-例外処理をサポートするだけならばこの■■必要はない。
+例外処理をサポートするだけならばこの必要はない。
 % We could simply search for the enclosing handler in the evaluation
 % context.
 コンテキストフレームのリストを単純に検索すれば最も内側のハンドラを見つけることができるからである。
@@ -170,7 +170,7 @@ big-step インタプリタを基にすることで、ユーザが指定した�
 % Furthermore, distinction is necessary if we want to implement
 % more general control operators,
 % such as shift and reset \cite{DF1990}.
-さらに、shift/reset のようなより一般的な制御オペレータ■■を実装する場合には
+さらに、shift/reset のようなより一般的な制御オペレータを実装する場合には
 この区別が必要になる。
 }
 
