@@ -12,6 +12,12 @@ John Clements, Matthew Flatt, and Matthias Felleisen.
 \newblock In {\em European symposium on programming}, pp. 320--334. Springer,
   2001.
 
+\bibitem{DF1990}
+Olivier Danvy and Andrzej Filinski.
+\newblock Abstracting control.
+\newblock In {\em Proceedings of the 1990 ACM Conference on Lisp and Functional
+  Programming}, LFP '90, pp. 151--160, 1990.
+
 \bibitem{felleisen09}
 Matthias Felleisen, Robert~Bruce Findler, and Matthew Flatt.
 \newblock {\em Semantics engineering with PLT Redex}.

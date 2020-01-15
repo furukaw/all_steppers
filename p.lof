@@ -11,38 +11,36 @@
 \contentsline {figure}{\numberline {3.5}{\ignorespaces ステッパ関数}}{10}
 \contentsline {figure}{\numberline {3.6}{\ignorespaces 関数 \texttt {memo} とメイン関数}}{11}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces 型無し$\lambda $計算とそのインタプリタ}}{14}
-\contentsline {figure}{\numberline {4.2}{\ignorespaces 型無し$\lambda $計算に対するステッパ}}{15}
-\contentsline {figure}{\numberline {4.3}{\ignorespaces 対象言語の構文}}{17}
-\contentsline {figure}{\numberline {4.4}{\ignorespaces 対象言語の定義}}{18}
-\contentsline {figure}{\numberline {4.5}{\ignorespaces 継続渡し形式で書かれたインタプリタ}}{19}
-\contentsline {figure}{\numberline {4.6}{\ignorespaces 非関数化後の継続の型}}{21}
-\contentsline {figure}{\numberline {4.7}{\ignorespaces CPS インタプリタを非関数化したプログラム}}{21}
-\contentsline {figure}{\numberline {4.8}{\ignorespaces 2回目の非関数化後の継続の型}}{22}
-\contentsline {figure}{\numberline {4.9}{\ignorespaces 変換の後、出力関数を足して得られるステッパ}}{23}
-\contentsline {figure}{\numberline {4.10}{\ignorespaces 継続を外側に拡張する関数}}{24}
-\contentsline {figure}{\numberline {4.11}{\ignorespaces 継続の情報を保持するための言語やコンテキストの定義}}{25}
-\contentsline {figure}{\numberline {4.12}{\ignorespaces 変換の結果得られた、CPSインタプリタを基にしたステッパ}}{26}
+\contentsline {figure}{\numberline {4.1}{\ignorespaces 対象言語の構文}}{15}
+\contentsline {figure}{\numberline {4.2}{\ignorespaces 対象言語の定義}}{16}
+\contentsline {figure}{\numberline {4.3}{\ignorespaces 継続渡し形式で書かれたインタプリタ}}{17}
+\contentsline {figure}{\numberline {4.4}{\ignorespaces 非関数化後の継続の型}}{19}
+\contentsline {figure}{\numberline {4.5}{\ignorespaces CPS インタプリタを非関数化したプログラム}}{20}
+\contentsline {figure}{\numberline {4.6}{\ignorespaces 2回目の非関数化後の継続の型}}{21}
+\contentsline {figure}{\numberline {4.7}{\ignorespaces 変換の後、出力関数を足して得られるステッパ}}{22}
+\contentsline {figure}{\numberline {4.8}{\ignorespaces 継続を外側に拡張する関数}}{23}
+\contentsline {figure}{\numberline {4.9}{\ignorespaces 継続の情報を保持するための言語やコンテキストの定義}}{23}
+\contentsline {figure}{\numberline {4.10}{\ignorespaces 変換の結果得られた、CPSインタプリタを基にしたステッパ}}{24}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces attribute を含む構文木の例}}{30}
-\contentsline {figure}{\numberline {5.2}{\ignorespaces ハイライトのための attribute の利用}}{31}
-\contentsline {figure}{\numberline {5.3}{\ignorespaces 対象言語の定義}}{35}
-\contentsline {figure}{\numberline {5.4}{\ignorespaces 既存のステッパの実装}}{42}
-\contentsline {figure}{\numberline {5.5}{\ignorespaces ステップ出力関数}}{43}
-\contentsline {figure}{\numberline {5.6}{\ignorespaces 実行の種類とステップ番号の定義}}{43}
-\contentsline {figure}{\numberline {5.7}{\ignorespaces incremental なステッパのための出力関数}}{44}
-\contentsline {figure}{\numberline {5.8}{\ignorespaces incremental なステッパ}}{45}
-\contentsline {figure}{\numberline {5.9}{\ignorespaces ステッパのスキップ機能}}{45}
+\contentsline {figure}{\numberline {5.1}{\ignorespaces attribute を含む構文木の例}}{28}
+\contentsline {figure}{\numberline {5.2}{\ignorespaces ハイライトのための attribute の利用}}{29}
+\contentsline {figure}{\numberline {5.3}{\ignorespaces 対象言語の定義}}{33}
+\contentsline {figure}{\numberline {5.4}{\ignorespaces 既存のステッパの実装}}{40}
+\contentsline {figure}{\numberline {5.5}{\ignorespaces ステップ出力関数}}{41}
+\contentsline {figure}{\numberline {5.6}{\ignorespaces 実行の種類とステップ番号の定義}}{41}
+\contentsline {figure}{\numberline {5.7}{\ignorespaces incremental なステッパのための出力関数}}{42}
+\contentsline {figure}{\numberline {5.8}{\ignorespaces incremental なステッパ}}{43}
+\contentsline {figure}{\numberline {5.9}{\ignorespaces ステッパのスキップ機能}}{43}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {6.1}{\ignorespaces 実際のステッパでプログラムを実行する様子}}{47}
-\contentsline {figure}{\numberline {6.2}{\ignorespaces 階乗関数をスキップする様子}}{48}
-\contentsline {figure}{\numberline {6.3}{\ignorespaces 関数適用をスキップするためのステッパ関数}}{49}
-\contentsline {figure}{\numberline {6.4}{\ignorespaces 関数適用をスキップするためのステッパの出力}}{49}
-\contentsline {figure}{\numberline {6.5}{\ignorespaces ステッパが使用された回数}}{51}
-\contentsline {figure}{\numberline {6.6}{\ignorespaces ステッパの実行のうち各構文を含むプログラムの実行の回数}}{52}
-\contentsline {figure}{\numberline {6.7}{\ignorespaces 学生が正答するまでの時間の比較}}{53}
+\contentsline {figure}{\numberline {6.1}{\ignorespaces 実際のステッパでプログラムを実行する様子}}{45}
+\contentsline {figure}{\numberline {6.2}{\ignorespaces 階乗関数をスキップする様子}}{46}
+\contentsline {figure}{\numberline {6.3}{\ignorespaces 関数適用をスキップするためのステッパ関数}}{47}
+\contentsline {figure}{\numberline {6.4}{\ignorespaces 関数適用をスキップするためのステッパの出力}}{47}
+\contentsline {figure}{\numberline {6.5}{\ignorespaces ステッパが使用された回数}}{49}
+\contentsline {figure}{\numberline {6.6}{\ignorespaces ステッパの実行のうち各構文を含むプログラムの実行の回数}}{50}
+\contentsline {figure}{\numberline {6.7}{\ignorespaces 学生が正答するまでの時間の比較}}{51}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {A.1}{\ignorespaces CPS インタプリタを非関数化して CPS 変換したプログラム}}{62}
-\contentsline {figure}{\numberline {A.2}{\ignorespaces CPS インタプリタを非関数化して CPS 変換して非関数化したプログラム}}{63}
+\contentsline {figure}{\numberline {A.1}{\ignorespaces CPS インタプリタを非関数化して CPS 変換したプログラム}}{60}
+\contentsline {figure}{\numberline {A.2}{\ignorespaces CPS インタプリタを非関数化して CPS 変換して非関数化したプログラム}}{61}
 \addvspace {10\p@ }
