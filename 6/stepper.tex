@@ -57,11 +57,6 @@ OCaml ステッパでは、
 標準出力された文字列や変数に格納された値などの「状態」をインタプリタが保持する必要がある。
 状態の情報はステッパプログラム内の書き換え可能なグローバル変数の中に格納することで実装した。
 
-OCaml ステッパは他に授業で利用する一部の演算子などに対応している。
-図 \ref{figure:ocmalstep} に実際のステップ列の例を示す。
-
-% ref、配列を使うやつにする？
-
 \begin{figure}
   \includegraphics[width=14cm]{6/longexample.eps}
 %   \caption{Evaluating programs using the actual stepper}
@@ -69,8 +64,13 @@ OCaml ステッパは他に授業で利用する一部の演算子などに対�
   \label{figure:ocamlstep}
 \end{figure}
 
+OCaml ステッパは他に授業で利用する一部の演算子などに対応している。
+図 \ref{figure:ocamlstep} に実際のステップ列の例を示す。
+
+% ref、配列を使うやつにする？
+
 \subsection{関数適用のスキップ}
-\label{subsection:stepper__skip}
+\label{subsection:skip}
 
 \begin{figure}
   \includegraphics[width=10cm]{6/beforeskip.eps}

@@ -1,4 +1,4 @@
-This is e-pTeX, Version 3.14159265-p3.7-160201-2.6 (utf8.euc) (TeX Live 2016) (preloaded format=platex 2017.4.27)  15 JAN 2020 13:27
+This is e-pTeX, Version 3.14159265-p3.7-160201-2.6 (utf8.euc) (TeX Live 2016) (preloaded format=platex 2017.4.27)  15 JAN 2020 14:09
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -251,30 +251,23 @@ LaTeX Font Warning: Font shape `JY1/gt/m/it' undefined
 (Font)              using `JY1/gt/m/n' instead on input line 112.
 
 ) (./3/stepper.tex [6]
-
-LaTeX Warning: Reference `section:experiment__language' on page 7 undefined on 
-input line 120.
-
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <9> on input line 175.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <5> on input line 175.
-[7] [8] [9] [10]
+ [7] [8] [9] [10]
 LaTeX Font Info:    Try loading font information for OMS+cmr on input line 436.
 
- (/usr/local/texlive/2016/texmf-dist/tex/latex/base/omscmr.fd
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 436.
-) (./3/conclusion.tex [11])) (./4/chapter4.tex [12]
+)
+(./3/conclusion.tex [11])) (./4/chapter4.tex [12]
 第 4 章
-(./4/intro.tex
-
-LaTeX Warning: Reference `subsection:interpreter' on page 13 undefined on input
- line 41.
-
-) (./4/definition.tex [13
+(./4/intro.tex) (./4/definition.tex [13
 
 ]
 LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <12> not available
@@ -560,16 +553,13 @@ LaTeX Warning: Citation `FSA18' on page 39 undefined on input line 23.
 (./6/intro.tex) (./6/stepper.tex [44
 
 ]
-
-LaTeX Warning: Reference `figure:ocmalstep' on page 45 undefined on input line 
-61.
-
 File: 6/longexample.eps Graphic file (type eps)
-<6/longexample.eps>
+ <6/longexample.eps>
 File: 6/beforeskip.eps Graphic file (type eps)
  <6/beforeskip.eps>
 File: 6/afterskip.eps Graphic file (type eps)
- <6/afterskip.eps> [45]
+
+<6/afterskip.eps> [45]
 Overfull \hbox (10.65091pt too wide) in paragraph at lines 141--141
 []        [][][][][][]                \OT1/cmtt/m/n/10.95 (* output start mark 
 *)[] 
@@ -581,23 +571,15 @@ Overfull \hbox (10.65091pt too wide) in paragraph at lines 144--144
 put end mark *)[] 
  []
 
-) (./6/course.tex
-
-LaTeX Warning: Reference `Asai07' on page 46 undefined on input line 29.
-
-[46] [47]) (./6/result.tex [48]
+) (./6/course.tex [46] [47]) (./6/result.tex [48]
 File: 6/table1a.eps Graphic file (type eps)
  <6/table1a.eps>
 File: 6/table1b.eps Graphic file (type eps)
- <6/table1b.eps> [49]
+
+<6/table1b.eps> [49]
 File: 6/table2.eps Graphic file (type eps)
-
-<6/table2.eps> [50] [51] [52])) (./chapter7.tex [53]
+ <6/table2.eps> [50] [51] [52])) (./chapter7.tex [53]
 第 7 章
-
-LaTeX Warning: Reference `chapter:algebraic effects' on page 54 undefined on in
-put line 20.
-
 [54
 
 ]) [55] (./syaji.tex) [56
@@ -621,12 +603,12 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 1954 strings out of 493693
- 27974 string characters out of 6149787
- 135725 words of memory out of 5000000
- 5370 multiletter control sequences out of 15000+600000
+ 1951 strings out of 493693
+ 27893 string characters out of 6149787
+ 135738 words of memory out of 5000000
+ 5367 multiletter control sequences out of 15000+600000
  23620 words of font info for 99 fonts, out of 8000000 for 9000
  929 hyphenation exceptions out of 8191
  27i,9n,21p,1017b,411s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on p.dvi (74 pages, 284028 bytes).
+Output written on p.dvi (74 pages, 284164 bytes).
