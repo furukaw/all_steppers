@@ -147,17 +147,17 @@ big-step インタプリタを基にすることで、ユーザが指定した�
 % the context \emph{within} the tryee.
 しかし、最初のステップでハイライトされている式はそれよりも大きい式
 \texttt{(2 + 3 * (raise 4) + 5)} である。
-これは \texttt{raise 4} の実行で例外を起こす際に、この式の外側にある、tryee の内部のコンテキストを捨てるからである。
+これは \texttt{raise 4} の実行で例外を起こす際に、この式の外側にある、try 節の内部のコンテキストを捨てるからである。
 % Since context frames are collected in a single list,
 % the second argument at this point will be
 % \texttt{[(3 * [.]); (2 + [.]);\ ([.]\ + 5);\ (try [.]\ with x -> x)]},
 % \ie, it contains the context \emph{outside} the tryee.
 コンレキストフレームは 1 つのリストに入っているので、この時点での関数 \texttt{eval} の第2引数は
 \texttt{[(3 * [.]); (2 + [.]);\ ([.]\ + 5);\ (try [.]\ with x -> x)]} であり、
-すなわち tryee の外側のコンテキストを含んでいる。
+すなわち try 節の外側のコンテキストを含んでいる。
 % This suggests that, when dealing with exception handlers,
 % we have to distinguish between contexts inside and outside a tryee.
-例外処理を扱う場合には、tryee の内側と外側のコンテキストを区別する必要があるということである。
+例外処理を扱う場合には、try 節の内側と外側のコンテキストを区別する必要があるということである。
 \footnote{
 % The destination is not necessary,
 % if we want to support only exception handling.
@@ -191,7 +191,7 @@ type ctry_t =
 (* コンテキスト *)
 and c_t = frame_t list * ctry_t
 
-(* tryee を再構成する *)
+(* try 節の式を再構成する *)
 (* plug_in_try : e_t -> frame_t list -> e_t *)
 let rec plug_in_try expr ctxt = match ctxt with
   | [] -> expr
@@ -223,12 +223,12 @@ let rec plug expr (clist, tries) =
 % When evaluating a program that uses try-with constructs,
 % these frames are used to build a delimited context within a tryee.
 \texttt{frame\_t} 型のフレームは、try-with 構文を使うプログラムを実行において
-tryee の内部に限定されたコンテキストを表すために使う。
+try 節の内部に限定されたコンテキストを表すために使う。
 % We next find a separate datatype \texttt{ctry\_t},
 % which can be understood as meta contexts.
 次に、別の型 \texttt{ctry\_t} が定義されており、これはメタコンテキストを表す型である。
 % Then we define evaluation contexts as pairs of delimited and meta contexts.
-そしてコンテキストは tryee 内部に限定されたコンテキストとメタコンテキストの 2 つ組として定義される。
+そしてコンテキストは try 節内部に限定されたコンテキストとメタコンテキストの 2 つ組として定義される。
 % As an example, when evaluating \texttt{raise 4} in the following expression:
 例として、以下のプログラムの中の \texttt{raise 4} を実行しているとき、
 
@@ -249,7 +249,7 @@ tryee の内部に限定されたコンテキストを表すために使う。
 % the tryee using the \texttt{frame\_t} contexts,
 % and then build up the whole program using the \texttt{ctry\_t} contexts.
 このようにコンテキスト定義を改良すると、
-まず \texttt{frame\_t} 型のコンテキストを使って tryee 式を再構成し、
+まず \texttt{frame\_t} 型のコンテキストを使って try 節の式を再構成し、
 その後 \texttt{ctry\_t} 型のコンテキストを使ってプログラム全体を作ることができる。
 % In our particular example, the stepper reconstructs \texttt{(3 + raise 4) - 5},
 % highlights it, and reconstructs the whole program.
@@ -274,7 +274,7 @@ eval (4 + 6) ([2 * [.]], CHole)
 
 % \noindent Observe that we discard the context within the tryee,
 % namely \texttt{3 + (raise [.])\ - 5}, at the last step.
-\noindent 最後のステップにおいて、tryee の内部のコンテキスト
+\noindent 最後のステップにおいて、try 節の内部のコンテキスト
 すなわち \texttt{3 + (raise [.])\ - 5} が捨てられている。
 
 % Now we present our stepping interpreter in Figure \ref{figure:stepper}.

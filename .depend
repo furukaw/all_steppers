@@ -1,9 +1,9 @@
 p.pdf : p.tex stepper.bib\
 1/chapter1.tex\
 chapter2.tex\
-3/chapter3.tex 3/intro.tex 3/interpreter.tex 3/stepper.tex 3/conclusion.tex\
+3/chapter3.tex 3/intro.tex 3/interpreter.tex 3/stepper.tex 3/actual.tex 3/conclusion.tex\
 4/chapter4.tex 4/intro.tex 4/context.tex 4/conclusion.tex 4/definition.tex 4/languages.tex 4/transform.tex\
 5/chapter5.tex 5/actual.tex 5/attribute.tex 5/interface.tex 5/new_implementation.tex 5/old_implementation.tex 5/problem.tex 5/solution.tex 5/spec.tex\
-6/chapter6.tex 6/intro.tex 6/stepper.tex 6/course.tex 6/result.tex\
+6/chapter6.tex 6/intro.tex 6/course.tex 6/result.tex\
 chapter7.tex\
 title.tex syaji.tex appendix.tex abstract_en.tex abstract_jp.tex

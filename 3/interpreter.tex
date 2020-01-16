@@ -18,7 +18,7 @@ type e_t = Var of string               (* x *)
 \begin{figure}
 \begin{spacing}{0.8}
 \begin{verbatim}
-(* 入力プログラムの例外の値を持った例が *)
+(* 入力プログラムの例外の値を引数に持つ例外 *)
 exception Error of e_t
 
 (* 式を実行する *)
@@ -69,9 +69,8 @@ let start e =
 %The \texttt{eval} function evaluates a given expression following OCaml's call-by-value, right-to-left strategy.
 型無し$\lambda$計算と try-with から成る言語の OCaml による定義を
 図 \ref{figure:typee} に示す。
-そしてこの言語に対するインタプリタは図 \ref{figure:interpreter} のように定義できる。
-ただしOCaml に合わせて call-by-value かつ right-to-left とし、
-また環境を持つのではなく変数が束縛されることが分かった時点で値を代入するインタプリタとした。
+そしてこの言語に対する代入ベースで call-by-value かつ right-to-left
+のインタプリタは図 \ref{figure:interpreter} のように定義できる。
 
 %For instance, when given an application \texttt{e1 e2},
 %it first evaluates the argument \texttt{e2}, then evaluates the function \texttt{e1}.
@@ -108,10 +107,8 @@ let start e =
 %For convenience, we will hereafter call \texttt{e1} a \emph{tryee};
 %the intention is that \texttt{e1} is
 %the expression being ``tried'' by the handler.
-説明を簡単にするため、 \texttt{try e1 with x -> e2} の \texttt{e1} のことを
-以後 \emph{tryee} と呼ぶ。
+try 節の式のことを、プログラム内では \texttt{tryee} という変数名で表していることがある。
 これは、 try ハンドラによって「try されている」ということを意図している。
-
 
 %The main function \texttt{start} calls \texttt{eval}
 %in an exception handling context.

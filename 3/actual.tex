@@ -1,5 +1,5 @@
-\section{実際に使用したステッパ}
-\label{section:experiment__stepper}
+\section{実際の OCaml ステッパ}
+\label{section:ocaml stepper}
 
 我々が実装した OCaml ステッパは、
 \ref{section:try-with__stepper} 節で示した try-with と比べて
@@ -121,7 +121,7 @@ OCaml ステッパは他に授業で利用する一部の演算子などに対�
 % \texttt{apply\_end} functions,
 % and help the Emacs Lisp program to hide unnecessary steps.
 関数 \texttt{apply\_start :\ unit -> int} が前者を出力する関数、
-関数 \texttt{apply\_end : int -> unit} が後者を出力する関数である。
+関数 \texttt{apply\_end :\ int -> unit} が後者を出力する関数である。
 表示処理をする Emacs Lisp プログラムがこれらの文字列を検索し、
 間のステップを隠す処理をする。
 % We show an example output sequence in Figure \ref{figure:skipping}.
