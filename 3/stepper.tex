@@ -40,6 +40,20 @@
 したがって、ステッパを実装するためには、
 それまでの評価文脈を追い続ける必要がある。
 
+そのために、コンテキストを表すデータ型を定義する必要がある。
+コンテキストはコンテキストフレームの列で表されるので、
+OCaml ではフレームを表すコンストラクタのリストとして定義することができる。
+しかし例外処理を含むプログラムの実行では、
+コンテキストをハンドラで区切って操作するため、
+より複雑なデータ構造として定義した方が良いことが分かった。
+\ref{subsection:stepper__before} 節で
+リストとしてコンテキストを定義した場合について説明し、
+\ref{subsection:stepper__after} 節で
+最終的な実装を示す■■。
+
+\subsection{一次元的なコンテキストでの実装}
+\label{subsection:stepper__before}
+
 % In Figure \ref{figure:simpleplug},
 % we define context frames as algebraic data of type \texttt{frame\_t}.
 図 \ref{figure:simpleplug} で、 \texttt{frame\_t} 型の代数的データとしてコンテキストフレームを定義している。
@@ -173,6 +187,9 @@ big-step インタプリタを基にすることで、ユーザが指定した�
 さらに、shift/reset のようなより一般的な制御オペレータを実装する場合には
 この区別が必要になる。
 }
+
+\subsection{二次元的なコンテキストでの実装}
+\label{subsection:stepper__after}
 
 \begin{figure}
 \begin{spacing}{0.8}

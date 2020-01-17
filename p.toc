@@ -7,11 +7,13 @@
 \contentsline {section}{\numberline {3.1}はじめに}{6}
 \contentsline {section}{\numberline {3.2}対象言語とインタプリタの定義}{6}
 \contentsline {section}{\numberline {3.3}ステッパの実装}{8}
-\contentsline {section}{\numberline {3.4}実際の OCaml ステッパ}{13}
+\contentsline {subsection}{\numberline {3.3.1}一次元的なコンテキストでの実装}{9}
+\contentsline {subsection}{\numberline {3.3.2}二次元的なコンテキストでの実装}{10}
+\contentsline {section}{\numberline {3.4}実際の OCaml ステッパ}{14}
 \contentsline {subsection}{\numberline {3.4.1}型エラーについて}{14}
-\contentsline {subsection}{\numberline {3.4.2}対象構文}{14}
-\contentsline {subsection}{\numberline {3.4.3}関数適用のスキップ}{15}
-\contentsline {section}{\numberline {3.5}この章のまとめ}{17}
+\contentsline {subsection}{\numberline {3.4.2}対象構文}{15}
+\contentsline {subsection}{\numberline {3.4.3}関数適用のスキップ}{16}
+\contentsline {section}{\numberline {3.5}この章のまとめ}{16}
 \contentsline {chapter}{\numberline {第4章}algebraic effects のステップ実行}{18}
 \contentsline {section}{\numberline {4.1}はじめに}{18}
 \contentsline {section}{\numberline {4.2}algebraic effects とインタプリタの定義}{19}

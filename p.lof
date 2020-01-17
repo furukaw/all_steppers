@@ -7,13 +7,13 @@
 \contentsline {figure}{\numberline {3.1}{\ignorespaces 対象言語の定義}}{6}
 \contentsline {figure}{\numberline {3.2}{\ignorespaces big-step インタプリタ}}{7}
 \contentsline {figure}{\numberline {3.3}{\ignorespaces コンテキストと再構成関数 (試作版)}}{9}
-\contentsline {figure}{\numberline {3.4}{\ignorespaces コンテキストと再構成関数 (最終版)}}{10}
-\contentsline {figure}{\numberline {3.5}{\ignorespaces ステッパ関数}}{12}
-\contentsline {figure}{\numberline {3.6}{\ignorespaces 関数 \texttt {memo} とメイン関数}}{13}
+\contentsline {figure}{\numberline {3.4}{\ignorespaces コンテキストと再構成関数 (最終版)}}{11}
+\contentsline {figure}{\numberline {3.5}{\ignorespaces ステッパ関数}}{13}
+\contentsline {figure}{\numberline {3.6}{\ignorespaces 関数 \texttt {memo} とメイン関数}}{14}
 \contentsline {figure}{\numberline {3.7}{\ignorespaces 実際のステッパでプログラムを実行する様子}}{15}
-\contentsline {figure}{\numberline {3.8}{\ignorespaces 階乗関数をスキップする様子}}{15}
-\contentsline {figure}{\numberline {3.9}{\ignorespaces 関数適用をスキップするためのステッパ関数}}{16}
-\contentsline {figure}{\numberline {3.10}{\ignorespaces 関数適用をスキップするためのステッパの出力}}{16}
+\contentsline {figure}{\numberline {3.8}{\ignorespaces 階乗関数をスキップする様子}}{16}
+\contentsline {figure}{\numberline {3.9}{\ignorespaces 関数適用をスキップするためのステッパ関数}}{17}
+\contentsline {figure}{\numberline {3.10}{\ignorespaces 関数適用をスキップするためのステッパの出力}}{17}
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {4.1}{\ignorespaces 対象言語の構文}}{20}
 \contentsline {figure}{\numberline {4.2}{\ignorespaces 対象言語の定義}}{21}
