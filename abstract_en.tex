@@ -10,8 +10,8 @@ are a novice-friendly tool for understanding program behavior and debugging.
 % 継続を扱うことができる代数的効果 \cite{PRETNAR201519} のような、
 % 複雑なプログラム制御をする言語機能に対応したステッパは作られていなかった。
 The tool was only available in
-the pedagogical languages of the DrRacket programming environment.
-Therefore, we cannot step through programs that uses advanced features
+the pedagogical languages of the DrRacket programming environment;
+therefore, we cannot step through programs that uses advanced features
 such as exception handling.
 % そのような複雑な機能を含むプログラムの挙動を理解するのは特に困難なので、
 % ステッパでプログラムの動きを観察できるようにしたい。
@@ -34,8 +34,8 @@ In this paper, we suggest two ways for that.
 % 機械的に導出する方法の 2 つを示す。
 
 Using the stepper,
-we realized it takes so long time to evaluate programs with big expressions.
-In order to solve this,
+we realized that it takes so long time to evaluate programs with big■■ expressions.
+In order to get over this■■,
 an "incremental stepper" that can be used
 without waiting for the end of the step execution process.
 This made it possible to create a stepper in a server-client system.

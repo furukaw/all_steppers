@@ -133,8 +133,8 @@ and a = Return of v               (* 値になった *)
 %\subsection{CPS インタプリタ}
 %\label{subsection:1cps}
 
-図 \ref{figure:syntax} の言語に
-対する call-by-value かつ right-to-left のインタプリタを
+図 \ref{figure:syntax} の言語に対する
+call-by-value かつ right-to-left の代入ベースのインタプリタを
 図 \ref{figure:1cps} に定義する。
 ただし、関数 \texttt{subst :\ e -> (string * v) list -> e} は代入のための
 関数であり、\texttt{subst e [(x, v); (k, cont\_value)]} は \texttt{e}
@@ -199,10 +199,10 @@ let interpreter (e : e) : a = eval e (fun v -> Return v) (*FIdに変換される
 \end{figure}
 
 このインタプリタは、\texttt{handle} 節内の実行については普通の CPS に
-なっており、継続である \texttt{k} は「直近のハンドラまでの継続」で
+なっており■■、継続である \texttt{k} は「直近のハンドラまでの継続」で
 ある。関数 \texttt{eval} の下から2行目で \texttt{with handle} 文を
 実行する際、再帰呼び出しの継続として
-\texttt{(fun x -> Return x)} を渡していて、これによって
+\texttt{(fun x -> Return x)} を渡しており、これによって
 \texttt{handle} 節の実行に入るたびに渡す継続を初期化している。
 
 %このインタプリタは、\texttt{handle} 節内の実行については CPS になっており、メタ継続である \texttt{k} は「直近のハンドラまでの継続」である。関数 \texttt{eval} の下から2行目で再帰呼び出しの際に継続に \texttt{(fun x -> Return x)} を渡していて、これによって \texttt{handle} 節の実行に入るたびに渡す継続を初期化している。

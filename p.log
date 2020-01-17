@@ -1,4 +1,4 @@
-This is e-pTeX, Version 3.14159265-p3.7-160201-2.6 (utf8.euc) (TeX Live 2016) (preloaded format=platex 2017.4.27)  17 JAN 2020 14:44
+This is e-pTeX, Version 3.14159265-p3.7-160201-2.6 (utf8.euc) (TeX Live 2016) (preloaded format=platex 2017.4.27)  17 JAN 2020 18:46
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -235,9 +235,16 @@ LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <14.4> not available
 (Font)              Font shape `JT1/gt/m/n' tried instead on input line 4.
 LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <14.4> not available
 (Font)              Font shape `JY1/gt/m/n' tried instead on input line 4.
-[5
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 15.
+(/usr/local/texlive/2016/texmf-dist/tex/latex/base/omscmr.fd
+File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 15.
+ [5
 
-]) (./3/chapter3.tex [6]
+])
+(./3/chapter3.tex [6]
 第 3 章
 (./3/intro.tex) (./3/interpreter.tex [7
 
@@ -259,22 +266,14 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <9> on input line 189.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <5> on input line 189.
- [11] [12]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 453.
-
- (/usr/local/texlive/2016/texmf-dist/tex/latex/base/omscmr.fd
-File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
-)
-LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 453.
- [13] [14]) (./3/actual.tex [15]
+ [11] [12] [13] [14]) (./3/actual.tex [15]
 File: 6/longexample.eps Graphic file (type eps)
  <6/longexample.eps>
 File: 6/beforeskip.eps Graphic file (type eps)
- <6/beforeskip.eps>
-File: 6/afterskip.eps Graphic file (type eps)
 
-<6/afterskip.eps> [16]
+<6/beforeskip.eps>
+File: 6/afterskip.eps Graphic file (type eps)
+ <6/afterskip.eps> [16]
 Overfull \hbox (10.65091pt too wide) in paragraph at lines 141--141
 []        [][][][][][]                \OT1/cmtt/m/n/10.95 (* output start mark 
 *)[] 
@@ -290,7 +289,7 @@ put end mark *)[]
 第 4 章
 (./4/intro.tex) (./4/definition.tex [19
 
-] [20]
+]
 Overfull \hbox (4.65091pt too wide) in paragraph at lines 118--118
 []\OT1/cmtt/m/n/10.95 and h = {return : string * e;                         (* 
 {return x -> e;      *)[] 
@@ -302,9 +301,11 @@ Overfull \hbox (4.65091pt too wide) in paragraph at lines 118--118
  op(x; k) -> e; ...} *)[] 
  []
 
+[20]
 LaTeX Font Info:    Try loading font information for OMS+cmtt on input line 144
 .
 LaTeX Font Info:    No file OMScmtt.fd. on input line 144.
+
 
 LaTeX Font Warning: Font shape `OMS/cmtt/m/n' undefined
 (Font)              using `OMS/cmsy/m/n' instead
@@ -323,7 +324,7 @@ LaTeX Warning: Float too large for page by 6.15746pt on input line 199.
 File: 5/attribute.png Graphic file (type bmp)
  <5/attribute.png> [36])
 (./5/solution.tex [37]
-Overfull \hbox (4.10356pt too wide) in paragraph at lines 19--20
+Overfull \hbox (4.10356pt too wide) in paragraph at lines 22--23
 \OT1/cmtt/m/n/10.95 (1, 5 * 7) ] $\U/lasy/m/n/10.95 ;$ \OT1/cmtt/m/n/10.95 6[@s
 tepper.reduct (2, 2 * 3) ] + 35[@stepper.reduct (1, 5 * 7) ]
  []
@@ -333,226 +334,95 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <14.4> on input line 10.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <7> on input line 10.
- [40] (./5/old_implementation.tex
-Underfull \hbox (badness 10000) in paragraph at lines 18--18
-[]    \OT1/cmtt/m/n/10.95 let arg[]value = eval e2 [][][][][][] in          (* 
-\JY1/mc/m/n/10.95 引数部分を評
- []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 19--19
-[]    \OT1/cmtt/m/n/10.95 let fun[]value = eval e1 [][][][][][] in   (* \JY1/mc
-/m/n/10.95 関数部分を評
- []
+LaTeX Warning: Reference `figure:lambda_with_attributes' on page 40 undefined o
+n input line 42.
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 22--22
-[]    \OT1/cmtt/m/n/10.95 let redex = \OMS/cmtt/m/n/10.95 f\OT1/cmtt/m/n/10.95 
-desc = App (fun[]value, arg[]value);               (* \JY1/mc/m/n/10.95 簡約前
-の
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 24--24
-[]      \OT1/cmtt/m/n/10.95 let reduct = \OMS/cmtt/m/n/10.95 f\OT1/cmtt/m/n/10.
-95 desc = (subst f x arg[]value).desc ;          (* \JY1/mc/m/n/10.95 簡約後の
- []
-
-
-Overfull \hbox (4.88419pt too wide) in paragraph at lines 26--26
+[40] (./5/old_implementation.tex
+Overfull \hbox (4.88419pt too wide) in paragraph at lines 27--27
 []      [][][][][][][] 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 27--27
-[]      \OT1/cmtt/m/n/10.95 eval reduct [][][][][][]                           
-       (* \JY1/mc/m/n/10.95 簡約後の式を評
+) [41] (./5/new_implementation.tex [42] [43]
+Underfull \hbox (badness 10000) in paragraph at lines 71--71
+[]  \OT1/cmtt/m/n/10.95 print[]as[]attribute (plug redex context);         (* \
+JY1/mc/m/n/10.95 処理用の簡約前のプログラ
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 47--47
-[]  \OT1/cmtt/m/n/10.95 let marked[]redex =                             (* \JY1
-/mc/m/n/10.95 簡約前の式に \OT1/cmtt/m/n/10.95 attribute \JY1/mc/m/n/10.95 追
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 49--49
-[]  \OT1/cmtt/m/n/10.95 let marked[]reduct =                            (* \JY1
-/mc/m/n/10.95 簡約後の式に \OT1/cmtt/m/n/10.95 attribute \JY1/mc/m/n/10.95 追
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 51--51
-[]  \OT1/cmtt/m/n/10.95 print[]counter ();                                  (* 
-\JY1/mc/m/n/10.95 簡約前ステ ッ プ番号を出
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 52--52
-[]  \OT1/cmtt/m/n/10.95 print (plug redex current[]context);                (* 
-\JY1/mc/m/n/10.95 簡約前のプログラムを出
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 53--53
-[]  \OT1/cmtt/m/n/10.95 counter := !counter + 1;                           (* \
-JY1/mc/m/n/10.95 ステ ッ プ番号を \OT1/cmtt/m/n/10.95 1 \JY1/mc/m/n/10.95 増や
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 54--54
-[]  \OT1/cmtt/m/n/10.95 print[]counter ();                                  (* 
-\JY1/mc/m/n/10.95 簡約後ステ ッ プ番号を出
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 55--55
-[]  \OT1/cmtt/m/n/10.95 print (plug reduct current[]context)                (* 
-\JY1/mc/m/n/10.95 簡約後のプログラムを出
- []
-
-) [41] (./5/new_implementation.tex
-Underfull \hbox (badness 10000) in paragraph at lines 54--54
-[]  \OT1/cmtt/m/n/10.95 let marked[]redex =                             (* \JY1
-/mc/m/n/10.95 簡約前の式に \OT1/cmtt/m/n/10.95 attribute \JY1/mc/m/n/10.95 付
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 60--60
-[]                   \OT1/cmtt/m/n/10.95 redex))                            (* 
-\JY1/mc/m/n/10.95 簡約前の式の情報を追
- []
-
-
-Underfull \hbox (badness 3989) in paragraph at lines 62--62
-[]  \OT1/cmtt/m/n/10.95 if mode = Prev                                       (*
- \JY1/mc/m/n/10.95 前ステ ッ プ出力のとき 、
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 63--63
-[]  \OT1/cmtt/m/n/10.95 then counter := !counter - 1;                          
-(* \JY1/mc/m/n/10.95 ステ ッ プ番号を１戻
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 64--64
-[]  \OT1/cmtt/m/n/10.95 print[]counter ();                                  (* 
-\JY1/mc/m/n/10.95 簡約前のステ ッ プ番号出
- []
-
-
-Underfull \hbox (badness 4660) in paragraph at lines 65--65
-[]  \OT1/cmtt/m/n/10.95 print[]as[]attribute (plug redex context);          (* 
-\JY1/mc/m/n/10.95 処理用の簡約前のプログラ
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 67--67
-[]           \OT1/cmtt/m/n/10.95 (plug marked[]redex context));           (* \J
-Y1/mc/m/n/10.95 表示用の簡約前のプログラ
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 68--68
-[]  \OT1/cmtt/m/n/10.95 counter := !counter + 1;                             (*
- \JY1/mc/m/n/10.95 ステ ッ プ番号を１進め
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 69--69
-[]  \OT1/cmtt/m/n/10.95 print[]counter ();                                  (* 
-\JY1/mc/m/n/10.95 簡約後のステ ッ プ番号出
- []
-
-
-Underfull \hbox (badness 6236) in paragraph at lines 71--71
-[]  \OT1/cmtt/m/n/10.95 print[]as[]attribute (latter[]program);              (*
- \JY1/mc/m/n/10.95 処理用の簡約後のプログラ
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 72--72
-[]  \OT1/cmtt/m/n/10.95 print (reduct[]mapper latter[]program);            (* \
-JY1/mc/m/n/10.95 表示用の簡約後のプログラ
- []
-
-[42] [43]
-Overfull \hbox (7.37753pt too wide) in paragraph at lines 122--122
+[44] [45]
+Overfull \hbox (7.37753pt too wide) in paragraph at lines 135--135
 [][][][][][][][] 
  []
 
 
-Overfull \hbox (9.0052pt too wide) in paragraph at lines 123--123
+Overfull \hbox (9.0052pt too wide) in paragraph at lines 136--136
 [][][][][][][][] 
  []
 
 
-Overfull \hbox (5.7912pt too wide) in paragraph at lines 124--124
+Overfull \hbox (5.7912pt too wide) in paragraph at lines 137--137
 [][][][][][][][] 
  []
 
 
-Overfull \hbox (6.13988pt too wide) in paragraph at lines 132--132
+Overfull \hbox (6.13988pt too wide) in paragraph at lines 145--145
 [][][][][][][][] 
  []
 
 
-Overfull \hbox (3.67274pt too wide) in paragraph at lines 133--133
+Overfull \hbox (3.67274pt too wide) in paragraph at lines 146--146
 [][][][][][][][] 
  []
 
 
-Overfull \hbox (3.92307pt too wide) in paragraph at lines 134--134
+Overfull \hbox (3.92307pt too wide) in paragraph at lines 147--147
 [][][][][][][][] 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 141--141
-[]    \OT1/cmtt/m/n/10.95 match fun[]value.desc with                          (
-* \JY1/mc/m/n/10.95 以下 、 次ステ ッ プの簡
- []
-
-) (./5/actual.tex [44]
+) (./5/actual.tex [46] [47]
 File: 5/skip1.png Graphic file (type bmp)
  <5/skip1.png>
 File: 5/skip2.png Graphic file (type bmp)
  <5/skip2.png>) (./5/interface.tex)
-(./5/problem.tex [45] [46])) (./6/chapter6.tex [47] [48] [49] [50] [51]
+(./5/problem.tex [48] [49])) (./6/chapter6.tex [50]
 第 6 章
-(./6/intro.tex) (./6/course.tex) [52
+(./6/intro.tex) (./6/course.tex) [51
 
 ] (./6/result.tex
 File: 6/table1a.eps Graphic file (type eps)
  <6/table1a.eps>
 File: 6/table1b.eps Graphic file (type eps)
 
-<6/table1b.eps> [53]
+<6/table1b.eps> [52]
 File: 6/table2.eps Graphic file (type eps)
- <6/table2.eps> [54] [55] [56])) (./chapter7.tex [57]
+ <6/table2.eps> [53] [54] [55])) (./chapter7.tex [56]
 第 7 章
-[58
+[57
 
-]) [59] (./syaji.tex) [60
+]) [58] (./syaji.tex) [59
 
-] (./p.bbl [61
+] (./p.bbl [60
 
-]) [62] (./appendix.tex
+]) [61] (./appendix.tex
 付 録 A  
-) [63
+) [62
 
-] [64] (./p.aux)
+] [63] (./p.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
+
+LaTeX Warning: There were undefined references.
+
  ) 
 Here is how much of TeX's memory you used:
- 1951 strings out of 493693
- 27916 string characters out of 6149787
- 135762 words of memory out of 5000000
- 5367 multiletter control sequences out of 15000+600000
+ 1953 strings out of 493693
+ 27972 string characters out of 6149787
+ 135766 words of memory out of 5000000
+ 5369 multiletter control sequences out of 15000+600000
  23620 words of font info for 99 fonts, out of 8000000 for 9000
  929 hyphenation exceptions out of 8191
  27i,9n,21p,1017b,411s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on p.dvi (73 pages, 288088 bytes).
+Output written on p.dvi (72 pages, 290916 bytes).

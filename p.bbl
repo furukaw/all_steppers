@@ -12,6 +12,12 @@ John Clements, Matthew Flatt, and Matthias Felleisen.
 \newblock In {\em European symposium on programming}, pp. 320--334. Springer,
   2001.
 
+\bibitem{Cong16}
+Youyou Cong and Kenichi Asai.
+\newblock Implementing a stepper using delimited continuations.
+\newblock {\em 7th International Symposium on Symbolic Computation in Software
+  Science}, Vol.~39, pp. 42--54, 2016.
+
 \bibitem{DF1990}
 Olivier Danvy and Andrzej Filinski.
 \newblock Abstracting control.

@@ -1,8 +1,9 @@
 \contentsline {chapter}{\numberline {第1章}序論}{1}
 \contentsline {chapter}{\numberline {第2章}関連研究}{5}
 \contentsline {section}{\numberline {2.1}ステッパの実装}{5}
-\contentsline {section}{\numberline {2.2}ステップ実行によるプログラミング学習}{6}
-\contentsline {section}{\numberline {2.3}algebraic effects}{6}
+\contentsline {section}{\numberline {2.2}ステッパと似た■■ツール}{5}
+\contentsline {section}{\numberline {2.3}ステップ実行によるプログラミング学習}{6}
+\contentsline {section}{\numberline {2.4}algebraic effects}{6}
 \contentsline {chapter}{\numberline {第3章}try-with のステップ実行}{7}
 \contentsline {section}{\numberline {3.1}はじめに}{7}
 \contentsline {section}{\numberline {3.2}対象言語とインタプリタの定義}{7}
@@ -16,16 +17,16 @@
 \contentsline {section}{\numberline {3.5}この章のまとめ}{17}
 \contentsline {chapter}{\numberline {第4章}algebraic effects のステップ実行}{19}
 \contentsline {section}{\numberline {4.1}はじめに}{19}
-\contentsline {section}{\numberline {4.2}algebraic effects とインタプリタの定義}{20}
+\contentsline {section}{\numberline {4.2}algebraic effects とインタプリタの定義}{19}
 \contentsline {subsection}{\numberline {4.2.1}algebraic effects}{20}
-\contentsline {subsection}{\numberline {4.2.2}構文の定義}{21}
+\contentsline {subsection}{\numberline {4.2.2}構文の定義}{20}
 \contentsline {subsection}{\numberline {4.2.3}CPS インタプリタによる意味論}{21}
 \contentsline {section}{\numberline {4.3}インタプリタの変換}{24}
 \contentsline {subsection}{\numberline {4.3.1}非関数化}{24}
 \contentsline {subsection}{\numberline {4.3.2}CPS 変換}{25}
 \contentsline {subsection}{\numberline {4.3.3}非関数化}{28}
 \contentsline {subsection}{\numberline {4.3.4}出力}{28}
-\contentsline {subsection}{\numberline {4.3.5}CPSインタプリタに基づいたステッパ}{31}
+\contentsline {subsection}{\numberline {4.3.5}CPSインタプリタに基づいたステッパ}{28}
 \contentsline {section}{\numberline {4.4}他の言語への対応}{33}
 \contentsline {subsection}{\numberline {4.4.1}型無し$\lambda $計算}{33}
 \contentsline {subsection}{\numberline {4.4.2}try-with}{33}
@@ -50,23 +51,23 @@
 \contentsline {section}{\numberline {5.4}$\lambda $計算に対する実装}{40}
 \contentsline {subsection}{\numberline {5.4.1}incremental でないステッパ}{41}
 \contentsline {subsection}{\numberline {5.4.2}incremental なステッパ}{42}
-\contentsline {subsubsection}{情報の付加}{43}
-\contentsline {subsubsection}{情報の利用}{44}
-\contentsline {subsection}{\numberline {5.4.3}実際のステッパ}{45}
-\contentsline {subsection}{\numberline {5.4.4}ツールの実装}{45}
-\contentsline {section}{\numberline {5.5}予想される問題点}{46}
-\contentsline {subsection}{\numberline {5.5.1}文字数の爆発}{46}
-\contentsline {subsection}{\numberline {5.5.2}実行時間}{46}
-\contentsline {subsection}{\numberline {5.5.3}関数適用評価スキップ後の前ステップ出力}{46}
-\contentsline {section}{\numberline {5.6}この章のまとめ}{47}
-\contentsline {chapter}{\numberline {第6章}評価}{52}
-\contentsline {section}{\numberline {6.1}授業の内容}{52}
-\contentsline {section}{\numberline {6.2}結果}{53}
-\contentsline {subsection}{\numberline {6.2.1}ステッパの使用状況}{53}
-\contentsline {subsection}{\numberline {6.2.2}ステッパの効果}{54}
-\contentsline {paragraph}{有効性に対する脅威}{56}
-\contentsline {subsection}{\numberline {6.2.3}学生による評価}{56}
-\contentsline {paragraph}{プログラムの挙動の理解}{57}
-\contentsline {paragraph}{デバッグ}{57}
-\contentsline {chapter}{\numberline {第7章}結論}{58}
-\contentsline {chapter}{\numberline {付 録A }学生の実行ログから得られたデータ}{63}
+\contentsline {subsubsection}{情報の付加}{44}
+\contentsline {subsubsection}{情報の利用}{45}
+\contentsline {subsection}{\numberline {5.4.3}実際のステッパ}{46}
+\contentsline {subsection}{\numberline {5.4.4}ツールの実装}{48}
+\contentsline {section}{\numberline {5.5}予想される問題点}{48}
+\contentsline {subsection}{\numberline {5.5.1}文字数の爆発}{49}
+\contentsline {subsection}{\numberline {5.5.2}実行時間}{49}
+\contentsline {subsection}{\numberline {5.5.3}関数適用評価スキップ後の前ステップ出力}{49}
+\contentsline {section}{\numberline {5.6}この章のまとめ}{50}
+\contentsline {chapter}{\numberline {第6章}評価}{51}
+\contentsline {section}{\numberline {6.1}授業の内容}{51}
+\contentsline {section}{\numberline {6.2}結果}{52}
+\contentsline {subsection}{\numberline {6.2.1}ステッパの使用状況}{52}
+\contentsline {subsection}{\numberline {6.2.2}ステッパの効果}{53}
+\contentsline {paragraph}{有効性に対する脅威}{55}
+\contentsline {subsection}{\numberline {6.2.3}学生による評価}{55}
+\contentsline {paragraph}{プログラムの挙動の理解}{56}
+\contentsline {paragraph}{デバッグ}{56}
+\contentsline {chapter}{\numberline {第7章}結論}{57}
+\contentsline {chapter}{\numberline {付 録A }学生の実行ログから得られたデータ}{62}

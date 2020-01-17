@@ -3,45 +3,45 @@ Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: p.aux
 The style file: jplain.bst
 Database file #1: stepper.bib
-You've used 14 entries,
+You've used 15 entries,
             2620 wiz_defined-function locations,
-            698 strings with 7379 characters,
-and the built_in function-call counts, 6928 in all, are:
-= -- 630
-> -- 222
-< -- 18
-+ -- 90
-- -- 75
-* -- 385
-:= -- 921
-add.period$ -- 48
-call.type$ -- 14
-change.case$ -- 75
+            706 strings with 7554 characters,
+and the built_in function-call counts, 7378 in all, are:
+= -- 673
+> -- 234
+< -- 20
++ -- 95
+- -- 79
+* -- 410
+:= -- 980
+add.period$ -- 51
+call.type$ -- 15
+change.case$ -- 80
 chr.to.int$ -- 0
-cite$ -- 14
-duplicate$ -- 381
-empty$ -- 594
-format.name$ -- 115
-if$ -- 1637
+cite$ -- 15
+duplicate$ -- 406
+empty$ -- 631
+format.name$ -- 121
+if$ -- 1743
 int.to.chr$ -- 0
-int.to.str$ -- 14
-missing$ -- 16
-newline$ -- 74
-num.names$ -- 36
-pop$ -- 129
+int.to.str$ -- 15
+missing$ -- 17
+newline$ -- 79
+num.names$ -- 38
+pop$ -- 135
 preamble$ -- 1
-purify$ -- 63
+purify$ -- 67
 quote$ -- 0
-skip$ -- 358
+skip$ -- 383
 stack$ -- 0
-substring$ -- 402
-swap$ -- 123
-text.length$ -- 18
+substring$ -- 431
+swap$ -- 132
+text.length$ -- 20
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 52
+type$ -- 56
 warning$ -- 0
-while$ -- 63
-width$ -- 16
-write$ -- 169
-is.kanji.str$ -- 175
+while$ -- 68
+width$ -- 17
+write$ -- 180
+is.kanji.str$ -- 186

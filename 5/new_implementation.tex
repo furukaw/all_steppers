@@ -1,13 +1,14 @@
 \subsection{incremental なステッパ}
 
 \begin{figure}[t]
+\begin{spacing}{0.8}
 \begin{verbatim}
 (* 実行の種類 *)
 type mode = All | Next | Prev
 let mode: mode =
-  try begin match Sys.getenv "STEPPER_MODE" with
-    | "next" -> Next | "prev" -> Prev | _ -> All
-  end with Not_found -> All
+  try (match Sys.getenv "STEPPER_MODE" with
+    | "next" -> Next | "prev" -> Prev | _ -> All)
+  with Not_found -> All
 
 (* ステップ番号を格納する変数 *)
 let counter: int ref =
@@ -15,6 +16,7 @@ let counter: int ref =
   with Not_found -> match mode with All -> ref 0
                     | _ -> failwith "no step number"
 \end{verbatim}
+\end{spacing}
 \caption{実行の種類とステップ番号の定義}
 \label{figure:mode}
 \end{figure}
@@ -35,7 +37,10 @@ let counter: int ref =
 \end{verbatim}
 と書くことで、mode が Next のときは最初のステップしか出力されず実行が終了し、求める次ステップ出力を得ることができる。
 
-しかし、\ref{生じる問題と解決方法}節で述べたように、「前ステップ出力」処理のためには出力内容を増やしたり、その新しい出力を処理できるようにしなければならない。それぞれの処理において以下のような実装をする必要がある。
+しかし、\ref{生じる問題と解決方法-情報の消失} 節で述べたように、
+「前ステップ出力」処理のためには出力内容を増やしたり、
+その新しい出力を処理できるようにしなければならない。
+それぞれの処理において以下のような実装をする必要がある。
 \begin{itemize}
 \item 全ステップ出力：それを新しい入力として前ステップ出力は行わないので変更無し
 \item 次ステップ出力：そのステップの簡約によって失われる情報を前ステップ出力で復元できるように attribute を付ける
@@ -47,31 +52,33 @@ let counter: int ref =
 \subsubsection{情報の付加}
 
 \begin{figure}[t]
+\begin{spacing}{0.8}
   \begin{alltt}
 (* 簡約前後の式とコンテキストを受け取って、そのステップを出力する *)
-let memo (redex : expression) (reduct : expression)
-    (context : frame list) : unit =
-  let marked\_redex =                             (* 簡約前の式に attribute 付加 *)
+let memo (redex : expression) (reduct : expression) (context : frame list)
+  : unit =
+  let marked\_redex =                            (* 簡約前の式に attribute 付加 *)
     \{redex with attr = ("stepper.redex", None) :: redex.attr\} in
   let marked\_reduct =
     \{reduct with
      attr = ("stepper.reduct",
-             Some (!counter + 1,                  (* 簡約後の式にステップ番号と、 *)
-                   redex))                            (* 簡約前の式の情報を追加 *)
+             Some (!counter + 1,                 (* 簡約後の式にステップ番号と、 *)
+                   redex))                           (* 簡約前の式の情報を追加 *)
             :: reduct.attr\} in
-  if mode = Prev                                       (* 前ステップ出力のとき、 *)
-  then counter := !counter - 1;                          (* ステップ番号を１戻す *)
-  print\_counter ();                                  (* 簡約前のステップ番号出力 *)
-  print\_as\_attribute (plug redex context);          (* 処理用の簡約前のプログラム *)
+  if mode = Prev                                      (* 前ステップ出力のとき、 *)
+  then counter := !counter - 1;                        (* ステップ番号を１戻す *)
+  print\_counter ();                                 (* 簡約前のステップ番号出力 *)
+  print\_as\_attribute (plug redex context);         (* 処理用の簡約前のプログラム *)
   print (redex\_mapper
-           (plug marked\_redex context));           (* 表示用の簡約前のプログラム *)
-  counter := !counter + 1;                             (* ステップ番号を１進める *)
-  print\_counter ();                                  (* 簡約後のステップ番号出力 *)
+           (plug marked\_redex context));          (* 表示用の簡約前のプログラム *)
+  counter := !counter + 1;                            (* ステップ番号を１進める *)
+  print\_counter ();                                 (* 簡約後のステップ番号出力 *)
   let latter\_program = plug marked\_reduct context in
-  print\_as\_attribute (latter\_program);              (* 処理用の簡約後のプログラム *)
-  print (reduct\_mapper latter\_program);            (* 表示用の簡約後のプログラム *)
-  if mode <> All then exit 0               (* 全ステップ実行でなければプロセス終了 *)
+  print\_as\_attribute (latter\_program);             (* 処理用の簡約後のプログラム *)
+  print (reduct\_mapper latter\_program);           (* 表示用の簡約後のプログラム *)
+  if mode <> All then exit 0             (* 全ステップ実行でなければプロセス終了 *)
   \end{alltt}
+  \end{spacing}
   \caption{incremental なステッパのための出力関数}
   \label{figure:new-memo}
 \end{figure}
@@ -112,9 +119,15 @@ incremental でないステッパでは、例えば \texttt{(2 * 3) + (5 * 7)} �
 \item 今のステップ番号を持つ attribute を探す
 \item その attribute が付いた式を attribute 内の式に置換したプログラムを出力する
 \end{enumerate}
-という操作が必要となる。「今のステップ番号を持つ \texttt{[@reduct ... ]}」は１つの式だけに付いており、これを探すには式を全て探索する必要がある。そのために、「前ステップ出力」時にだけ利用する新しいインタプリタ関数を作ってもよいが、検索の順序はステッパ関数、すなわち図\ref{figure:old-stepper}の \texttt{eval} と同じなので、本研究ではこの関数にさらに作用を足すことで前ステップ出力を行う。
+という操作が必要となる。
+「今のステップ番号を持つ \texttt{[@reduct ... ]}」は１つの式だけに付いており、
+これを探すには式を全て探索する必要がある。
+そのために、「前ステップ出力」時にだけ利用する新しいインタプリタ関数を作ってもよいが、
+検索の順序はステッパ関数、すなわち図\ref{figure:old-stepper}の \texttt{eval} と同じ■■なので、
+本研究ではこの関数にさらに作用を足すことで前ステップ出力を行う。
 
 \begin{figure}
+\begin{spacing}{0.8}
 \begin{alltt}
 \colorbox{lightgray}{ (* 今のステップ番号の [@stepper.reduct] を探してその中の式を返す *)}
 \colorbox{lightgray}{let rec find\_last\_reduct (attrs : attribute list) : expression =}
@@ -138,7 +151,7 @@ let rec eval (expr : expression) (context : frame list) : expression =
   | App (e1, e2) ->
     let arg\_value = eval e2 (AppR e1 :: context) in
     let fun\_value = eval e1 (AppL arg\_value :: context) in
-    match fun\_value.desc with                          (* 以下、次ステップの簡約 *)
+    match fun\_value.desc with                         (* 以下、次ステップの簡約 *)
     | Fun (x, f) ->
       let redex = {expr with desc = App (fun\_value, arg\_value)} in
       let reduct = {(subst f x arg\_value)
@@ -147,13 +160,24 @@ let rec eval (expr : expression) (context : frame list) : expression =
       eval reduct context
     | \_ -> failwith "error: not a function"
 \end{alltt}
+\end{spacing}
 \caption{incremental なステッパ}
 \label{figure:new-stepper}
 \end{figure}
 
 前ステップ出力の処理は、関数 \texttt{memo} を図\ref{figure:new-memo}のように定義した上で図\ref{figure:new-stepper}のように実装することができる。灰色の部分が incremental になったことで加わった部分である。灰色の部分は、\texttt{if mode = Prev then begin ... end;} であることから分かるように、前ステップ出力モードの時にしか実行されない。
 
-前ステップ出力モードの時の関数 \texttt{eval} の実行は、まず今評価している式に \texttt{[@stepper.reduct (今のステップ番号, 簡約前の式) ]} が付いているかを調べることから始まる。そこで見つかれば、その「\texttt{簡約前の式}」を利用して前ステップの出力ができプロセスを終了する。見つからなければ、\texttt{eval} の本体である \texttt{match} 文へ進む。今評価している式をパターンマッチして、関数だったらそれ以上の簡約はできず、そのままその関数を返す。関数適用だったら、引数部分の式の実行に移る。するとまたその引数部分の式に\texttt{[@stepper.reduct (今のステップ番号, 簡約前の式) ]} が付いているかを調べる。あれば出力して終了、無ければ同様に式を普通に評価する。
+前ステップ出力モードの時の関数 \texttt{eval} の実行は、
+まず今評価している式に
+\texttt{[@stepper.reduct (今のステップ番号, 簡約前の式) ]}
+が付いているかを調べることから始まる。
+そこで見つかれば、その「 \texttt{簡約前の式} 」を利用して前ステップの出力をしてプロセスを終了する。
+見つからなければ、\texttt{eval} の本体である \texttt{match} 文へ進む。
+今評価している式をパターンマッチして、関数だったらそれ以上の簡約はできず、そのままその関数を返す。
+関数適用だったら、引数部分の式の実行に移る。
+するとまたその引数部分の式に
+\texttt{[@stepper.reduct (今のステップ番号, 簡約前の式) ]}
+が付いているかを調べる。あれば出力して終了、無ければ同様に式を普通に評価する。
 
 このように実行を進めると、1 以上の正しいステップ番号を変数 \texttt{counter} に持っている限り、必ずどこかに \texttt{[@stepper.reduct (今のステップ番号, 簡約前の式) ]} が付いた式が見つかる。そして、今のステップに至るまで行ってきた「次ステップの出力」と同じ順序で式を探索してきたため、見つかるまでに評価した式は全て簡約済みであり、その式を見つけるまでに簡約処理、すなわち \texttt{match fun\_value.desc with ...} を行うことは無い。よって、灰色の部分を書き足すことで前ステップ出力が可能になる。
 

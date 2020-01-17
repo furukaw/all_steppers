@@ -31,15 +31,15 @@
 \contentsline {figure}{\numberline {5.1}{\ignorespaces attribute を含む構文木の例}}{36}
 \contentsline {figure}{\numberline {5.2}{\ignorespaces ハイライトのための attribute の利用}}{37}
 \contentsline {figure}{\numberline {5.3}{\ignorespaces 対象言語の定義}}{41}
-\contentsline {figure}{\numberline {5.4}{\ignorespaces 既存のステッパの実装}}{48}
-\contentsline {figure}{\numberline {5.5}{\ignorespaces ステップ出力関数}}{49}
-\contentsline {figure}{\numberline {5.6}{\ignorespaces 実行の種類とステップ番号の定義}}{49}
-\contentsline {figure}{\numberline {5.7}{\ignorespaces incremental なステッパのための出力関数}}{50}
-\contentsline {figure}{\numberline {5.8}{\ignorespaces incremental なステッパ}}{51}
-\contentsline {figure}{\numberline {5.9}{\ignorespaces ステッパのスキップ機能}}{51}
+\contentsline {figure}{\numberline {5.4}{\ignorespaces 既存のステッパの実装}}{42}
+\contentsline {figure}{\numberline {5.5}{\ignorespaces ステップ出力関数}}{43}
+\contentsline {figure}{\numberline {5.6}{\ignorespaces 実行の種類とステップ番号の定義}}{43}
+\contentsline {figure}{\numberline {5.7}{\ignorespaces incremental なステッパのための出力関数}}{44}
+\contentsline {figure}{\numberline {5.8}{\ignorespaces incremental なステッパ}}{47}
+\contentsline {figure}{\numberline {5.9}{\ignorespaces ステッパのスキップ機能}}{48}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {6.1}{\ignorespaces ステッパが使用された回数}}{54}
-\contentsline {figure}{\numberline {6.2}{\ignorespaces ステッパの実行のうち各構文を含むプログラムの実行の回数}}{55}
-\contentsline {figure}{\numberline {6.3}{\ignorespaces 学生が正答するまでの時間の比較}}{56}
+\contentsline {figure}{\numberline {6.1}{\ignorespaces ステッパが使用された回数}}{53}
+\contentsline {figure}{\numberline {6.2}{\ignorespaces ステッパの実行のうち各構文を含むプログラムの実行の回数}}{54}
+\contentsline {figure}{\numberline {6.3}{\ignorespaces 学生が正答するまでの時間の比較}}{55}
 \addvspace {10\p@ }
 \addvspace {10\p@ }

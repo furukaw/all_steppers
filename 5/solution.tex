@@ -1,10 +1,13 @@
 \section{生じる問題と解決方法}
 \label{生じる問題と解決方法}
 
-著者らの incremental でないステッパ\cite{FCA19}と同じようにステップ出力を行うと、incremental なステッパでは様々な問題が起きた。本節ではその問題と、回避するために行った出力内容の変更について説明する。
+incremental でない OCaml ステッパと全く同じようにステップ出力を行うと、
+incremental なステッパでは様々な問題が起きた。
+本節ではその問題と、回避するために行った出力内容の変更について説明する。
 
 \subsection{情報の消失}
 \label{生じる問題と解決方法-情報の消失}
+
 \subsubsection{問題点}
 \label{生じる問題と解決方法-情報の消失-問題点}
 \ref{ステッパの動作-DrRacketのステッパ} 節および \ref{ステッパの動作-incrementalでないOCamlステッパ} 節で紹介した既存のステッパは、ステップ実行をした結果を蓄えておき、ユーザが表示ステップを切り替える際にその中から表示するステップの情報を検索して表示するので、ステップ番号を指定すれば任意のステップをすぐに表示することができる。それに対して本研究で提案するステッパは、表示を切り替える命令が入力されるたびに１ステップ先や１ステップ前を計算することになる。その際のステッパの入力は前回出力したプログラムの一部である。すると、１ステップ前を計算する時に問題が起きる。
@@ -14,7 +17,7 @@
 \subsubsection{解決方法}
 \label{生じる問題と解決方法-情報の消失-解決方法}
 
-本研究の incremental なステッパでは、簡約後の式に簡約前の式の情報を、簡約された式を表す attribute \texttt{[@stepper.reduct ]} の引数として付加することで、簡約によって失われた情報を復元可能にする。「\texttt{式2} が簡約された結果の \texttt{式1}」を \texttt{式1[@stepper.reduct 式2]} と表して、\texttt{2 * 3 + 5 * 7 $\leadsto$ 2 * 3 + 35} の代わりに \texttt{2 * 3 + 5 * 7 $\leadsto$ 2 * 3 + 35[@stepper.reduct 5 * 7 ]}、また \texttt{2 * 3 + 35 $\leadsto$ 6 + 35} の代わりに \texttt{2 * 3 + 35[@stepper.reduct 5 * 7 ] $\leadsto$ 6[@stepper.reduct 2 * 3 ] + 35[@stepper.reduct 5 * 7 ]} を出力すると、どのステップの出力からでもオリジナルのプログラムまで情報を復元することができる。
+incremental なステッパでは、簡約後の式に簡約前の式の情報を、簡約された式を表す attribute \texttt{[@stepper.reduct ]} の引数として付加することで、簡約によって失われた情報を復元可能にする。「\texttt{式2} が簡約された結果の \texttt{式1}」を \texttt{式1[@stepper.reduct 式2]} と表して、\texttt{2 * 3 + 5 * 7 $\leadsto$ 2 * 3 + 35} の代わりに \texttt{2 * 3 + 5 * 7 $\leadsto$ 2 * 3 + 35[@stepper.reduct 5 * 7 ]}、また \texttt{2 * 3 + 35 $\leadsto$ 6 + 35} の代わりに \texttt{2 * 3 + 35[@stepper.reduct 5 * 7 ] $\leadsto$ 6[@stepper.reduct 2 * 3 ] + 35[@stepper.reduct 5 * 7 ]} を出力すると、どのステップの出力からでもオリジナルのプログラムまで情報を復元することができる。
 
 さらに、直前のステップで簡約された式が明示的に分かるように、簡約された時のステップ番号も attribute に含める。例えば \texttt{6[@stepper.reduct 2 * 3 ] + 35[@stepper.reduct 5 * 7 ]} に \texttt{2 * 3} や \texttt{5 * 7} のそれぞれの簡約が行われた当時のステップ番号を追加して、\texttt{6[@stepper.reduct (2, 2 * 3) ] + 35[@stepper.reduct (1, 5 * 7) ]} と出力する。こうすると、ここから前のステップを求めるときに、最後に簡約されたのは \texttt{6} だとステップ番号から分かり、\texttt{6} をその attribute に記録された簡約前の式 \texttt{2 * 3} に置き換えることで前のステップ \texttt{2 * 3 + 35[@stepper.reduct (1, 5 * 7) ] $\leadsto$ 6[@stepper.reduct (2, 2 * 3) ] + 35[@stepper.reduct (1, 5 * 7) ]} が得られる。
 
