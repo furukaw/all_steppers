@@ -1,73 +1,73 @@
 \contentsline {chapter}{\numberline {第1章}序論}{1}
-\contentsline {chapter}{\numberline {第2章}関連研究}{4}
-\contentsline {section}{\numberline {2.1}ステッパの実装}{4}
-\contentsline {section}{\numberline {2.2}ステップ実行によるプログラミング学習}{5}
-\contentsline {section}{\numberline {2.3}algebraic effects}{5}
-\contentsline {chapter}{\numberline {第3章}try-with のステップ実行}{6}
-\contentsline {section}{\numberline {3.1}はじめに}{6}
-\contentsline {section}{\numberline {3.2}対象言語とインタプリタの定義}{6}
-\contentsline {section}{\numberline {3.3}ステッパの実装}{8}
-\contentsline {subsection}{\numberline {3.3.1}一次元的なコンテキストでの実装}{9}
-\contentsline {subsection}{\numberline {3.3.2}二次元的なコンテキストでの実装}{10}
-\contentsline {section}{\numberline {3.4}実際の OCaml ステッパ}{14}
-\contentsline {subsection}{\numberline {3.4.1}型エラーについて}{14}
-\contentsline {subsection}{\numberline {3.4.2}対象構文}{15}
-\contentsline {subsection}{\numberline {3.4.3}関数適用のスキップ}{16}
-\contentsline {section}{\numberline {3.5}この章のまとめ}{16}
-\contentsline {chapter}{\numberline {第4章}algebraic effects のステップ実行}{18}
-\contentsline {section}{\numberline {4.1}はじめに}{18}
-\contentsline {section}{\numberline {4.2}algebraic effects とインタプリタの定義}{19}
-\contentsline {subsection}{\numberline {4.2.1}algebraic effects}{19}
-\contentsline {subsection}{\numberline {4.2.2}構文の定義}{20}
-\contentsline {subsection}{\numberline {4.2.3}CPS インタプリタによる意味論}{20}
-\contentsline {section}{\numberline {4.3}インタプリタの変換}{23}
-\contentsline {subsection}{\numberline {4.3.1}非関数化}{23}
-\contentsline {subsection}{\numberline {4.3.2}CPS 変換}{24}
-\contentsline {subsection}{\numberline {4.3.3}非関数化}{26}
-\contentsline {subsection}{\numberline {4.3.4}出力}{26}
-\contentsline {subsection}{\numberline {4.3.5}CPSインタプリタに基づいたステッパ}{28}
-\contentsline {section}{\numberline {4.4}他の言語への対応}{30}
-\contentsline {subsection}{\numberline {4.4.1}型無し$\lambda $計算}{30}
-\contentsline {subsection}{\numberline {4.4.2}try-with}{30}
-\contentsline {subsection}{\numberline {4.4.3}shift/reset}{30}
-\contentsline {subsection}{\numberline {4.4.4}Multicore OCaml}{30}
-\contentsline {section}{\numberline {4.5}まとめ}{31}
-\contentsline {chapter}{\numberline {第5章}incremental なステッパの実装}{32}
-\contentsline {section}{\numberline {5.1}ステッパの動作}{32}
-\contentsline {subsection}{\numberline {5.1.1}DrRacketのステッパ}{32}
-\contentsline {subsection}{\numberline {5.1.2}incremental でない OCaml ステッパ}{32}
-\contentsline {subsection}{\numberline {5.1.3}提案するステッパ}{32}
-\contentsline {section}{\numberline {5.2}OCaml の attribute}{33}
-\contentsline {subsection}{\numberline {5.2.1}式の attribute}{33}
-\contentsline {subsection}{\numberline {5.2.2}プログラムの attribute}{34}
-\contentsline {section}{\numberline {5.3}生じる問題と解決方法}{35}
-\contentsline {subsection}{\numberline {5.3.1}情報の消失}{35}
-\contentsline {subsubsection}{問題点}{35}
-\contentsline {subsubsection}{解決方法}{35}
-\contentsline {subsection}{\numberline {5.3.2}表示の崩れ}{36}
+\contentsline {chapter}{\numberline {第2章}関連研究}{5}
+\contentsline {section}{\numberline {2.1}ステッパの実装}{5}
+\contentsline {section}{\numberline {2.2}ステップ実行によるプログラミング学習}{6}
+\contentsline {section}{\numberline {2.3}algebraic effects}{6}
+\contentsline {chapter}{\numberline {第3章}try-with のステップ実行}{7}
+\contentsline {section}{\numberline {3.1}はじめに}{7}
+\contentsline {section}{\numberline {3.2}対象言語とインタプリタの定義}{7}
+\contentsline {section}{\numberline {3.3}ステッパの実装}{9}
+\contentsline {subsection}{\numberline {3.3.1}一次元的なコンテキストでの実装}{10}
+\contentsline {subsection}{\numberline {3.3.2}二次元的なコンテキストでの実装}{11}
+\contentsline {section}{\numberline {3.4}実際の OCaml ステッパ}{15}
+\contentsline {subsection}{\numberline {3.4.1}型エラーについて}{15}
+\contentsline {subsection}{\numberline {3.4.2}対象構文}{16}
+\contentsline {subsection}{\numberline {3.4.3}関数適用のスキップ}{17}
+\contentsline {section}{\numberline {3.5}この章のまとめ}{17}
+\contentsline {chapter}{\numberline {第4章}algebraic effects のステップ実行}{19}
+\contentsline {section}{\numberline {4.1}はじめに}{19}
+\contentsline {section}{\numberline {4.2}algebraic effects とインタプリタの定義}{20}
+\contentsline {subsection}{\numberline {4.2.1}algebraic effects}{20}
+\contentsline {subsection}{\numberline {4.2.2}構文の定義}{21}
+\contentsline {subsection}{\numberline {4.2.3}CPS インタプリタによる意味論}{21}
+\contentsline {section}{\numberline {4.3}インタプリタの変換}{24}
+\contentsline {subsection}{\numberline {4.3.1}非関数化}{24}
+\contentsline {subsection}{\numberline {4.3.2}CPS 変換}{25}
+\contentsline {subsection}{\numberline {4.3.3}非関数化}{27}
+\contentsline {subsection}{\numberline {4.3.4}出力}{27}
+\contentsline {subsection}{\numberline {4.3.5}CPSインタプリタに基づいたステッパ}{29}
+\contentsline {section}{\numberline {4.4}他の言語への対応}{31}
+\contentsline {subsection}{\numberline {4.4.1}型無し$\lambda $計算}{31}
+\contentsline {subsection}{\numberline {4.4.2}try-with}{31}
+\contentsline {subsection}{\numberline {4.4.3}shift/reset}{31}
+\contentsline {subsection}{\numberline {4.4.4}Multicore OCaml}{31}
+\contentsline {section}{\numberline {4.5}まとめ}{32}
+\contentsline {chapter}{\numberline {第5章}incremental なステッパの実装}{33}
+\contentsline {section}{\numberline {5.1}ステッパの動作}{33}
+\contentsline {subsection}{\numberline {5.1.1}DrRacketのステッパ}{33}
+\contentsline {subsection}{\numberline {5.1.2}incremental でない OCaml ステッパ}{33}
+\contentsline {subsection}{\numberline {5.1.3}提案するステッパ}{33}
+\contentsline {section}{\numberline {5.2}OCaml の attribute}{34}
+\contentsline {subsection}{\numberline {5.2.1}式の attribute}{34}
+\contentsline {subsection}{\numberline {5.2.2}プログラムの attribute}{35}
+\contentsline {section}{\numberline {5.3}生じる問題と解決方法}{36}
+\contentsline {subsection}{\numberline {5.3.1}情報の消失}{36}
 \contentsline {subsubsection}{問題点}{36}
 \contentsline {subsubsection}{解決方法}{36}
-\contentsline {section}{\numberline {5.4}$\lambda $計算に対する実装}{37}
-\contentsline {subsection}{\numberline {5.4.1}incremental でないステッパ}{38}
-\contentsline {subsection}{\numberline {5.4.2}incremental なステッパ}{39}
-\contentsline {subsubsection}{情報の付加}{40}
-\contentsline {subsubsection}{情報の利用}{41}
-\contentsline {subsection}{\numberline {5.4.3}実際のステッパ}{42}
-\contentsline {subsection}{\numberline {5.4.4}ツールの実装}{42}
-\contentsline {section}{\numberline {5.5}予想される問題点}{43}
-\contentsline {subsection}{\numberline {5.5.1}文字数の爆発}{43}
-\contentsline {subsection}{\numberline {5.5.2}実行時間}{43}
-\contentsline {subsection}{\numberline {5.5.3}関数適用評価スキップ後の前ステップ出力}{43}
-\contentsline {section}{\numberline {5.6}この章のまとめ}{44}
-\contentsline {chapter}{\numberline {第6章}評価}{49}
-\contentsline {section}{\numberline {6.1}授業の内容}{49}
-\contentsline {section}{\numberline {6.2}結果}{50}
-\contentsline {subsection}{\numberline {6.2.1}ステッパの使用状況}{50}
-\contentsline {subsection}{\numberline {6.2.2}ステッパの効果}{51}
-\contentsline {paragraph}{有効性に対する脅威}{53}
-\contentsline {subsection}{\numberline {6.2.3}学生による評価}{53}
-\contentsline {paragraph}{プログラムの挙動の理解}{54}
-\contentsline {paragraph}{デバッグ}{54}
-\contentsline {chapter}{\numberline {第7章}結論}{55}
-\contentsline {chapter}{\numberline {付 録A }インタプリタの変換過程}{60}
-\contentsline {chapter}{\numberline {付 録B }学生の実行ログから得られたデータ}{63}
+\contentsline {subsection}{\numberline {5.3.2}表示の崩れ}{37}
+\contentsline {subsubsection}{問題点}{37}
+\contentsline {subsubsection}{解決方法}{37}
+\contentsline {section}{\numberline {5.4}$\lambda $計算に対する実装}{38}
+\contentsline {subsection}{\numberline {5.4.1}incremental でないステッパ}{39}
+\contentsline {subsection}{\numberline {5.4.2}incremental なステッパ}{40}
+\contentsline {subsubsection}{情報の付加}{41}
+\contentsline {subsubsection}{情報の利用}{42}
+\contentsline {subsection}{\numberline {5.4.3}実際のステッパ}{43}
+\contentsline {subsection}{\numberline {5.4.4}ツールの実装}{43}
+\contentsline {section}{\numberline {5.5}予想される問題点}{44}
+\contentsline {subsection}{\numberline {5.5.1}文字数の爆発}{44}
+\contentsline {subsection}{\numberline {5.5.2}実行時間}{44}
+\contentsline {subsection}{\numberline {5.5.3}関数適用評価スキップ後の前ステップ出力}{44}
+\contentsline {section}{\numberline {5.6}この章のまとめ}{45}
+\contentsline {chapter}{\numberline {第6章}評価}{50}
+\contentsline {section}{\numberline {6.1}授業の内容}{50}
+\contentsline {section}{\numberline {6.2}結果}{51}
+\contentsline {subsection}{\numberline {6.2.1}ステッパの使用状況}{51}
+\contentsline {subsection}{\numberline {6.2.2}ステッパの効果}{52}
+\contentsline {paragraph}{有効性に対する脅威}{54}
+\contentsline {subsection}{\numberline {6.2.3}学生による評価}{54}
+\contentsline {paragraph}{プログラムの挙動の理解}{55}
+\contentsline {paragraph}{デバッグ}{55}
+\contentsline {chapter}{\numberline {第7章}結論}{56}
+\contentsline {chapter}{\numberline {付 録A }インタプリタの変換過程}{61}
+\contentsline {chapter}{\numberline {付 録B }学生の実行ログから得られたデータ}{64}
