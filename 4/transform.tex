@@ -112,6 +112,59 @@ let interpreter (e : e) : a = eval e FId
 \subsection{CPS 変換}
 \label{subsection:3cps}
 
+\begin{figure}
+  % code/3cps/eval.ml より
+  \begin{spacing}{0.8}
+\begin{verbatim}
+(* CPS インタプリタを非関数化して CPS 変換した関数 *)
+let rec eval (exp : e) (k : k) (k2 : k2) : a = match exp with
+  | Val (v) -> apply_in k v k2
+  | App (e1, e2) -> eval e2 (FApp2 (e1, k)) k2
+  | Op (name, e) -> eval e (FOp (name, k)) k2
+  | With (h, e) ->
+    eval e FId (fun a -> apply_handler k h a k2)  (* GHandle に変換される *)
+
+(* handle 節内の継続を適用する関数 *)
+and apply_in (k : k) (v : v) (k2 : k2) : a = match k with
+  | FId -> k2 (Return v)  (* 継続適用 *)
+  | FApp2 (e1, k) -> let v2 = v in eval e1 (FApp1 (v2, k)) k2
+  | FApp1 (v2, k) -> let v1 = v in
+    (match v1 with
+      | Fun (x, e) ->
+        let reduct = subst e [(x, v2)] in
+        eval reduct k k2
+      | Cont (cont_value) ->
+        (cont_value k) v2 k2
+      | _ -> failwith "type error")
+  | FOp (name, k) ->
+    k2 (OpCall (name, v, (fun v -> fun k2' -> apply_in k v k2'))) (* 継続適用 *)
+
+(* handle 節内の実行結果をハンドラで処理する関数 *)
+and apply_handler (k : k) (h : h) (a : a) (k2 : k2) : a = match a with
+  | Return v ->
+    (match h with {return = (x, e)} ->
+      let reduct = subst e [(x, v)] in
+      eval reduct k k2)
+  | OpCall (name, v, m) ->
+    (match search_op name h with
+      | None ->
+        k2 (OpCall (name, v, (fun v -> fun k2' ->  (* 継続適用 *)
+          m v (fun a' -> apply_handler k h a' k2'))))  (* GHandle に変換 *)
+      | Some (x, y, e) ->
+        let cont_value =
+          Cont (fun k'' -> fun v -> fun k2 ->
+            m v (fun a' -> apply_handler k'' h a' k2)) in  (* GHandle に変換 *)
+        let reduct = subst e [(x, v); (y, cont_value)] in
+        eval reduct k k2)
+
+(* 初期継続を渡して実行を始める *)
+let interpreter (e : e) : a = eval e FId (fun a -> a)  (* GId に変換される *)
+\end{verbatim}
+\end{spacing}
+\caption{CPS インタプリタを非関数化して CPS 変換したプログラム}
+\label{figure:3cps}
+\end{figure}
+
 図\ref{figure:2defun} では、末尾再帰でない再帰呼び出しの際に継続が初期
 化されてしまうせいでコンテキスト全体に対応する情報が継続に含まれていな
 かった。
@@ -119,7 +172,7 @@ let interpreter (e : e) : a = eval e FId
 す。
 この変換によって現れる継続は \texttt{a -> a} 型である。この型
 \texttt{a -> a} の名前を \texttt{k2} とする。
-変換したプログラムは付録の図 \ref{figure:3cps} に示す。
+変換したプログラムは図 \ref{figure:3cps} に示す。
 
 このプログラムは、図 \ref{figure:2defun}のプログラムを機械的に CPS 変
 換すれば得られるもので、
@@ -132,11 +185,64 @@ let interpreter (e : e) : a = eval e FId
 \subsection{非関数化}
 \label{subsection:4defun}
 
+\begin{figure}
+  % code/4defun/syntax.ml より
+  \begin{spacing}{0.8}
+\begin{verbatim}
+(* CPS インタプリタを非関数化して CPS 変換して非関数化した関数 *)
+let rec eval (exp : e) (k : k) (k2 : k2) : a = match exp with
+  | Val (v) -> apply_in k v k2
+  | App (e1, e2) -> eval e2 (FApp2 (e1, k)) k2
+  | Op (name, e) -> eval e (FOp (name, k)) k2
+  | With (h, e) -> eval e FId (GHandle (h, k, k2))
+
+(* handle 節内の継続を適用する関数 *)
+and apply_in (k : k) (v : v) (k2 : k2) : a = match k with
+  | FId -> apply_out k2 (Return v)
+  | FApp2 (e1, k) -> let v2 = v in eval e1 (FApp1 (v2, k)) k2
+  | FApp1 (v2, k) -> let v1 = v in (match v1 with
+    | Fun (x, e) ->
+      let reduct = subst e [(x, v2)] in
+      eval reduct k k2
+    | Cont (cont_value) ->
+      (cont_value k) v2 k2
+    | _ -> failwith "type error")
+  | FOp (name, k) ->
+    apply_out k2 (OpCall (name, v, (fun v -> fun k2' -> apply_in k v k2')))
+
+(* 全体の継続を適用する関数 *)
+and apply_out (k2 : k2) (a : a) : a = match k2 with
+  | GId -> a
+  | GHandle (h, k, k2) -> apply_handler k h a k2
+
+(* handle 節内の実行結果をハンドラで処理する関数 *)
+and apply_handler (k : k) (h : h) (a : a) (k2 : k2) : a = match a with
+  | Return v -> (match h with {return = (x, e)} ->
+    let reduct = subst e [(x, v)] in eval reduct k k2)
+  | OpCall (name, v, va) ->
+    (match search_op name h with
+      | None ->
+        apply_out k2 (OpCall (name, v,
+          (fun v -> fun k2' -> m v (GHandle (h, k, k2')))))
+      | Some (x, y, e) ->
+        let cont_value =
+          Cont (fun k'' -> fun v -> fun k2 -> m v (GHandle (h, k'', k2))) in
+        let reduct = subst e [(x, v); (y, cont_value)] in
+        eval reduct k k2)
+
+(* 初期継続を渡して実行を始める *)
+let interpreter (e : e) : a = eval e FId GId
+\end{verbatim}
+\end{spacing}
+\caption{CPS インタプリタを非関数化して CPS 変換して非関数化したプログラム}
+\label{figure:4defun}
+\end{figure}
+
 CPS 変換ですべてのコンテキスト情報がふたつの継続に集約された。ここで
 は、CPS 変換したことにより新たに現れた \texttt{a -> a} 型の関数を非関
 数化してデータ構造に変換する。
 非関数化によって型 \texttt{k2} の定義は図 \ref{figure:k2_4defun} に、
-インタプリタは付録の図 \ref{figure:4defun} に変換される。
+インタプリタは図 \ref{figure:4defun} に変換される。
 
 \begin{figure}
 \begin{spacing}{0.8}

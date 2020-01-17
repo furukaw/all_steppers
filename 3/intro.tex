@@ -3,10 +3,12 @@
 
 この章では、try-with 構文を含む言語を対象としたステッパ関数を
 OCaml で実装する方法を示す。
-OCaml 自体も try-with 構文で例外処理を行うので、
-実際に我々が大学の授業において使っている OCaml ステッパは本章で説明する方法に基づいて実装されている。
 ここでは簡単のため型無し $\lambda$ 計算と try-with 構文のみから成る言語を対象として説明する。
+また、同様の方法で実装することができた OCaml の try-with
+を含む一部の構文を対象にしたステッパ (以下、OCaml ステッパ) について紹介する。
 
 ステッパの実装は対象言語の通常のインタプリタ関数を拡張することによって行う。
 この章ではまず \ref{section:try-with__interpreter} 節で言語とそのインタプリタを定義し、
 \ref{section:try-with__stepper} 節でインタプリタを拡張してステッパを実装する。
+そして \ref{section:ocaml stepper} 節で OCaml ステッパの対象言語や機能
+およびその実装について述べ、 \ref{section:try-with__conclusion} 節でまとめる。

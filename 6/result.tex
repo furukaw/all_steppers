@@ -23,16 +23,15 @@
 % Although the steppers used in the past had
 % almost the same user-interface as the one shown
 % in Figure \ref{figure:ocamlfac}, they differ in the following ways:
-当時のステッパは図 \ref{figure:ocamlfac} とほとんど同じインタフェースだったが、
-以下の点で \ref{section:experiment__stepper} 節で紹介したステッパと異なる。
+ステッパのインタフェースは2016年度から2018年度まで概ね変わらない (図 \ref{figure:ocamlfac}) が、
+以下の点で各年度のステッパの機能は異なる。
 \begin{description}
 % \item[2016] This first version supported function definitions,
 % conditionals, records, lists, and recursion.  However, there were
 % various operations that were not supported.
 % As such, the usability of the stepper was low.
-\item[2016年度] 最初の OCaml ステッパは
-関数定義、条件分岐、レコード、リスト、再帰のような
-より基本的な式しか実行できず、使いにくかった。
+\item[2016年度] 関数定義、条件分岐、レコード、リスト、再帰のような
+非常に基本的な式と一部の演算子のみが実行できるステッパを利用した。
 % Moreover, when the instructor introduced the stepper to students, he
 % only mildly encouraged to use it.
 また、教員がステッパを学生に紹介する際に、ステッパの使用を強くは奨励しなかった。
@@ -53,7 +52,7 @@
 % \item[2018] The third version supported almost all the constructs
 % needed for the course, including modules, exception handling,
 % sequential execution, printing, references, and arrays.
-\item[2018年度] \ref{section:experiment__stepper} 節で紹介した、
+\item[2018年度] \ref{figure:ocamlfac} 節で紹介した、
 モジュール、例外処理、逐次実行、配列などを実行できるステッパを利用した。
 これは授業範囲のほとんどの構文要素を含んでいる。
 % It also supported skipping of function application.
