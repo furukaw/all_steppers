@@ -33,11 +33,14 @@ incremental なステッパ関数では、たとえば入力 \texttt{2 * 3 + 35[
 ステッパ関数のプログラムの実行ごとに環境変数で定めて、
 \texttt{mode} というグローバル変数に格納する。
 
-次ステップ出力の内容は全ステップ出力の冒頭の1ステップであるので、もし全ステップ出力と次ステップ出力をするだけならば、例えば関数 \texttt{memo}（図\ref{figure:memo}）の最後に
+次ステップ出力の内容は全ステップ出力の冒頭の1ステップであるので、
+もし前ステップ出力機能を実装しないならば、
+例えば関数 \texttt{memo}（図\ref{figure:memo}）の最後に
 \begin{verbatim}
 ;if mode <> All then exit 0
 \end{verbatim}
-と書くことで、mode が Next のときは最初のステップしか出力されず実行が終了し、求める次ステップ出力を得ることができる。
+と書けばよい。すると mode が Next のときは最初のステップしか出力されず実行が終了し、
+All のときは全ステップが出力される。■■
 
 しかし、\ref{生じる問題と解決方法-情報の消失} 節で述べたように、
 「前ステップ出力」処理のためには出力内容を増やしたり、
@@ -106,12 +109,25 @@ incremental でないステッパ関数では、例えば \texttt{(2 * 3) + (5 *
 \end{verbatim}
 を出力したいので、出力をする関数 \texttt{memo} を書き換える必要がある。
 
-図\ref{figure:memo} にある関数 \texttt{memo} の引数は簡約基、それが簡約されたもの、その簡約時のコンテキストの 3 つであったが、新しい出力の内容もこれらの情報から構成することができる。その実装を図\ref{figure:new-memo}に示す。関数 \texttt{print\_as\_attribute : expression -> unit} は、\texttt{[@@@stepper.process ... ]} にプログラムを入れて出力する関数である。
+図\ref{figure:memo} にある関数 \texttt{memo} の引数は簡約基、
+それが簡約されたもの、その簡約時のコンテキストの 3 つであったが、
+新しい出力の内容もこれらの情報から構成することができる。
+その実装を図\ref{figure:new-memo}に示す。
+関数 \texttt{print\_as\_attribute :\ expression -> unit} は、
+\texttt{[@@@stepper.process ... ]} にプログラムを入れて出力する関数である。
 
 ここで、\ref{生じる問題と解決方法-表示の崩れ}節で述べたように、表示用のプログラムではハイライトに最低限必要な attribute だけを出力したい。しかし、今簡約している式の外、すなわちコンテキストに含まれる式の中には attribute \texttt{[@stepper.reduct ]} が含まれうる。上の出力例で処理用
 の \texttt{35} に付いている \texttt{[@stepper.reduct (1, 5 * 7) ]} がそれである。表示用のプログラムを出力するためには、今のステップで簡約される式以外の attribute を消したものを得る必要がある。
 
-そのために、本研究では OCaml のモジュール Ast\_mapper を利用した。Ast\_mapper は OCaml プログラムの構文木を簡単に部分的に変換するためのモジュールである。ここでは詳しい紹介は省くが、Ast\_mapper を利用して attribute のみを変換する関数 \texttt{redex\_mapper : expression -> expression} と関数 \texttt{reduct\_mapper : expression -> expression} を実装した。\texttt{redex\_mapper} は \texttt{[@x ]} 以外の attribute を無くす変換をする関数であり、\texttt{reduct\_mapper} は \texttt{[@stepper.reduct (今のステップ, 簡約前の式) ]} を \texttt{[@t ]} にし、それ以外の attribute を無くす変換をする関数である。
+そのために、本研究では OCaml のモジュール Ast\_mapper を利用した。
+Ast\_mapper は OCaml プログラムの構文木を簡単に部分的に変換するためのモジュールである。
+ここでは詳しい紹介は省くが、
+Ast\_mapper を利用して attribute のみを変換する関数
+\texttt{redex\_mapper :\ expression -> expression} と関数
+\texttt{reduct\_mapper :\ expression -> expression} を実装した。
+\texttt{redex\_mapper} は \texttt{[@x ]} 以外の attribute を無くす変換をする関数であり、
+\texttt{reduct\_mapper} は \texttt{[@stepper.reduct (今のステップ, 簡約前の式) ]} を
+\texttt{[@t ]} にし、それ以外の attribute を無くす変換をする関数である。
 
 以上によって、\ref{生じる問題と解決方法}節で定めたように、十分な情報を持つプログラムが出力できた。
 

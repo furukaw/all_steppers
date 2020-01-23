@@ -55,10 +55,12 @@
 \contentsline {subsubsection}{情報の利用}{45}
 \contentsline {subsection}{\numberline {5.4.3}実際のステッパ}{46}
 \contentsline {subsection}{\numberline {5.4.4}ツールの実装}{48}
-\contentsline {section}{\numberline {5.5}予想される問題点}{48}
+\contentsline {section}{\numberline {5.5}予想される問題点とその経過}{48}
 \contentsline {subsection}{\numberline {5.5.1}文字数の爆発}{49}
+\contentsline {subsubsection}{問題点}{49}
+\contentsline {subsubsection}{使用した結果}{49}
 \contentsline {subsection}{\numberline {5.5.2}実行時間}{49}
-\contentsline {subsection}{\numberline {5.5.3}関数適用評価スキップ後の前ステップ出力}{49}
+\contentsline {subsection}{\numberline {5.5.3}関数適用評価スキップ後の前ステップ出力}{50}
 \contentsline {section}{\numberline {5.6}この章のまとめ}{50}
 \contentsline {chapter}{\numberline {第6章}評価}{51}
 \contentsline {section}{\numberline {6.1}授業の内容}{51}

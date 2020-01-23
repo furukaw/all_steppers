@@ -39,6 +39,10 @@ let start (expr : expression) : expression = eval expr \colorbox{lightgray}{[]}
 incremental でないステッパ関数は big-step インタプリタ関数に
 ステップ出力のための作用を追加することで構築されている。
 incremental でないステッパ関数の実装は図\ref{figure:old-stepper}のようになる。
+これは、 \ref{chapter:try-with} 章で示した
+コンテキストをリストとして定義した場合の
+try-with と型無し $\lambda$ 計算のステッパ (図 \ref{figure:stepper}) の、
+$\lambda$ 計算を実行する部分と同じ動作をするプログラムである。
 関数 \texttt{eval} は OCaml の call-by-value かつ right-to-left
 の評価戦略に従った代入ベースの $\lambda$
 計算のインタプリタにステップ実行のための作用を追加したステッパ関数である。
@@ -79,4 +83,13 @@ let memo (redex : expression) (reduct : expression) (context : frame list)
 \label{figure:memo}
 \end{figure}
 
-関数 \texttt{eval} の下から３行目の関数 \texttt{memo} は、簡約前のプログラムを出力し、 \texttt{counter} の値を１増やし、簡約後のプログラムを出力する関数である。その実装は図\ref{figure:memo}に示す。ただし、関数 \texttt{print\_counter : unit -> unit} はコメントとしてステップ番号 \texttt{(* Step n *)} を標準出力する関数、関数 \texttt{print : expr -> unit} は式を標準出力する関数、関数 \texttt{plug : expression -> frame list -> expression} は計算している途中の部分式とコンテキストを受け取って式を再構成する関数であり、実装は省略する。変数 \texttt{counter} には、現在のステップ番号が格納されている。式の評価中に関数適用の簡約を行うたびに１ずつ増加させることで、式全体の通しステップ番号を出力できる。
+関数 \texttt{eval} の下から３行目の関数 \texttt{memo} は、簡約前のプログラムを出力し、
+\texttt{counter} の値を１増やし、簡約後のプログラムを出力する関数である。
+その実装は図\ref{figure:memo}に示す。ただし、
+関数 \texttt{print\_counter :\ unit -> unit} はコメントとしてステップ番号
+\texttt{(* Step n *)} を標準出力する関数、
+関数 \texttt{print :\ expr -> unit} は式を標準出力する関数、
+関数 \texttt{plug :\ expression -> frame list -> expression}
+は計算している途中の部分式とコンテキストを受け取って式を再構成する関数であり、実装は省略する。
+変数 \texttt{counter} には、現在のステップ番号が格納されている。
+式の評価中に関数適用の簡約を行うたびに１ずつ増加させることで、式全体の通しステップ番号を出力できる。
