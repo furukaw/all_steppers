@@ -3,24 +3,23 @@
 
 % ステッパとはプログラミング教育やデバッグのために使うツールであり、
 % プログラムが代数的に書き換わる様子を出力することで実行過程を見せるものである。
-Steppers, which display all the reduction steps of a given program,
-are a novice-friendly tool for understanding program behavior and debugging.
+A stepper, which display all the reduction steps of a given program,
+is a novice-friendly tool for understanding program behavior and debugging.
 % これまでに Racket \cite{clements01} の教育用に制限した構文
 % などを対象にステッパが作られてきたが、
 % 継続を扱うことができる代数的効果 \cite{PRETNAR201519} のような、
 % 複雑なプログラム制御をする言語機能に対応したステッパは作られていなかった。
-The tool was only available in
+So far, the tool was available only in
 the pedagogical languages of the DrRacket programming environment;
-therefore, we cannot step through programs that uses advanced features
+therefore, we have not been able to step through programs that use advanced features
 such as exception handling.
 % そのような複雑な機能を含むプログラムの挙動を理解するのは特に困難なので、
 % ステッパでプログラムの動きを観察できるようにしたい。
 % 本研究では例外処理や継続操作の機能を含む言語に対応したステッパを実装した。
-We implemented steppers for constructs of exception handling and
-some control operators.
+We implemented steppers for constructs including exception handling and
+various control operators.
 
-We need information of context surrounding the redex
-to implement a stepper,
+To implement a stepper, we need information on the context surrounding the redex,
 because stepper is a kind of interpreter which outputs
 the whole programs at each reduction step.
 % ステッパは簡約のたびにその時点でのプログラム全体を出力するインタプリタなので、
@@ -34,9 +33,9 @@ In this paper, we suggest two ways for that.
 % 機械的に導出する方法の 2 つを示す。
 
 Using the stepper,
-we realized that it takes so long time to evaluate programs with big■■ expressions.
-In order to get over this■■,
-an "incremental stepper" that can be used
+we realized that it takes so long time to evaluate long■■ programs.
+In order to get over this problem,
+we designed an "incremental stepper" that can be used
 without waiting for the end of the step execution process.
 This made it possible to create a stepper in a server-client system.
 % 実装したステッパを利用してみると、
@@ -51,7 +50,7 @@ This made it possible to create a stepper in a server-client system.
 % and examined the educational effects of the stepper
 % from the execution logs and showed that
 % there were situations where the stepper was useful.
-Moreover, we asked university students
+We asked university students
 to use our OCaml stepper in a course,
 and examined the educational effects of the stepper
 from the execution logs and their comments.
@@ -59,11 +58,6 @@ We showed that there were some situations where the stepper was useful.
 % また、OCaml の一部の構文のステッパを大学の授業で学生に使用してもらい、
 % その実行ログなどからステッパの教育上の効果について考察し、
 % ステッパが有用な場面があることを示した。
-
-Through these attempts,
-we have gained knowledge so that steppers can be used
-in more languages or environments.
-% 以上の試みによって、ステッパがより多くの言語や環境で利用されるための知見を得た。
 
 \vspace{10mm}
 
