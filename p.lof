@@ -13,7 +13,7 @@
 \contentsline {figure}{\numberline {3.7}{\ignorespaces 実際のステッパでプログラムを実行する様子}}{16}
 \contentsline {figure}{\numberline {3.8}{\ignorespaces 階乗関数をスキップする様子}}{17}
 \contentsline {figure}{\numberline {3.9}{\ignorespaces 関数適用をスキップするためのステッパ関数}}{18}
-\contentsline {figure}{\numberline {3.10}{\ignorespaces 関数適用をスキップするためのステッパの出力}}{18}
+\contentsline {figure}{\numberline {3.10}{\ignorespaces 関数適用をスキップするためのステッパ関数の出力}}{18}
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {4.1}{\ignorespaces 対象言語の構文}}{21}
 \contentsline {figure}{\numberline {4.2}{\ignorespaces 対象言語の定義}}{22}
@@ -26,16 +26,16 @@
 \contentsline {figure}{\numberline {4.9}{\ignorespaces 変換の後、出力関数を足して得られるステッパ}}{30}
 \contentsline {figure}{\numberline {4.10}{\ignorespaces 継続を外側に拡張する関数}}{31}
 \contentsline {figure}{\numberline {4.11}{\ignorespaces 継続の情報を保持するための言語やコンテキストの定義}}{31}
-\contentsline {figure}{\numberline {4.12}{\ignorespaces 変換の結果得られた、CPSインタプリタを基にしたステッパ}}{32}
+\contentsline {figure}{\numberline {4.12}{\ignorespaces 変換の結果得られた、CPSインタプリタを基にしたステッパ関数}}{32}
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {5.1}{\ignorespaces attribute を含む構文木の例}}{36}
 \contentsline {figure}{\numberline {5.2}{\ignorespaces ハイライトのための attribute の利用}}{37}
 \contentsline {figure}{\numberline {5.3}{\ignorespaces 対象言語の定義}}{41}
-\contentsline {figure}{\numberline {5.4}{\ignorespaces 既存のステッパの実装}}{42}
+\contentsline {figure}{\numberline {5.4}{\ignorespaces incremental でないステッパ関数の実装}}{42}
 \contentsline {figure}{\numberline {5.5}{\ignorespaces ステップ出力関数}}{43}
 \contentsline {figure}{\numberline {5.6}{\ignorespaces 実行の種類とステップ番号の定義}}{43}
 \contentsline {figure}{\numberline {5.7}{\ignorespaces incremental なステッパのための出力関数}}{44}
-\contentsline {figure}{\numberline {5.8}{\ignorespaces incremental なステッパ}}{47}
+\contentsline {figure}{\numberline {5.8}{\ignorespaces incremental なステッパ関数}}{47}
 \contentsline {figure}{\numberline {5.9}{\ignorespaces ステッパのスキップ機能}}{48}
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {6.1}{\ignorespaces ステッパが使用された回数}}{53}

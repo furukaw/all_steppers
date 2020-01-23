@@ -1,4 +1,4 @@
-This is e-pTeX, Version 3.14159265-p3.7-160201-2.6 (utf8.euc) (TeX Live 2016) (preloaded format=platex 2017.4.27)  19 JAN 2020 18:55
+This is e-pTeX, Version 3.14159265-p3.7-160201-2.6 (utf8.euc) (TeX Live 2016) (preloaded format=platex 2017.4.27)  23 JAN 2020 11:51
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -249,43 +249,33 @@ LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
 (./3/intro.tex) (./3/interpreter.tex [7
 
 ] [8]) (./3/stepper.tex
-
-LaTeX Font Warning: Font shape `JT1/gt/m/it' undefined
-(Font)              using `JT1/gt/m/n' instead on input line 35.
-
-
-LaTeX Font Warning: Font shape `JY1/gt/m/it' undefined
-(Font)              using `JY1/gt/m/n' instead on input line 35.
-
 LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <12> not available
 (Font)              Font shape `JT1/gt/m/n' tried instead on input line 54.
 LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <12> not available
 (Font)              Font shape `JY1/gt/m/n' tried instead on input line 54.
-[9] [10]
+ [9] [10]
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <9> on input line 189.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <5> on input line 189.
- [11] [12] [13] [14]) (./3/actual.tex [15]
+
+[11] [12]
+
+LaTeX Font Warning: Font shape `JT1/gt/m/it' undefined
+(Font)              using `JT1/gt/m/n' instead on input line 444.
+
+
+LaTeX Font Warning: Font shape `JY1/gt/m/it' undefined
+(Font)              using `JY1/gt/m/n' instead on input line 444.
+
+[13] [14]) (./3/actual.tex [15]
 File: 6/longexample.eps Graphic file (type eps)
  <6/longexample.eps>
 File: 6/beforeskip.eps Graphic file (type eps)
-
-<6/beforeskip.eps>
+ <6/beforeskip.eps>
 File: 6/afterskip.eps Graphic file (type eps)
- <6/afterskip.eps> [16]
-Overfull \hbox (10.65091pt too wide) in paragraph at lines 141--141
-[]        [][][][][][]                \OT1/cmtt/m/n/10.95 (* output start mark 
-*)[] 
- []
 
-
-Overfull \hbox (10.65091pt too wide) in paragraph at lines 144--144
-[]        [][][][][][]                               \OT1/cmtt/m/n/10.95 (* out
-put end mark *)[] 
- []
-
-) (./3/conclusion.tex)) (./4/chapter4.tex [17] [18]
+<6/afterskip.eps> [16]) (./3/conclusion.tex)) (./4/chapter4.tex [17] [18]
 第 4 章
 (./4/intro.tex) (./4/definition.tex [19
 
@@ -324,7 +314,7 @@ LaTeX Warning: Float too large for page by 6.15746pt on input line 199.
 File: 5/attribute.png Graphic file (type bmp)
  <5/attribute.png> [36])
 (./5/solution.tex [37]
-Overfull \hbox (4.10356pt too wide) in paragraph at lines 22--23
+Overfull \hbox (4.10356pt too wide) in paragraph at lines 49--60
 \OT1/cmtt/m/n/10.95 (1, 5 * 7) ] $\U/lasy/m/n/10.95 ;$ \OT1/cmtt/m/n/10.95 6[@s
 tepper.reduct (2, 2 * 3) ] + 35[@stepper.reduct (1, 5 * 7) ]
  []
@@ -336,42 +326,36 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <7> on input line 10.
  [40] (./5/old_implementation.tex
 Overfull \hbox (4.88419pt too wide) in paragraph at lines 27--27
-[]      [][][][][][][] 
+[]          [][][][][][][] 
  []
 
-) [41] (./5/new_implementation.tex [42] [43]
-Underfull \hbox (badness 10000) in paragraph at lines 71--71
-[]  \OT1/cmtt/m/n/10.95 print[]as[]attribute (plug redex context);         (* \
-JY1/mc/m/n/10.95 処理用の簡約前のプログラ
- []
-
-[44] [45]
-Overfull \hbox (7.37753pt too wide) in paragraph at lines 135--135
+) [41] (./5/new_implementation.tex [42] [43] [44] [45]
+Overfull \hbox (7.37753pt too wide) in paragraph at lines 137--137
 [][][][][][][][] 
  []
 
 
-Overfull \hbox (9.0052pt too wide) in paragraph at lines 136--136
+Overfull \hbox (9.0052pt too wide) in paragraph at lines 138--138
 [][][][][][][][] 
  []
 
 
-Overfull \hbox (5.7912pt too wide) in paragraph at lines 137--137
+Overfull \hbox (5.7912pt too wide) in paragraph at lines 139--139
 [][][][][][][][] 
  []
 
 
-Overfull \hbox (6.13988pt too wide) in paragraph at lines 145--145
+Overfull \hbox (6.13988pt too wide) in paragraph at lines 147--147
 [][][][][][][][] 
  []
 
 
-Overfull \hbox (3.67274pt too wide) in paragraph at lines 146--146
+Overfull \hbox (3.67274pt too wide) in paragraph at lines 148--148
 [][][][][][][][] 
  []
 
 
-Overfull \hbox (3.92307pt too wide) in paragraph at lines 147--147
+Overfull \hbox (3.92307pt too wide) in paragraph at lines 149--149
 [][][][][][][][] 
  []
 
@@ -417,4 +401,4 @@ Here is how much of TeX's memory you used:
  929 hyphenation exceptions out of 8191
  27i,9n,21p,1017b,411s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on p.dvi (72 pages, 290972 bytes).
+Output written on p.dvi (72 pages, 291948 bytes).

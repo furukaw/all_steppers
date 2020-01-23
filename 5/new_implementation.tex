@@ -1,4 +1,4 @@
-\subsection{incremental なステッパ}
+\subsection{incremental なステッパ関数}
 
 \begin{figure}[t]
 \begin{spacing}{0.8}
@@ -14,14 +14,14 @@ let mode: mode =
 let counter: int ref =
   try int_of_string (Sys.getenv "STEPPER_COUNT")
   with Not_found -> match mode with All -> ref 0
-                    | _ -> failwith "no step number"
+                      | _ -> failwith "no step number"
 \end{verbatim}
 \end{spacing}
 \caption{実行の種類とステップ番号の定義}
 \label{figure:mode}
 \end{figure}
 
-本稿の incremental なステッパでは、たとえば入力 \texttt{2 * 3 + 35[@stepper.reduct (1, 5 * 7) ]} に対して、以下の3種類の処理を実装する。
+incremental なステッパ関数では、たとえば入力 \texttt{2 * 3 + 35[@stepper.reduct (1, 5 * 7) ]} に対して、以下の3種類の処理を実装する。
 
 \begin{itemize}
 \item 全ステップ出力 \texttt{\colorbox{lightgreen}{2 * 3} + 35 $\leadsto$ \colorbox{purple}{6} + 35, \colorbox{lightgreen}{6 + 35} $\leadsto$ \colorbox{purple}{41}}
@@ -29,7 +29,9 @@ let counter: int ref =
 \item 前ステップ出力 \texttt{2 * 3 + \colorbox{lightgreen}{5 * 7} $\leadsto$ 2 * 3 + \colorbox{purple}{35}}
 \end{itemize}
 
-このうちどの処理を行うかは、図\ref{figure:mode}のように、ステッパの実行ごとに環境変数で定めて、\texttt{mode} というグローバル変数に格納する。
+このうちどの処理を行うかは、図\ref{figure:mode}のように、
+ステッパ関数のプログラムの実行ごとに環境変数で定めて、
+\texttt{mode} というグローバル変数に格納する。
 
 次ステップ出力の内容は全ステップ出力の冒頭の1ステップであるので、もし全ステップ出力と次ステップ出力をするだけならば、例えば関数 \texttt{memo}（図\ref{figure:memo}）の最後に
 \begin{verbatim}
@@ -68,7 +70,7 @@ let memo (redex : expression) (reduct : expression) (context : frame list)
   if mode = Prev                                      (* 前ステップ出力のとき、 *)
   then counter := !counter - 1;                        (* ステップ番号を１戻す *)
   print\_counter ();                                 (* 簡約前のステップ番号出力 *)
-  print\_as\_attribute (plug redex context);         (* 処理用の簡約前のプログラム *)
+  print\_as\_attribute (plug redex context);        (* 処理用の簡約前のプログラム *)
   print (redex\_mapper
            (plug marked\_redex context));          (* 表示用の簡約前のプログラム *)
   counter := !counter + 1;                            (* ステップ番号を１進める *)
@@ -83,7 +85,7 @@ let memo (redex : expression) (reduct : expression) (context : frame list)
   \label{figure:new-memo}
 \end{figure}
 
-incremental でないステッパでは、例えば \texttt{(2 * 3) + (5 * 7)} に対して、2 ステップ目を
+incremental でないステッパ関数では、例えば \texttt{(2 * 3) + (5 * 7)} に対して、2 ステップ目を
 \begin{verbatim}
   (* Step 1 *)
   (2 * 3)[@stepper.redex ] + 35
@@ -146,22 +148,22 @@ let rec eval (expr : expression) (context : frame list) : expression =
 \colorbox{lightgray}{    with Not\_found -> ()             (* expr が探している式でなければ何もせず、 *)}
 \colorbox{lightgray}{  end;                                               (* 以下の match 文へ進む *)}
   match expr.desc with
-  | Var (x) -> failwith "error: Unbound variable"
-  | Fun (x, f) -> expr
-  | App (e1, e2) ->
-    let arg\_value = eval e2 (AppR e1 :: context) in
-    let fun\_value = eval e1 (AppL arg\_value :: context) in
-    match fun\_value.desc with                         (* 以下、次ステップの簡約 *)
-    | Fun (x, f) ->
-      let redex = {expr with desc = App (fun\_value, arg\_value)} in
-      let reduct = {(subst f x arg\_value)
-                    with attr = expr.attr} in
-      memo redex reduct context;
-      eval reduct context
-    | \_ -> failwith "error: not a function"
+    | Var (x) -> failwith "error: Unbound variable"
+    | Fun (x, f) -> expr
+    | App (e1, e2) ->
+      let arg\_value = eval e2 (AppR e1 :: context) in
+      let fun\_value = eval e1 (AppL arg\_value :: context) in
+      match fun\_value.desc with                       (* 以下、次ステップの簡約 *)
+        | Fun (x, f) ->
+          let redex = \{expr with desc = App (fun\_value, arg\_value)\} in
+          let reduct = \{(subst f x arg\_value)
+                        with attr = expr.attr\} in
+          memo redex reduct context;
+          eval reduct context
+        | \_ -> failwith "error: not a function"
 \end{alltt}
 \end{spacing}
-\caption{incremental なステッパ}
+\caption{incremental なステッパ関数}
 \label{figure:new-stepper}
 \end{figure}
 
@@ -179,6 +181,15 @@ let rec eval (expr : expression) (context : frame list) : expression =
 \texttt{[@stepper.reduct (今のステップ番号, 簡約前の式) ]}
 が付いているかを調べる。あれば出力して終了、無ければ同様に式を普通に評価する。
 
-このように実行を進めると、1 以上の正しいステップ番号を変数 \texttt{counter} に持っている限り、必ずどこかに \texttt{[@stepper.reduct (今のステップ番号, 簡約前の式) ]} が付いた式が見つかる。そして、今のステップに至るまで行ってきた「次ステップの出力」と同じ順序で式を探索してきたため、見つかるまでに評価した式は全て簡約済みであり、その式を見つけるまでに簡約処理、すなわち \texttt{match fun\_value.desc with ...} を行うことは無い。よって、灰色の部分を書き足すことで前ステップ出力が可能になる。
+このように実行を進めると、
+1 以上の正しいステップ番号を変数 \texttt{counter} に持っている限り、
+必ずどこかに \texttt{[@stepper.reduct (今のステップ番号, 簡約前の式) ]} が付いた式が見つかる。
+そして、今のステップに至るまで行ってきた「次ステップの出力」と同じ順序で式を探索してきたため、
+見つかるまでに評価した式は全て簡約済みであり、その式を見つけるまでに簡約処理、
+すなわち \texttt{match fun\_value.desc with ...} を行うことは無い。
+よって、灰色の部分を書き足すことで前ステップ出力が可能になる。
 
-以上のように、incremental でないステッパ（図\ref{figure:old-stepper}, \ref{figure:memo}）を図\ref{figure:mode}, \ref{figure:new-memo}, \ref{figure:new-stepper}のように書き換えることで、incremental なステッパを実装できる。
+以上のように、incremental でないステッパ関数
+（図\ref{figure:old-stepper}, \ref{figure:memo}）
+を図\ref{figure:mode}, \ref{figure:new-memo}, \ref{figure:new-stepper}のように書き換えることで、
+incremental なステッパ関数を実装できる。

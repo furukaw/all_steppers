@@ -4,7 +4,7 @@
 本節では、\ref{section:definition} 節で定義したインタプリタ
 (図\ref{figure:1cps})に対して、正当性の保証された２種類のプログラム変
 換（非関数化と CPS 変換）をかけることで、コンテキストを明示的に保持する
-インタプリタを得て、そこからステッパを作成する方法を示す。
+インタプリタを得て、そこからステッパ関数を作成する方法を示す。
 
 %本節では、\ref{section:definition}節で定義したインタプリタ(図\ref{figure:1cps})を変換することで、コンテキストの情報を保持するインタプリタを得る方法を示す。用いるプログラム変換は非関数化とCPS変換の２種類である。これらの変換はプログラムの動作を変えないので、変換の結果得られるインタプリタと図\ref{figure:1cps}のインタプリタは、同じ引数 \texttt{e} に対して同じ値を返す。
 
@@ -327,7 +327,7 @@ and apply_handler (k : k) (h : h) (a : a) (k2 : k2) : a = match a with
 
 \ref{subsection:4defun} 節までの変換によって、コンテキストの情報を引数
 に保持するインタプリタ関数を得ることができた。この情報を用いて簡約前後
-のプログラムを出力するようにするとステッパが得られる。具体的には、簡約が起こる部分でプログラム全
+のプログラムを出力するようにするとステッパ関数が得られる。具体的には、簡約が起こる部分でプログラム全
 体を再構成し表示するようにする。図\ref{figure:5memo}
 が表示を行う関数 \texttt{memo} を
 足した後の関数 \texttt{apply\_in} と \texttt{apply\_handler}
@@ -351,8 +351,9 @@ and apply_handler (k : k) (h : h) (a : a) (k2 : k2) : a = match a with
 (* コンテキスト k2_in の外側にフレーム GHandle (h, k_out, k2_out) を付加する *)
 let rec compose_k2 (k2_in : k2) (h : h) ((k_out, k2_out) : k * k2) : k2 =
   match k2_in with
-  | GId -> GHandle (h, k_out, k2_out)
-  | GHandle (h', k', k2') -> GHandle (h', k', compose_k2 k2' h (k_out, k2_out))
+    | GId -> GHandle (h, k_out, k2_out)
+    | GHandle (h', k', k2') ->
+      GHandle (h', k', compose_k2 k2' h (k_out, k2_out))
 \end{verbatim}
 \end{spacing}
 \caption{継続を外側に拡張する関数}
@@ -432,18 +433,18 @@ and apply_handler ((c, k) : c * k) (h : h) (a : a) (c2 : c2) : a = match a with
 let stepper (e : e) : a = eval e (FId, (fun v c2 -> Return v)) GId
 \end{verbatim}
 \end{spacing}
-\caption{変換の結果得られた、CPSインタプリタを基にしたステッパ}
+\caption{変換の結果得られた、CPSインタプリタを基にしたステッパ関数}
 \label{figure:6cps}
 \end{figure}
 
 \subsection{CPSインタプリタに基づいたステッパ}
 
-前節で algebraic effects を持つ言語に対するステッパを作ることができ
-た。しかし、前節で作ったステッパではコンテキストの情報が非関数化されて
+前節で algebraic effects を持つ言語に対するステッパ関数を作ることができ
+た。しかし、前節で作ったステッパ関数ではコンテキストの情報が非関数化されて
 いた。また、CPS 変換されているためふたつの継続を扱っており、
 もともとの CPS インタプリタとは形がかなり異なったものとなっている。
 しかし、一度、前節までで必要なコンテキストの情報がどのようなものかが判
-明すると、それを直接、もとの CPS インタプリタに加えてステッパを作るこ
+明すると、それを直接、もとの CPS インタプリタに加えてステッパ関数を作るこ
 とができる。
 
 もとの CPS インタプリタの型定義に必要なコンテキストの情報を加えた定義
@@ -455,11 +456,11 @@ let stepper (e : e) : a = eval e (FId, (fun v c2 -> Return v)) GId
 必要なコンテキストの情報を新たに引数に取るようになっている。
 よって \texttt{k} の定義は \texttt{v -> c2 -> a} となる。
 
-このデータ定義を使って、もとの CPS インタプリタをステッパに変換したの
+このデータ定義を使って、もとの CPS インタプリタをステッパ関数に変換したの
 が図 \ref{figure:6cps}である。
 このインタプリタは、もとの CPS インタプリタにコンテキストの情報として
 引数 \texttt{c} と \texttt{c2} を加え、簡約ごとにプログラムを再構成
 し、ステップ表示するようにしたものである。
 一度、必要なコンテキストの情報が特定されると、algebraic effects のよう
-に非自明な言語構文が入っていても、直接、ステッパを作ることができるよう
+に非自明な言語構文が入っていても、直接、ステッパ関数を作ることができるよう
 になる。

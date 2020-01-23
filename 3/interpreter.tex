@@ -31,11 +31,11 @@ let rec eval expr = match expr with
       let v2 = eval e2 in
       let v1 = eval e1 in
       match v1 with
-      | Fun (x, e) ->
-        let e' = subst e x v2 in   (* e[v2/x] *)
-        let v = eval e' in
-        v
-      | _ -> failwith "not a function"
+        | Fun (x, e) ->
+          let e' = subst e x v2 in   (* e[v2/x] *)
+          let v = eval e' in
+          v
+        | _ -> failwith "not a function"
     end
   | Try (e1, x, e2) ->
     begin

@@ -105,7 +105,7 @@ OCaml ステッパは他に授業で利用する一部の演算子などに対�
 % The skipping feature requires some modifications to
 % the \texttt{eval} function (Figure \ref{figure:skipapp}).
 このスキップ機能は、
-\ref{chapter:try-with} 章で try-with に対応したステッパ
+\ref{chapter:try-with} 章で try-with に対応したステッパ関数
 (図 \ref{figure:stepper}) の eval 関数を
 図 \ref{figure:skipapp} のように変更することで実装できる。
 % The idea is to sandwich the steps within an application between two strings:
@@ -136,14 +136,14 @@ let rec eval expr ctxt = match expr with
       let v2 = eval e2 (add ctxt (CAppR e1)) in
       let v1 = eval e1 (add ctxt (CAppL v2)) in
       match v1 with
-      | Lam (x, e) ->
-        let e' = subst e x v2 in
-        \colorbox{lightgray}{let apply_num = apply_start () in}                (* output start mark *)
-        memo (App (v1, v2)) e' ctxt;
-        let v = eval e' ctxt in
-        \colorbox{lightgray}{apply_end apply_num;}                               (* output end mark *)
-        v
-      | _ -> failwith "not a function"
+        | Lam (x, e) ->
+          let e' = subst e x v2 in
+          \colorbox{lightgray}{let apply_num = apply_start () in}               (* 開始マークを出力 *)
+          memo (App (v1, v2)) e' ctxt;
+          let v = eval e' ctxt in
+          \colorbox{lightgray}{apply_end apply_num;}                            (* 終了マークを出力 *)
+          v
+        | _ -> failwith "not a function"
     end
   | ...
 \end{alltt}
@@ -164,6 +164,6 @@ let rec eval expr ctxt = match expr with
 (* Application 1 end *)\\
 (* Step 4 *) \colorbox{lightgreen}{7 + 1000}\\
 (* Step 5 *) \colorbox{purple}{1007}}
-\caption{関数適用をスキップするためのステッパの出力}
+\caption{関数適用をスキップするためのステッパ関数の出力}
 \label{figure:skipping}
 \end{figure}

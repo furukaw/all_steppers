@@ -7,7 +7,7 @@
 \contentsline {chapter}{\numberline {第3章}try-with のステップ実行}{7}
 \contentsline {section}{\numberline {3.1}はじめに}{7}
 \contentsline {section}{\numberline {3.2}対象言語とインタプリタの定義}{7}
-\contentsline {section}{\numberline {3.3}ステッパの実装}{9}
+\contentsline {section}{\numberline {3.3}ステッパ関数の実装}{9}
 \contentsline {subsection}{\numberline {3.3.1}一次元的なコンテキストでの実装}{10}
 \contentsline {subsection}{\numberline {3.3.2}二次元的なコンテキストでの実装}{11}
 \contentsline {section}{\numberline {3.4}実際の OCaml ステッパ}{15}
@@ -49,8 +49,8 @@
 \contentsline {subsubsection}{問題点}{39}
 \contentsline {subsubsection}{解決方法}{39}
 \contentsline {section}{\numberline {5.4}$\lambda $計算に対する実装}{40}
-\contentsline {subsection}{\numberline {5.4.1}incremental でないステッパ}{41}
-\contentsline {subsection}{\numberline {5.4.2}incremental なステッパ}{42}
+\contentsline {subsection}{\numberline {5.4.1}incremental でないステッパ関数}{41}
+\contentsline {subsection}{\numberline {5.4.2}incremental なステッパ関数}{42}
 \contentsline {subsubsection}{情報の付加}{44}
 \contentsline {subsubsection}{情報の利用}{45}
 \contentsline {subsection}{\numberline {5.4.3}実際のステッパ}{46}

@@ -1,9 +1,9 @@
-\section{ステッパの実装}
+\section{ステッパ関数の実装}
 \label{section:try-with__stepper}
 
 % As stated in Section \ref{sec:intro},
 % a stepper must display the whole program at each reduction step.
-ステッパは各簡約ステップでのプログラムの全体を表示する必要がある。
+ステッパ関数は各簡約ステップでのプログラムの全体を表示する必要がある。
 % Consider the simple arithmetic expression \texttt{(1 + 2 * 3) + 4}.
 % When step-executing this expression,
 % we want to see the following reduction sequence:
@@ -32,12 +32,12 @@
 % What is missing here is the \emph{context} surrounding \texttt{2 * 3},
 % namely \texttt{(1 + [.])\ + 4}
 % (where \texttt{[.]} denotes the hole of the context).
-ここで欠けているのは \texttt{2 * 3} を囲んでいる \emph{コンテキスト} すなわち
+ここで欠けているのは \texttt{2 * 3} を囲んでいるコンテキストすなわち
 \texttt{(1 + [.])\ + 4} である。
 (コンテキストの穴を \texttt{[.]} と表記する。)
 % Hence, to implement a stepper,
 % we need to keep track of every evaluation context we have traversed.  
-したがって、ステッパを実装するためには、
+したがって、ステッパ関数を実装するためには、
 それまでの評価文脈を追い続ける必要がある。
 
 そのために、コンテキストを表すデータ型を定義する必要がある。
@@ -117,7 +117,7 @@ let rec plug expr ctxt = match ctxt with
 % The resulting stepper is essentially the CK abstract machine
 % \cite{FF1986}, where the expression is the control string and the
 % evaluation context is the continuation.
-最終的に得られるステッパは、式を control string、評価文脈を継続とみなすと、本質的にCK 機械 \cite{FF1986} であるといえる。
+最終的に得られるステッパ関数は、式を control string、評価文脈を継続とみなすと、本質的にCK 機械 \cite{FF1986} であるといえる。
 % Substitution is used to implement $\beta$-reduction.
 % 代入は $\beta$ 簡約の実装のために用いられている。
 % We did not implement the abstract machine directly but augmented a
@@ -222,8 +222,8 @@ let rec plug_in_try expr ctxt = match ctxt with
 let rec plug expr (clist, tries) =
   let tryee = plug_in_try expr clist in
   match tries with
-  | CHole -> tryee
-  | CTry (x, e2, outer) -> plug (Try (tryee, x, e2)) outer
+    | CHole -> tryee
+    | CTry (x, e2, outer) -> plug (Try (tryee, x, e2)) outer
 \end{verbatim}
 \end{spacing}
 %   \caption{Contexts and reconstruction function; final version}
@@ -324,12 +324,12 @@ let rec eval expr \colorbox{lightgray}{ctxt} = match expr with    (* コンテ�
       let v2 = eval e2 \colorbox{lightgray}{(add ctxt (CAppR e1))} in     (* コンテキスト情報を足す *)
       let v1 = eval e1 \colorbox{lightgray}{(add ctxt (CAppL v2))} in     (* コンテキスト情報を足す *)
       match v1 with
-      | Lam (x, e) ->
-        let e' = subst e x v2 in
-        \colorbox{lightgray}{memo (App (v1, v2)) e' ctxt;}                                (* 出力 *)
-        let v = eval e' \colorbox{lightgray}{ctxt} in                     (* コンテキスト情報を足す *)
-        v
-      | _ -> failwith "not a function"
+        | Lam (x, e) ->
+          let e' = subst e x v2 in
+          \colorbox{lightgray}{memo (App (v1, v2)) e' ctxt;}                              (* 出力 *)
+          let v = eval e' \colorbox{lightgray}{ctxt} in                   (* コンテキスト情報を足す *)
+          v
+        | _ -> failwith "not a function"
     end
   | Try (e1, x, e2) ->
     begin
@@ -344,31 +344,31 @@ let rec eval expr \colorbox{lightgray}{ctxt} = match expr with    (* コンテ�
     end
   | Raise (e0) ->
     let v = eval e0 \colorbox{lightgray}{(add ctxt CRaise)} in            (* コンテキスト情報を足す *)
-    \colorbox{lightgray}{begin match ctxt with                   }
+    \colorbox{lightgray}{begin match ctxt with                 }
 \end{alltt}
 \vspace{-27pt}
 \begin{alltt}
-    \colorbox{lightgray}{    | ([], _) -> ()                     }
+    \colorbox{lightgray}{  | ([], _) -> ()                     }
 \end{alltt}
 \vspace{-27pt}
 \begin{alltt}
-    \colorbox{lightgray}{    | (clist, tries) ->                 }
+    \colorbox{lightgray}{  | (clist, tries) ->                 }
 \end{alltt}
 \vspace{-27pt}
 \begin{alltt}
-    \colorbox{lightgray}{      memo (plug_in_try (Raise v) clist)}                        (* 出力 *)
+    \colorbox{lightgray}{    memo (plug_in_try (Raise v) clist)}                          (* 出力 *)
 \end{alltt}
 \vspace{-27pt}
 \begin{alltt}
-    \colorbox{lightgray}{           (Raise v)                    }
+    \colorbox{lightgray}{         (Raise v)                    }
 \end{alltt}
 \vspace{-27pt}
 \begin{alltt}
-    \colorbox{lightgray}{           ([], tries)                  }
+    \colorbox{lightgray}{         ([], tries)                  }
 \end{alltt}
 \vspace{-27pt}
 \begin{alltt}
-    \colorbox{lightgray}{end;                                    }
+    \colorbox{lightgray}{end;                                  }
     raise (Error (v))
 \end{alltt}
 \end{spacing}
@@ -415,7 +415,7 @@ let start e =
 % In the stepper, on the other hand,
 % we have an additional function call to the \texttt{memo} function
 % defined in Figure \ref{figure:memo}.
-それに対しステッパでは、
+それに対しステッパ関数では、
 図 \ref{figure:try-with__memo} で定義された関数 \texttt{memo} の呼び出しが追加されている。
 % This function receives three arguments:
 % the redex we have just found, its reduct, and the current evaluation context.
@@ -425,7 +425,7 @@ let start e =
 % the \texttt{memo} function reconstructs and prints the pre- and post-reduction programs,
 % using the \texttt{plug} and \texttt{print\_exp} functions
 関数 \texttt{memo} はこれらの引数を受け取ったら、
-関数 \texttt{plug} と \texttt{print\_exp} を使って簡約前と後のプログラムをそれぞれ再構成して出力する。
+関数 \texttt{plug} と \texttt{print\_exp} を使って簡約前と後のプログラムをそれぞれ再構成して出力する
 \footnote{
     % In the actual implementation,
     % we annotate redexes and reducts using OCaml's \emph{attributes}.
@@ -435,6 +435,7 @@ let start e =
     % and similarly for \texttt{purple}.
     ここでは \texttt{green expr1} は \texttt{expr1[@stepper.redex]} と出力される式を表し、
     \texttt{purple} についても同様である。
+    ( \ref{OCamlのattribute-式のattribute} 節で詳しく述べる。)
     % When displaying the steps,
     % the Emacs Lisp program uses the attributes information
     % to appropriately highlight expressions.

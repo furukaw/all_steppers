@@ -28,8 +28,7 @@ and payload = (int * expression) option  (* ステップ番号と簡約前の式
 \label{figure:lambda_with_attrributes}
 \end{figure}
 
-本節では、既存の OCaml ステッパ\cite{FCA19}の実装を紹介し、
-新しい OCaml ステッパの実装を示す。
+本節では、incremental でない OCaml ステッパ関数をもとに incremental なOCaml ステッパ関数を実装する。
 対象言語は型無しの$\lambda$式で、
 さらに実際の OCaml を模して任意の部分式に複数の attribute を付けられるものとする。
 各 attribute の第一引数は attribute の名前とし、
