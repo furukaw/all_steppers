@@ -186,6 +186,18 @@ let interpreter (e : e) : a = eval e FId (fun a -> a)  (* GId に変換される
 \label{subsection:4defun}
 
 \begin{figure}
+\begin{spacing}{0.8}
+\begin{verbatim}
+(* 全体のメタ継続 *)
+type k2 = GId
+        | GHandle of h * k * k2
+\end{verbatim}
+\end{spacing}
+\caption{2回目の非関数化後の継続の型}
+\label{figure:k2_4defun}
+\end{figure}
+
+\begin{figure}
   % code/4defun/syntax.ml より
   \begin{spacing}{0.8}
 \begin{verbatim}
@@ -243,18 +255,6 @@ CPS 変換ですべてのコンテキスト情報がふたつの継続に集約�
 数化してデータ構造に変換する。
 非関数化によって型 \texttt{k2} の定義は図 \ref{figure:k2_4defun} に、
 インタプリタは図 \ref{figure:4defun} に変換される。
-
-\begin{figure}
-\begin{spacing}{0.8}
-\begin{verbatim}
-(* 全体のメタ継続 *)
-type k2 = GId
-        | GHandle of h * k * k2
-\end{verbatim}
-\end{spacing}
-\caption{2回目の非関数化後の継続の型}
-\label{figure:k2_4defun}
-\end{figure}
 
 \begin{figure}
 \begin{spacing}{0.8}

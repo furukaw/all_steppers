@@ -21,8 +21,8 @@
 \contentsline {figure}{\numberline {4.4}{\ignorespaces 非関数化後の継続の型}}{25}
 \contentsline {figure}{\numberline {4.5}{\ignorespaces CPS インタプリタを非関数化したプログラム}}{26}
 \contentsline {figure}{\numberline {4.6}{\ignorespaces CPS インタプリタを非関数化して CPS 変換したプログラム}}{27}
-\contentsline {figure}{\numberline {4.7}{\ignorespaces CPS インタプリタを非関数化して CPS 変換して非関数化したプログラム}}{29}
-\contentsline {figure}{\numberline {4.8}{\ignorespaces 2回目の非関数化後の継続の型}}{29}
+\contentsline {figure}{\numberline {4.7}{\ignorespaces 2回目の非関数化後の継続の型}}{28}
+\contentsline {figure}{\numberline {4.8}{\ignorespaces CPS インタプリタを非関数化して CPS 変換して非関数化したプログラム}}{29}
 \contentsline {figure}{\numberline {4.9}{\ignorespaces 変換の後、出力関数を足して得られるステッパ}}{30}
 \contentsline {figure}{\numberline {4.10}{\ignorespaces 継続を外側に拡張する関数}}{31}
 \contentsline {figure}{\numberline {4.11}{\ignorespaces 継続の情報を保持するための言語やコンテキストの定義}}{31}
