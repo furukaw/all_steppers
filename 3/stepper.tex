@@ -172,21 +172,8 @@ big-step インタプリタを基にすることで、ユーザが指定した�
 % This suggests that, when dealing with exception handlers,
 % we have to distinguish between contexts inside and outside a tryee.
 例外処理を扱う場合には、try 節の内側と外側のコンテキストを区別する必要があるということである。
-\footnote{
-% The destination is not necessary,
-% if we want to support only exception handling.
-例外処理をサポートするだけならばこの必要はない。
-% We could simply search for the enclosing handler in the evaluation
-% context.
-コンテキストフレームのリストを単純に検索すれば最も内側のハンドラを見つけることができるからである。
-% However, it requires a linear search through the evaluation context.
-しかし、それには評価文脈を線形探索する必要がある。
-% Furthermore, distinction is necessary if we want to implement
-% more general control operators,
-% such as shift and reset \cite{DF1990}.
-さらに、shift/reset のようなより一般的な制御オペレータを実装する場合には
-この区別が必要になる。
-}
+コンテキストフレームのリストを単純に検索すれば最も内側のハンドラを見つけることができるが、
+ここでは構造的に区別できるようにコンテキストの型定義を変更していく。
 
 \subsection{二次元的なコンテキストでの実装}
 \label{subsection:stepper__after}
