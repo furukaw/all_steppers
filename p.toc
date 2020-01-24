@@ -58,18 +58,25 @@
 \contentsline {section}{\numberline {5.5}予想される問題点とその経過}{48}
 \contentsline {subsection}{\numberline {5.5.1}文字数の爆発}{49}
 \contentsline {subsubsection}{問題点}{49}
+\contentsline {subsubsection}{解決方法}{49}
 \contentsline {subsubsection}{使用した結果}{49}
 \contentsline {subsection}{\numberline {5.5.2}実行時間}{49}
+\contentsline {subsubsection}{問題点}{49}
+\contentsline {subsubsection}{解決方法}{50}
+\contentsline {subsubsection}{使用した結果}{50}
 \contentsline {subsection}{\numberline {5.5.3}関数適用評価スキップ後の前ステップ出力}{50}
-\contentsline {section}{\numberline {5.6}この章のまとめ}{50}
-\contentsline {chapter}{\numberline {第6章}評価}{51}
-\contentsline {section}{\numberline {6.1}授業の内容}{51}
-\contentsline {section}{\numberline {6.2}結果}{52}
-\contentsline {subsection}{\numberline {6.2.1}ステッパの使用状況}{52}
-\contentsline {subsection}{\numberline {6.2.2}ステッパの効果}{53}
-\contentsline {paragraph}{有効性に対する脅威}{55}
-\contentsline {subsection}{\numberline {6.2.3}学生による評価}{55}
-\contentsline {paragraph}{プログラムの挙動の理解}{56}
-\contentsline {paragraph}{デバッグ}{56}
-\contentsline {chapter}{\numberline {第7章}結論}{57}
-\contentsline {chapter}{\numberline {付 録A }学生の実行ログから得られたデータ}{62}
+\contentsline {subsubsection}{問題点}{50}
+\contentsline {subsubsection}{解決方法}{50}
+\contentsline {subsubsection}{使用した結果}{51}
+\contentsline {section}{\numberline {5.6}この章のまとめ}{51}
+\contentsline {chapter}{\numberline {第6章}評価}{52}
+\contentsline {section}{\numberline {6.1}授業の内容}{52}
+\contentsline {section}{\numberline {6.2}結果}{53}
+\contentsline {subsection}{\numberline {6.2.1}ステッパの使用状況}{53}
+\contentsline {subsection}{\numberline {6.2.2}ステッパの効果}{54}
+\contentsline {paragraph}{有効性に対する脅威}{56}
+\contentsline {subsection}{\numberline {6.2.3}学生による評価}{56}
+\contentsline {paragraph}{プログラムの挙動の理解}{57}
+\contentsline {paragraph}{デバッグ}{57}
+\contentsline {chapter}{\numberline {第7章}結論}{58}
+\contentsline {chapter}{\numberline {付 録A }学生の実行ログから得られたデータ}{63}

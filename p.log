@@ -1,4 +1,4 @@
-This is e-pTeX, Version 3.14159265-p3.7-160201-2.6 (utf8.euc) (TeX Live 2016) (preloaded format=platex 2017.4.27)  24 JAN 2020 09:55
+This is e-pTeX, Version 3.14159265-p3.7-160201-2.6 (utf8.euc) (TeX Live 2016) (preloaded format=platex 2017.4.27)  24 JAN 2020 15:56
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -363,41 +363,49 @@ File: 5/skip1.png Graphic file (type bmp)
  <5/skip1.png>
 File: 5/skip2.png Graphic file (type bmp)
  <5/skip2.png>) (./5/interface.tex)
-(./5/problem.tex [48] [49])) (./6/chapter6.tex [50]
+(./5/problem.tex [48] [49]
+
+LaTeX Warning: Reference `予想される問題点-文字数の爆発' on page 50 undefined o
+n input line 89.
+
+) [50]) (./6/chapter6.tex [51]
 第 6 章
-(./6/intro.tex) (./6/course.tex) [51
+(./6/intro.tex) (./6/course.tex) [52
 
 ] (./6/result.tex
 File: 6/table1a.eps Graphic file (type eps)
  <6/table1a.eps>
 File: 6/table1b.eps Graphic file (type eps)
 
-<6/table1b.eps> [52]
+<6/table1b.eps> [53]
 File: 6/table2.eps Graphic file (type eps)
- <6/table2.eps> [53] [54] [55])) (./chapter7.tex [56]
+ <6/table2.eps> [54] [55] [56])) (./chapter7.tex [57]
 第 7 章
-[57
+[58
 
-]) [58] (./syaji.tex) [59
+]) [59] (./syaji.tex) [60
 
-] (./p.bbl [60
+] (./p.bbl [61
 
-]) [61] (./appendix.tex
+]) [62] (./appendix.tex
 付 録 A  
-) [62
+) [63
 
-] [63] (./p.aux)
+] [64] (./p.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
+
+LaTeX Warning: There were undefined references.
+
  ) 
 Here is how much of TeX's memory you used:
- 1952 strings out of 493693
- 27941 string characters out of 6149787
+ 1953 strings out of 493693
+ 27972 string characters out of 6149787
  135766 words of memory out of 5000000
- 5368 multiletter control sequences out of 15000+600000
+ 5369 multiletter control sequences out of 15000+600000
  23620 words of font info for 99 fonts, out of 8000000 for 9000
  929 hyphenation exceptions out of 8191
  27i,9n,21p,1017b,411s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on p.dvi (72 pages, 291956 bytes).
+Output written on p.dvi (73 pages, 293436 bytes).
