@@ -1,7 +1,7 @@
 \contentsline {chapter}{\numberline {第1章}序論}{1}
 \contentsline {chapter}{\numberline {第2章}関連研究}{5}
 \contentsline {section}{\numberline {2.1}ステッパの実装}{5}
-\contentsline {section}{\numberline {2.2}ステッパと似た■■ツール}{5}
+\contentsline {section}{\numberline {2.2}ステッパと似たツール}{5}
 \contentsline {section}{\numberline {2.3}ステップ実行によるプログラミング学習}{6}
 \contentsline {section}{\numberline {2.4}algebraic effects}{6}
 \contentsline {chapter}{\numberline {第3章}try-with のステップ実行}{7}

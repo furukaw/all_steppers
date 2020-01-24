@@ -141,7 +141,7 @@ call-by-value かつ right-to-left の代入ベースのインタプリタを
 の中の変数 \texttt{x} と変数 \texttt{k} に同時にそれぞれ値 \texttt{v}
 と値 \texttt{cont\_value} を代入した式を返す。
 関数 \texttt{search\_op} はハンドラ内のオペレーションを検索する関数
-で、例えば \texttt{\{return x -> x; op1(y, k) -> k y\}} を表す
+で、例えば \texttt{\{return x -> x; op1(y; k) -> k y\}} を表す
 データを \texttt{h} とする
 と \texttt{search\_op "op2" h} は \texttt{None} を返し
 \texttt{search\_op "op1" h} は \texttt{Some ("y", "k", App (Var "k", Var
@@ -199,7 +199,7 @@ let interpreter (e : e) : a = eval e (fun v -> Return v) (*FIdに変換される
 \end{figure}
 
 このインタプリタは、\texttt{handle} 節内の実行については普通の CPS に
-なっており■■、継続である \texttt{k} は「直近のハンドラまでの継続」で
+なっており、継続である \texttt{k} は「直近のハンドラまでの継続」で
 ある。関数 \texttt{eval} の下から2行目で \texttt{with handle} 文を
 実行する際、再帰呼び出しの継続として
 \texttt{(fun x -> Return x)} を渡しており、これによって
