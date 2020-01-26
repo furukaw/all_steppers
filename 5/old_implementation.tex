@@ -16,17 +16,17 @@ let rec eval (expr : expression) \colorbox{lightgray}{(context : frame list)} : 
     | Var (x) -> failwith "error: Unbound variable"
     | Fun (x, f) -> expr
     | App (e1, e2) ->
-      let arg\_value = eval e2 \colorbox{lightgray}{(AppR e1 :: context)} in       (* 引数部分を評価 *)
-      let fun\_value = eval e1 \colorbox{lightgray}{(AppL arg\_value :: context)} in(* 関数部分を評価 *)
-      match fun\_value.desc with
+      let arg_value = eval e2 \colorbox{lightgray}{(AppR e1 :: context)} in      (* 引数部分を評価 *)
+      let fun_value = eval e1 \colorbox{lightgray}{(AppL arg_value :: context)} in(*関数部分を評価 *)
+      match fun_value.desc with
         | Fun (x, f) ->
-          let redex = \{desc = App (fun\_value, arg\_value);       (* 簡約前の式 *)
+          let redex = \{desc = App (fun_value, arg_value);       (* 簡約前の式 *)
                       attr = expr.attr\} in
-          let reduct = \{desc = (subst f x arg\_value).desc ;     (* 簡約後の式 *)
+          let reduct = \{desc = (subst f x arg_value).desc ;     (* 簡約後の式 *)
                         attr = expr.attr\} in
           \colorbox{lightgray}{memo redex reduct context;                          (* ステップ出力 *)}
           eval reduct \colorbox{lightgray}{context}                             (* 簡約後の式を評価 *)
-        | \_ -> failwith "error: not a function"
+        | _ -> failwith "error: not a function"
 
 (* \colorbox{lightgray}{空のコンテキストで}式の評価を始める *)
 let start (expr : expression) : expression = eval expr \colorbox{lightgray}{[]}
@@ -68,15 +68,15 @@ $\lambda$ 計算を実行する部分と同じ動作をするプログラムで�
 (* 簡約前後の式とコンテキストを受け取って、そのステップを出力する *)
 let memo (redex : expression) (reduct : expression) (context : frame list)
   : unit =
-  let marked\_redex =                            (* 簡約前の式に attribute 追加 *)
+  let marked_redex =                            (* 簡約前の式に attribute 追加 *)
     \{redex with attr = Some ("stepper.redex", None)\} in
-  let marked\_reduct =                           (* 簡約後の式に attribute 追加 *)
+  let marked_reduct =                           (* 簡約後の式に attribute 追加 *)
     \{reduct with attr = Some ("stepper.reduct", None)\} in
-  print\_counter ();                                 (* 簡約前ステップ番号を出力 *)
-  print (plug redex current\_context);               (* 簡約前のプログラムを出力 *)
+  print_counter ();                                 (* 簡約前ステップ番号を出力 *)
+  print (plug redex current_context);               (* 簡約前のプログラムを出力 *)
   counter := !counter + 1;                          (* ステップ番号を 1 増やす *)
-  print\_counter ();                                 (* 簡約後ステップ番号を出力 *)
-  print (plug reduct current\_context)               (* 簡約後のプログラムを出力 *)
+  print_counter ();                                 (* 簡約後ステップ番号を出力 *)
+  print (plug reduct current_context)               (* 簡約後のプログラムを出力 *)
 \end{alltt}
 \end{spacing}
 \caption{ステップ出力関数}

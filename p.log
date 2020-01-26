@@ -1,4 +1,4 @@
-This is e-pTeX, Version 3.14159265-p3.7-160201-2.6 (utf8.euc) (TeX Live 2016) (preloaded format=platex 2017.4.27)  24 JAN 2020 17:54
+This is e-pTeX, Version 3.14159265-p3.7-160201-2.6 (utf8.euc) (TeX Live 2016) (preloaded format=platex 2017.4.27)  26 JAN 2020 17:58
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -331,12 +331,12 @@ Overfull \hbox (4.88419pt too wide) in paragraph at lines 27--27
  []
 
 ) [41] (./5/new_implementation.tex [42] [43] [44] [45]
-Overfull \hbox (7.37753pt too wide) in paragraph at lines 153--153
+Overfull \hbox (10.5968pt too wide) in paragraph at lines 153--153
 [][][][][][][][] 
  []
 
 
-Overfull \hbox (9.0052pt too wide) in paragraph at lines 154--154
+Overfull \hbox (10.61484pt too wide) in paragraph at lines 154--154
 [][][][][][][][] 
  []
 
@@ -346,12 +346,12 @@ Overfull \hbox (5.7912pt too wide) in paragraph at lines 155--155
  []
 
 
-Overfull \hbox (6.13988pt too wide) in paragraph at lines 163--163
+Overfull \hbox (7.74951pt too wide) in paragraph at lines 163--163
 [][][][][][][][] 
  []
 
 
-Overfull \hbox (3.67274pt too wide) in paragraph at lines 164--164
+Overfull \hbox (5.28238pt too wide) in paragraph at lines 164--164
 [][][][][][][][] 
  []
 
@@ -410,4 +410,4 @@ Here is how much of TeX's memory you used:
  929 hyphenation exceptions out of 8191
  27i,9n,21p,1017b,411s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on p.dvi (73 pages, 293380 bytes).
+Output written on p.dvi (73 pages, 292500 bytes).

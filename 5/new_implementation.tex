@@ -62,9 +62,9 @@ All のときは全ステップが出力される。
 (* 簡約前後の式とコンテキストを受け取って、そのステップを出力する *)
 let memo (redex : expression) (reduct : expression) (context : frame list)
   : unit =
-  let marked\_redex =                            (* 簡約前の式に attribute 付加 *)
+  let marked_redex =                            (* 簡約前の式に attribute 付加 *)
     \{redex with attr = ("stepper.redex", None) :: redex.attr\} in
-  let marked\_reduct =
+  let marked_reduct =
     \{reduct with
      attr = ("stepper.reduct",
              Some (!counter + 1,                 (* 簡約後の式にステップ番号と、 *)
@@ -72,15 +72,15 @@ let memo (redex : expression) (reduct : expression) (context : frame list)
             :: reduct.attr\} in
   if mode = Prev                                      (* 前ステップ出力のとき、 *)
   then counter := !counter - 1;                        (* ステップ番号を１戻す *)
-  print\_counter ();                                 (* 簡約前のステップ番号出力 *)
-  print\_as\_attribute (plug redex context);        (* 処理用の簡約前のプログラム *)
-  print (redex\_mapper
-           (plug marked\_redex context));          (* 表示用の簡約前のプログラム *)
+  print_counter ();                                 (* 簡約前のステップ番号出力 *)
+  print_as_attribute (plug redex context);        (* 処理用の簡約前のプログラム *)
+  print (redex_mapper
+           (plug marked_redex context));          (* 表示用の簡約前のプログラム *)
   counter := !counter + 1;                            (* ステップ番号を１進める *)
-  print\_counter ();                                 (* 簡約後のステップ番号出力 *)
-  let latter\_program = plug marked\_reduct context in
-  print\_as\_attribute (latter\_program);             (* 処理用の簡約後のプログラム *)
-  print (reduct\_mapper latter\_program);           (* 表示用の簡約後のプログラム *)
+  print_counter ();                                 (* 簡約後のステップ番号出力 *)
+  let latter_program = plug marked_reduct context in
+  print_as_attribute (latter_program);            (* 処理用の簡約後のプログラム *)
+  print (reduct_mapper latter_program);           (* 表示用の簡約後のプログラム *)
   if mode <> All then exit 0             (* 全ステップ実行でなければプロセス終了 *)
   \end{alltt}
   \end{spacing}
@@ -148,35 +148,35 @@ Ast\_mapper を利用して attribute のみを変換する関数
 \begin{spacing}{0.8}
 \begin{alltt}
 \colorbox{lightgray}{ (* 今のステップ番号の [@stepper.reduct] を探してその中の式を返す *)}
-\colorbox{lightgray}{let rec find\_last\_reduct (attrs : attribute list) : expression =}
+\colorbox{lightgray}{let rec find_last_reduct (attrs : attribute list) : expression =}
 \colorbox{lightgray}{  match attrs with}
-\colorbox{lightgray}{  | [] -> raise Not\_found      (* リストの最後まで見つからなければ例外 Not\_found *)}
-\colorbox{lightgray}{  | ("stepper.reduct", Some (n, redex)) :: \_        (* 簡約後のマークがあって、 *)}
+\colorbox{lightgray}{  | [] -> raise Not_found      (* リストの最後まで見つからなければ例外 Not_found *)}
+\colorbox{lightgray}{  | ("stepper.reduct", Some (n, redex)) :: _        (* 簡約後のマークがあって、 *)}
 \colorbox{lightgray}{    when n = !counter -> redex (* その番号が今のステップ番号だったらその式を返す *)}
-\colorbox{lightgray}{  | \_ :: rest -> find\_last\_reduct rest}
+\colorbox{lightgray}{  | _ :: rest -> find_last_reduct rest}
 
 (* ステップ実行インタプリタ *)
 let rec eval (expr : expression) (context : frame list) : expression =
 \colorbox{lightgray}{  if mode = Prev}
 \colorbox{lightgray}{  then begin try}
-\colorbox{lightgray}{      let marked\_redex = find\_last\_reduct expr.attr in}
-\colorbox{lightgray}{      memo marked\_redex expr                     (* 出力して最後に exit 0 する *)}
-\colorbox{lightgray}{    with Not\_found -> ()             (* expr が探している式でなければ何もせず、 *)}
+\colorbox{lightgray}{      let marked_redex = find_last_reduct expr.attr in}
+\colorbox{lightgray}{      memo marked_redex expr                     (* 出力して最後に exit 0 する *)}
+\colorbox{lightgray}{    with Not_found -> ()             (* expr が探している式でなければ何もせず、 *)}
 \colorbox{lightgray}{  end;                                               (* 以下の match 文へ進む *)}
   match expr.desc with
     | Var (x) -> failwith "error: Unbound variable"
     | Fun (x, f) -> expr
     | App (e1, e2) ->
-      let arg\_value = eval e2 (AppR e1 :: context) in
-      let fun\_value = eval e1 (AppL arg\_value :: context) in
-      match fun\_value.desc with                       (* 以下、次ステップの簡約 *)
+      let arg_value = eval e2 (AppR e1 :: context) in
+      let fun_value = eval e1 (AppL arg_value :: context) in
+      match fun_value.desc with                       (* 以下、次ステップの簡約 *)
         | Fun (x, f) ->
-          let redex = \{expr with desc = App (fun\_value, arg\_value)\} in
-          let reduct = \{(subst f x arg\_value)
+          let redex = \{expr with desc = App (fun_value, arg_value)\} in
+          let reduct = \{(subst f x arg_value)
                         with attr = expr.attr\} in
           memo redex reduct context;
           eval reduct context
-        | \_ -> failwith "error: not a function"
+        | _ -> failwith "error: not a function"
 \end{alltt}
 \end{spacing}
 \caption{incremental なステッパ関数}
