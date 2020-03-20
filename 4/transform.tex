@@ -35,7 +35,7 @@
 図 \ref{figure:1cps}の中には、コメントとしてどの関数がどのコンストラク
 タに置き換わったのかが書かれている。
 \item 関数を表すコンストラクタと引数を受け取って中身を実行するような apply 関数を定義する。
-これは、図 \ref{figure:2defun}では \texttt{apply\_in} と呼ばれている。
+これは、図 \ref{figure:2defun}では \texttt{apply\US in} と呼ばれている。
 \item $\lambda$式を呼び出す部分を、apply 関数にコンストラクタと引数を渡すように変更する。
 \end{enumerate}
 
@@ -330,15 +330,15 @@ and apply_handler (k : k) (h : h) (a : a) (k2 : k2) : a = match a with
 のプログラムを出力するようにするとステッパ関数が得られる。具体的には、簡約が起こる部分でプログラム全
 体を再構成し表示するようにする。図\ref{figure:5memo}
 が表示を行う関数 \texttt{memo} を
-足した後の関数 \texttt{apply\_in} と \texttt{apply\_handler}
+足した後の関数 \texttt{apply\US in} と \texttt{apply\US handler}
 である。
 (他の関数は簡約している部分が無いので図 \ref{figure:4defun} と同じになる。)
-%\ref{subsection:4defun} 節までの変換によって、コンテキストの情報を引数に保持するインタプリタ関数を得ることができた。この情報を用いて簡約前後のプログラムを出力するように、図\ref{figure:4defun} のインタプリタの簡約が起こる部分に副作用を足すとステッパが得られる。図\ref{figure:5memo} が副作用を足した後の関数 \texttt{apply\_in} と \texttt{apply\_handler} であり、他の関数は簡約している部分が無いので図 \ref{figure:4defun} と変わらない。
+%\ref{subsection:4defun} 節までの変換によって、コンテキストの情報を引数に保持するインタプリタ関数を得ることができた。この情報を用いて簡約前後のプログラムを出力するように、図\ref{figure:4defun} のインタプリタの簡約が起こる部分に副作用を足すとステッパが得られる。図\ref{figure:5memo} が副作用を足した後の関数 \texttt{apply\US in} と \texttt{apply\US handler} であり、他の関数は簡約している部分が無いので図 \ref{figure:4defun} と変わらない。
 
 ここで関数 \texttt{memo :\ e -> e -> (k * k2) -> unit} は、簡約基とその簡約後の式と簡約時のコンテキストを受け取って、簡約前のプログラムと簡約後のプログラムをそれぞれ再構成して出力する。
 
-図 \ref{figure:5memo}を見ると \texttt{apply\_in} では普通の関数呼び出しと継続呼び出しが
-\texttt{memo} されている。また、\texttt{apply\_handler} では
+図 \ref{figure:5memo}を見ると \texttt{apply\US in} では普通の関数呼び出しと継続呼び出しが
+\texttt{memo} されている。また、\texttt{apply\US handler} では
 ハンドラが正常終了した場合とオペレーション呼び出しが起きた場合に
 それぞれ \texttt{memo} 関数が挿入されている。
 また、オペレーション呼び出しが処理されず外側の \texttt{with handle} 文

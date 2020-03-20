@@ -106,7 +106,7 @@ As stated in Section \ref{sec:intro}, a stepper must display the whole program a
 
 The interpreter in Figure \ref{figure:interpreter}, however, does not immediately give us these steps.  Suppose the \texttt{eval} function is evaluating the subexpression \texttt{2 * 3}.  We can display this subexpression using a printing function, but we do not have enough information to reconstruct the whole program.  What is missing here is the \emph{context} surrounding \texttt{2 * 3}, namely \texttt{(1 + [.])\ + 4} (where \texttt{[.]} denotes the hole of the context).  Hence, to implement a stepper, we need to keep track of every evaluation context we have traversed.  
 
-In Figure \ref{figure:simpleplug}, we define context frames as algebraic data of type \texttt{frame\_t}.  Each frame represents evaluation of some subexpression: \eg, \texttt{CAppR (e1)} tells us that we are evaluating the argument part of an application, whose function part is \texttt{e1}.  Evaluation contexts are defined as lists of these frames (spoiler alert: this does not work for exceptions).  We then define the \texttt{plug} function, which reconstructs a program by wrapping the expression \texttt{expr} with context frames in \texttt{ctxt}. 
+In Figure \ref{figure:simpleplug}, we define context frames as algebraic data of type \texttt{frame\US t}.  Each frame represents evaluation of some subexpression: \eg, \texttt{CAppR (e1)} tells us that we are evaluating the argument part of an application, whose function part is \texttt{e1}.  Evaluation contexts are defined as lists of these frames (spoiler alert: this does not work for exceptions).  We then define the \texttt{plug} function, which reconstructs a program by wrapping the expression \texttt{expr} with context frames in \texttt{ctxt}. 
 
 \begin{figure}
 \begin{verbatim}
@@ -205,7 +205,7 @@ let rec plug expr (clist, tries) =
   \label{figure:typec}
 \end{figure}
 
-In Figure \ref{figure:typec}, we present a refined definition of evaluation contexts.  We see a new definition of context frames \texttt{frame\_t}, where \texttt{CTry} is missing.  When evaluating a program that uses try-with constructs, these frames are used to build a delimited context within a tryee.  We next find a separate datatype \texttt{ctry\_t}, which can be understood as meta contexts.  Then we define evaluation contexts as pairs of delimited and meta contexts.  As an example, when evaluating \texttt{raise 4} in the following expression:
+In Figure \ref{figure:typec}, we present a refined definition of evaluation contexts.  We see a new definition of context frames \texttt{frame\US t}, where \texttt{CTry} is missing.  When evaluating a program that uses try-with constructs, these frames are used to build a delimited context within a tryee.  We next find a separate datatype \texttt{ctry\US t}, which can be understood as meta contexts.  Then we define evaluation contexts as pairs of delimited and meta contexts.  As an example, when evaluating \texttt{raise 4} in the following expression:
 \begin{verbatim}
 0 + (try 1 + 2 * (try (3 + raise 4) - 5 with x -> x + 6) with y -> y)
 \end{verbatim}
@@ -218,7 +218,7 @@ In Figure \ref{figure:typec}, we present a refined definition of evaluation cont
         ([0 + [.]], CHole)))))
 \end{verbatim}
 
-The refined contexts allow us to first reconstruct the expression up to the tryee using the \texttt{frame\_t} contexts, and then build up the whole program using the \texttt{ctry\_t} contexts.  In our particular example, the stepper reconstructs \texttt{(3 + raise 4) - 5}, highlights it, and reconstructs the whole program.
+The refined contexts allow us to first reconstruct the expression up to the tryee using the \texttt{frame\US t} contexts, and then build up the whole program using the \texttt{ctry\US t} contexts.  In our particular example, the stepper reconstructs \texttt{(3 + raise 4) - 5}, highlights it, and reconstructs the whole program.
 
 To give the reader a better idea how context frames are accumulated, let us demonstrate the evaluation of an expression involving exception handling:
 
@@ -328,7 +328,7 @@ let start e =
 \label{figure:memo}
 \end{figure}
 
-Let us observe the application case.  As in the big-step interpreter, we first evaluate \texttt{e2}, and then \texttt{e1}.  When \texttt{e1} has reduced to a function, we know that the application is a $\beta$-redex.  In the standard interpreter, what we do is to perform the substitution \texttt{subst e x v2} and then evaluate the result.  In the stepper, on the other hand, we have an additional function call to the \texttt{memo} function defined in Figure \ref{figure:memo}.  This function receives three arguments: the redex we have just found, its reduct, and the current evaluation context.  When given these arguments, the \texttt{memo} function reconstructs and prints the pre- and post-reduction programs, using the \texttt{plug} and \texttt{print\_exp} functions\footnote{In the actual implementation, we annotate redexes and reducts using OCaml's \emph{attributes}.  Here, we write \texttt{green expr1} to mean \texttt{expr1[@stepper.redex]}, and similarly for \texttt{purple}.  When displaying the steps, the Emacs Lisp program uses the attributes information to appropriately highlight expressions.}.  After printing the programs, we continue evaluation as usual.
+Let us observe the application case.  As in the big-step interpreter, we first evaluate \texttt{e2}, and then \texttt{e1}.  When \texttt{e1} has reduced to a function, we know that the application is a $\beta$-redex.  In the standard interpreter, what we do is to perform the substitution \texttt{subst e x v2} and then evaluate the result.  In the stepper, on the other hand, we have an additional function call to the \texttt{memo} function defined in Figure \ref{figure:memo}.  This function receives three arguments: the redex we have just found, its reduct, and the current evaluation context.  When given these arguments, the \texttt{memo} function reconstructs and prints the pre- and post-reduction programs, using the \texttt{plug} and \texttt{print\US exp} functions\footnote{In the actual implementation, we annotate redexes and reducts using OCaml's \emph{attributes}.  Here, we write \texttt{green expr1} to mean \texttt{expr1[@stepper.redex]}, and similarly for \texttt{purple}.  When displaying the steps, the Emacs Lisp program uses the attributes information to appropriately highlight expressions.}.  After printing the programs, we continue evaluation as usual.
 
 In the \texttt{eval} function, we find three more occurrences of \texttt{memo}, representing the following reduction rules:
 
@@ -398,7 +398,7 @@ In Figure \ref{figure:ocamlstep}, we show a reduction sequence produced by the a
 
 To allow the user to adjust granularity of steps, we provide an option for skipping the evaluation of the current function application.  Let us look at Figure \ref{figure:factskip}, which shows skipping of the factorial function.  By pressing the ``skip'' button, we can directly go from the program on the left to the one on the right, without seeing the intermediate steps that appear during the evaluation of the function's body.  This feature helps us focus on the steps we are interested in, allowing us to grasp the overall flow of the execution.
 
-The skipping feature requires some modifications to the \texttt{eval} function (Figure \ref{figure:skipapp}).  The idea is to sandwich the steps within an application between two strings: \texttt{(* Application n start *)} and \texttt{(* Application n end *)}.  Here, \texttt{n} tells us at which step we have entered the application.  These strings are printed using the \texttt{apply\_start} and \texttt{apply\_end} functions, and help the Emacs Lisp program to hide unnecessary steps.  We show an example output sequence in Figure \ref{figure:skipping}.
+The skipping feature requires some modifications to the \texttt{eval} function (Figure \ref{figure:skipapp}).  The idea is to sandwich the steps within an application between two strings: \texttt{(* Application n start *)} and \texttt{(* Application n end *)}.  Here, \texttt{n} tells us at which step we have entered the application.  These strings are printed using the \texttt{apply\US start} and \texttt{apply\US end} functions, and help the Emacs Lisp program to hide unnecessary steps.  We show an example output sequence in Figure \ref{figure:skipping}.
 
 
 \begin{figure}

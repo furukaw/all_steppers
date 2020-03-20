@@ -1,7 +1,7 @@
 \begin{thebibliography}{10}
 
 \bibitem{10.1145/3158096}
-Dariusz Biernacki, Maciej Pir\'{o}g, Piotr Polesiuk, and Filip Sieczkowski.
+Dariusz Biernacki, Maciej Pir\`{o}g, Piotr Polesiuk, and Filip Sieczkowski.
 \newblock Handle with care: Relational interpretation of algebraic effects and
   handlers.
 \newblock {\em Proc. ACM Program. Lang.}, Vol.~2, No. POPL, December 2017.

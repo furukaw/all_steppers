@@ -113,7 +113,7 @@ incremental でないステッパ関数では、例えば \texttt{(2 * 3) + (5 *
 それが簡約されたもの、その簡約時のコンテキストの 3 つであったが、
 新しい出力の内容もこれらの情報から構成することができる。
 その実装を図\ref{figure:new-memo}に示す。
-関数 \texttt{print\_as\_attribute :\ expression -> unit} は、
+関数 \texttt{print\US as\US attribute :\ expression -> unit} は、
 \texttt{[@@@stepper.process ... ]} にプログラムを入れて出力する関数である。
 
 ここで、\ref{生じる問題と解決方法-表示の崩れ}節で述べたように、表示用のプログラムではハイライトに最低限必要な attribute だけを出力したい。しかし、今簡約している式の外、すなわちコンテキストに含まれる式の中には attribute \texttt{[@stepper.reduct ]} が含まれうる。上の出力例で処理用
@@ -123,10 +123,10 @@ incremental でないステッパ関数では、例えば \texttt{(2 * 3) + (5 *
 Ast\_mapper は OCaml プログラムの構文木を簡単に部分的に変換するためのモジュールである。
 ここでは詳しい紹介は省くが、
 Ast\_mapper を利用して attribute のみを変換する関数
-\texttt{redex\_mapper :\ expression -> expression} と関数
-\texttt{reduct\_mapper :\ expression -> expression} を実装した。
-\texttt{redex\_mapper} は \texttt{[@x ]} 以外の attribute を無くす変換をする関数であり、
-\texttt{reduct\_mapper} は \texttt{[@stepper.reduct (今のステップ, 簡約前の式) ]} を
+\texttt{redex\US mapper :\ expression -> expression} と関数
+\texttt{reduct\US mapper :\ expression -> expression} を実装した。
+\texttt{redex\US mapper} は \texttt{[@x ]} 以外の attribute を無くす変換をする関数であり、
+\texttt{reduct\US mapper} は \texttt{[@stepper.reduct (今のステップ, 簡約前の式) ]} を
 \texttt{[@t ]} にし、それ以外の attribute を無くす変換をする関数である。
 
 以上によって、\ref{生じる問題と解決方法}節で定めたように、十分な情報を持つプログラムが出力できた。
@@ -202,7 +202,7 @@ let rec eval (expr : expression) (context : frame list) : expression =
 必ずどこかに \texttt{[@stepper.reduct (今のステップ番号, 簡約前の式) ]} が付いた式が見つかる。
 そして、今のステップに至るまで行ってきた「次ステップの出力」と同じ順序で式を探索してきたため、
 見つかるまでに評価した式は全て簡約済みであり、その式を見つけるまでに簡約処理、
-すなわち \texttt{match fun\_value.desc with ...} を行うことは無い。
+すなわち \texttt{match fun\US value.desc with ...} を行うことは無い。
 よって、灰色の部分を書き足すことで前ステップ出力が可能になる。
 
 以上のように、incremental でないステッパ関数

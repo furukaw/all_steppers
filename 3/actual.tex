@@ -117,11 +117,11 @@ OCaml ステッパは他に授業で利用する一部の演算子などに対�
 \texttt{n} は関数適用の実行が始まるステップの番号である。
 あるステップで実行が始まる関数適用は必ず 1 つ以下なので、
 このステップ番号によって関数適用を一意に特定することができる。
-% These strings are printed using the \texttt{apply\_start} and
-% \texttt{apply\_end} functions,
+% These strings are printed using the \texttt{apply\US start} and
+% \texttt{apply\US end} functions,
 % and help the Emacs Lisp program to hide unnecessary steps.
-関数 \texttt{apply\_start :\ unit -> int} が前者を出力する関数、
-関数 \texttt{apply\_end :\ int -> unit} が後者を出力する関数である。
+関数 \texttt{apply\US start :\ unit -> int} が前者を出力する関数、
+関数 \texttt{apply\US end :\ int -> unit} が後者を出力する関数である。
 表示処理をする Emacs Lisp プログラムがこれらの文字列を検索し、
 間のステップを隠す処理をする。
 % We show an example output sequence in Figure \ref{figure:skipping}.

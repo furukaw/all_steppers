@@ -55,8 +55,8 @@ OCaml ではフレームを表すコンストラクタのリストとして定�
 \label{subsection:stepper__before}
 
 % In Figure \ref{figure:simpleplug},
-% we define context frames as algebraic data of type \texttt{frame\_t}.
-図 \ref{figure:simpleplug} で、 \texttt{frame\_t} 型の代数的データとしてコンテキストフレームを定義している。
+% we define context frames as algebraic data of type \texttt{frame\US t}.
+図 \ref{figure:simpleplug} で、 \texttt{frame\US t} 型の代数的データとしてコンテキストフレームを定義している。
 % Each frame represents evaluation of some subexpression:
 各フレームがなんらかの部分式の実行を表しており、
 % \eg, \texttt{CAppR (e1)} tells us that we are evaluating
@@ -221,16 +221,16 @@ let rec plug expr (clist, tries) =
 % In Figure \ref{figure:typec},
 % we present a refined definition of evaluation contexts.
 図 \ref{figure:typec} に、改良したコンテキスト定義を示す。
-% We see a new definition of context frames \texttt{frame\_t},
+% We see a new definition of context frames \texttt{frame\US t},
 % where \texttt{CTry} is missing.
-新しい \texttt{frame\_t} 型の定義は、 \texttt{CTry} を含まないようになっている。
+新しい \texttt{frame\US t} 型の定義は、 \texttt{CTry} を含まないようになっている。
 % When evaluating a program that uses try-with constructs,
 % these frames are used to build a delimited context within a tryee.
-\texttt{frame\_t} 型のフレームは、try-with 構文を使うプログラムを実行において
+\texttt{frame\US t} 型のフレームは、try-with 構文を使うプログラムを実行において
 try 節の内部に限定されたコンテキストを表すために使う。
-% We next find a separate datatype \texttt{ctry\_t},
+% We next find a separate datatype \texttt{ctry\US t},
 % which can be understood as meta contexts.
-次に、別の型 \texttt{ctry\_t} が定義されており、これはメタコンテキストを表す型である。
+次に、別の型 \texttt{ctry\US t} が定義されており、これはメタコンテキストを表す型である。
 % Then we define evaluation contexts as pairs of delimited and meta contexts.
 そしてコンテキストは try 節内部に限定されたコンテキストとメタコンテキストの 2 つ組として定義される。
 % As an example, when evaluating \texttt{raise 4} in the following expression:
@@ -250,11 +250,11 @@ try 節の内部に限定されたコンテキストを表すために使う。
 \end{verbatim}
 
 % The refined contexts allow us to first reconstruct the expression up to
-% the tryee using the \texttt{frame\_t} contexts,
-% and then build up the whole program using the \texttt{ctry\_t} contexts.
+% the tryee using the \texttt{frame\US t} contexts,
+% and then build up the whole program using the \texttt{ctry\US t} contexts.
 このようにコンテキスト定義を改良すると、
-まず \texttt{frame\_t} 型のコンテキストを使って try 節の式を再構成し、
-その後 \texttt{ctry\_t} 型のコンテキストを使ってプログラム全体を作ることができる。
+まず \texttt{frame\US t} 型のコンテキストを使って try 節の式を再構成し、
+その後 \texttt{ctry\US t} 型のコンテキストを使ってプログラム全体を作ることができる。
 % In our particular example, the stepper reconstructs \texttt{(3 + raise 4) - 5},
 % highlights it, and reconstructs the whole program.
 上の例でいうと、ステッパはまず \texttt{(3 + raise 4) - 5} を再構成して
@@ -410,9 +410,9 @@ let start e =
 見つかった簡約基と、その簡約結果と、現時点のコンテキストである。
 % When given these arguments,
 % the \texttt{memo} function reconstructs and prints the pre- and post-reduction programs,
-% using the \texttt{plug} and \texttt{print\_exp} functions
+% using the \texttt{plug} and \texttt{print\US exp} functions
 関数 \texttt{memo} はこれらの引数を受け取ったら、
-関数 \texttt{plug} と \texttt{print\_exp} を使って簡約前と後のプログラムをそれぞれ再構成して出力する
+関数 \texttt{plug} と \texttt{print\US exp} を使って簡約前と後のプログラムをそれぞれ再構成して出力する
 \footnote{
     % In the actual implementation,
     % we annotate redexes and reducts using OCaml's \emph{attributes}.

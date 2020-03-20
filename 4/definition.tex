@@ -137,17 +137,17 @@ and a = Return of v               (* 値になった *)
 call-by-value かつ right-to-left の代入ベースのインタプリタを
 図 \ref{figure:1cps} に定義する。
 ただし、関数 \texttt{subst :\ e -> (string * v) list -> e} は代入のための
-関数であり、\texttt{subst e [(x, v); (k, cont\_value)]} は \texttt{e}
+関数であり、\texttt{subst e [(x, v); (k, cont\US value)]} は \texttt{e}
 の中の変数 \texttt{x} と変数 \texttt{k} に同時にそれぞれ値 \texttt{v}
-と値 \texttt{cont\_value} を代入した式を返す。
-関数 \texttt{search\_op} はハンドラ内のオペレーションを検索する関数
+と値 \texttt{cont\US value} を代入した式を返す。
+関数 \texttt{search\US op} はハンドラ内のオペレーションを検索する関数
 で、例えば \texttt{\{return x -> x; op1(y; k) -> k y\}} を表す
 データを \texttt{h} とする
-と \texttt{search\_op "op2" h} は \texttt{None} を返し
-\texttt{search\_op "op1" h} は \texttt{Some ("y", "k", App (Var "k", Var
+と \texttt{search\US op "op2" h} は \texttt{None} を返し
+\texttt{search\US op "op1" h} は \texttt{Some ("y", "k", App (Var "k", Var
 "y"))} を返す。
 
-%図 \ref{figure:syntax} の言語に対する、call-by-value かつ right-to-left のインタプリタを図 \ref{figure:1cps} に定義する。ただし、関数 \texttt{subst :\ e -> (string * v) list -> e} は代入のための関数であり、\texttt{subst e [(x, v); (k, cont\_value)]} は \texttt{e} の中の変数 \texttt{x} と変数 \texttt{k} に同時にそれぞれ値 \texttt{v} と値 \texttt{cont\_value} を代入した式を返す。関数 \texttt{search\_op} はハンドラ内のオペレーションを検索する関数で、例えば \texttt{handler \{return x -> x; op1(y; k) -> k y\}} を表すデータを \texttt{h} とすると \texttt{search\_op "op2" h} は \texttt{None} を返し \texttt{search\_op "op1" h} は \texttt{Some (y, k, App (Var "k", Var "y"))} を返す。
+%図 \ref{figure:syntax} の言語に対する、call-by-value かつ right-to-left のインタプリタを図 \ref{figure:1cps} に定義する。ただし、関数 \texttt{subst :\ e -> (string * v) list -> e} は代入のための関数であり、\texttt{subst e [(x, v); (k, cont\US value)]} は \texttt{e} の中の変数 \texttt{x} と変数 \texttt{k} に同時にそれぞれ値 \texttt{v} と値 \texttt{cont\US value} を代入した式を返す。関数 \texttt{search\US op} はハンドラ内のオペレーションを検索する関数で、例えば \texttt{handler \{return x -> x; op1(y; k) -> k y\}} を表すデータを \texttt{h} とすると \texttt{search\US op "op2" h} は \texttt{None} を返し \texttt{search\US op "op1" h} は \texttt{Some (y, k, App (Var "k", Var "y"))} を返す。
 
 \begin{figure}
   % code/1cps/eval.ml より
@@ -213,10 +213,10 @@ let interpreter (e : e) : a = eval e (fun v -> Return v) (*FIdに変換される
 た場合（\texttt{eval} の下から4行目）は引数 \texttt{e} を実行後、
 結果を継続 \texttt{k} に渡すことなく \texttt{OpCall} を返している。
 これが \texttt{handle} 節の結果となり、\texttt{eval} の最下行で
-\texttt{apply\_handler} に渡される。
+\texttt{apply\US handler} に渡される。
 一方、\texttt{handle} 節内の実行が正常終了した場合は、
 初期継続 \texttt{(fun x -> Return x)} に結果が返り、それが
-\texttt{apply\_handler} に渡される。
+\texttt{apply\US handler} に渡される。
 
 ここで、オペレーション呼び出しで返される \texttt{OpCall} の第 3 引数
 が \texttt{k} ではなく \texttt{fun v -> k v} のように $\eta$-expand さ
@@ -225,16 +225,16 @@ let interpreter (e : e) : a = eval e (fun v -> Return v) (*FIdに変換される
 はより広い継続を指すことがあり両者を区別したいためである。これについて
 は、次節で非関数化を施す際に詳しく述べる。
 
-\texttt{apply\_handler} は、そのときの継続 \texttt{k}、
+\texttt{apply\US handler} は、そのときの継続 \texttt{k}、
 処理すべきハンドラ \texttt{h}、そして
 \texttt{handle} 節内の実行結果 \texttt{a} を受け取って
 ハンドラの処理をする。
-関数 \texttt{apply\_handler} の動作は \texttt{handle} 節の実行結果とハ
+関数 \texttt{apply\US handler} の動作は \texttt{handle} 節の実行結果とハ
 ンドラの内容によって3種類ある。
 
-%\texttt{handle} 節を実行した結果値 \texttt{v} になったことを \texttt{Return v} と表し、値になる前にオペレーション呼び出しが行われたことを \texttt{OpCall (name, v, k)} で表す。この結果とハンドラを受け取ってハンドラの処理をするのが関数 \texttt{apply\_handler} である。関数 \texttt{apply\_handler} の動作は \texttt{handle} 節の実行結果とハンドラの内容によって3種類ある。
+%\texttt{handle} 節を実行した結果値 \texttt{v} になったことを \texttt{Return v} と表し、値になる前にオペレーション呼び出しが行われたことを \texttt{OpCall (name, v, k)} で表す。この結果とハンドラを受け取ってハンドラの処理をするのが関数 \texttt{apply\US handler} である。関数 \texttt{apply\US handler} の動作は \texttt{handle} 節の実行結果とハンドラの内容によって3種類ある。
 
-%そして \texttt{handle} 節内を実行した結果を表すのが \texttt{a} 型で、 \texttt{handle} 節を実行した結果値 \texttt{v} になったことを \texttt{Return v} と表し、値になる前にオペレーション呼び出しが行われたことを \texttt{OpCall (name, v, k)} で表す。この結果とハンドラを受け取ってハンドラの処理をするのが関数 \texttt{apply\_handler} である。関数 \texttt{apply\_handler} の動作は \texttt{handle} 節の実行結果とハンドラの内容によって3種類ある。
+%そして \texttt{handle} 節内を実行した結果を表すのが \texttt{a} 型で、 \texttt{handle} 節を実行した結果値 \texttt{v} になったことを \texttt{Return v} と表し、値になる前にオペレーション呼び出しが行われたことを \texttt{OpCall (name, v, k)} で表す。この結果とハンドラを受け取ってハンドラの処理をするのが関数 \texttt{apply\US handler} である。関数 \texttt{apply\US handler} の動作は \texttt{handle} 節の実行結果とハンドラの内容によって3種類ある。
 
 \begin{enumerate}
 \item \texttt{handle} 節が値 \texttt{v}になった場合：ハンドラの \texttt{return} 節 \texttt{return x -> e} を参照して、\texttt{e[v/x]} を実行
@@ -245,32 +245,32 @@ let interpreter (e : e) : a = eval e (fun v -> Return v) (*FIdに変換される
 く、より広い継続となっている。
 %\item \texttt{handle} 節がオペレーション呼び出し \texttt{OpCall (name, v, k')} になった場合で、そのオペレーション \texttt{name} がハンドラ内で定義されていなかった場合：\texttt{handle} 節内の限定継続 \texttt{k'} に、1つ外側の \texttt{handle} までの限定継続を合成した継続 \texttt{fun v -> ...} を作り、それを \texttt{OpCall (name, v, (fun v -> ...))} と返す
 \item \texttt{handle} 節がオペレーション呼び出し \texttt{OpCall (name, v, k')} になった場合で、そのオペレーション \texttt{name} がハンドラ内で定義されていた場合：そのハンドラの定義 \texttt{name (x; y) -> e} を参照し、
-\texttt{e[v/x, cont\_value/y]} を実行する。
-（\texttt{cont\_value} については、以下の説明を参照。）
+\texttt{e[v/x, cont\US value/y]} を実行する。
+（\texttt{cont\US value} については、以下の説明を参照。）
 %\item \texttt{handle} 節がオペレーション呼び出し \texttt{OpCall (name, v, k')} になった場合で、そのオペレーション \texttt{name} がハンドラ内で定義されていた場合：そのハンドラの定義 \texttt{name (x; y) -> e} を参照し、 \texttt{e[v/x, k'/y]} を実行
 \end{enumerate}
 
 オペレーション呼び出しを処理する際に \texttt{k} に束縛する
-限定継続 \texttt{cont\_value} は、「オペレーション呼び出し時の
+限定継続 \texttt{cont\US value} は、「オペレーション呼び出し時の
 限定継続 \texttt{k'}」に「現在のハンドラ \texttt{h}」と
-「\texttt{cont\_value} が呼び出された時の継続 \texttt{k''}」
+「\texttt{cont\US value} が呼び出された時の継続 \texttt{k''}」
 を合成したものである。
 %% ここで、\texttt{k} 内の実行を現在のハンドラ \texttt{h} の中で行うのは
 %% deep ハンドラと呼ばれる方式 \cite{10.1145/2500365.2500590} を採用している
 %% ためである。
 %% shallow ハンドラと呼ばれる方式 \cite{10.1007/978-3-030-02768-1_22} を
 %% 採用する場合は、\texttt{k} 内の実行は現在のハンドラ \texttt{h} の外で
-%% 行われるので、\texttt{cont\_value} の代わりに
+%% 行われるので、\texttt{cont\US value} の代わりに
 %% 単に \texttt{fun k'' -> fun v -> k'' (k' v)} とすれば良い。
 
 このようにして作られた限定継続が呼び出されるのは \texttt{eval} の
 \texttt{App} の \texttt{Cont} のケースである。
-\texttt{cont\_value} は、この継続が呼び出された時点での
-限定継続が必要なので、それを \texttt{cont\_value k} のように渡してから
+\texttt{cont\US value} は、この継続が呼び出された時点での
+限定継続が必要なので、それを \texttt{cont\US value k} のように渡してから
 値 \texttt{v2} を渡している。
 %% shallow ハンドラを採用している場合は、\texttt{Cont} に格納する
 %% 継続を単に \texttt{k'} として、それを適用する際に
-%% \texttt{k (cont\_value v2)} とすれば良い。
+%% \texttt{k (cont\US value v2)} とすれば良い。
 
 これまで、algebraic effects の意味論は small-step のもの
 \cite{10.1145/2500365.2500590, PRETNAR201519}
@@ -285,4 +285,4 @@ CPS で書かれた big-step のもの
 おり、algebraic effects の定義を与えるインタプリタ (definitional
 intepreter) と捉えて良いのではないかと考えている。
 
-%関数 \texttt{apply\_handler} の下から 5 行目に \texttt{(fun k'' -> fun v -> ...)} という関数がある。このうち \texttt{fun v -> ...} の部分は \texttt{k'} の後に \texttt{k''} を行うという継続であり、継続を実際に適用する際に引数に適用するものである。\texttt{k''} はこの継続を適用する時点で関数 \texttt{eval} が引数に保持している継続である。なぜ \texttt{k''} をとる関数になっているのかというと、例えば \texttt{(fun a -> a) ((fun y => with h handle (fun b -> b) y) 1)} の継続の適用をするとき、継続値は「受け取った値に \texttt{fun b -> b} を適用してそれをハンドラ \texttt{h} で処理する」というメタ継続を持っているが、さらにその後には「そこに\texttt{fun a -> a}を適用する」という継続を合成したいのに、継続を capture する時点では \texttt{fun a -> a} についての情報は見えないからである。関数 \texttt{eval} 内の \texttt{(k' k) v2} という部分で、この関数 \texttt{(fun k'' -> fun v -> ...)} に継続の適用の後の継続 \texttt{k} を渡すことで合成された継続を作り、そこに値を渡している。
+%関数 \texttt{apply\US handler} の下から 5 行目に \texttt{(fun k'' -> fun v -> ...)} という関数がある。このうち \texttt{fun v -> ...} の部分は \texttt{k'} の後に \texttt{k''} を行うという継続であり、継続を実際に適用する際に引数に適用するものである。\texttt{k''} はこの継続を適用する時点で関数 \texttt{eval} が引数に保持している継続である。なぜ \texttt{k''} をとる関数になっているのかというと、例えば \texttt{(fun a -> a) ((fun y => with h handle (fun b -> b) y) 1)} の継続の適用をするとき、継続値は「受け取った値に \texttt{fun b -> b} を適用してそれをハンドラ \texttt{h} で処理する」というメタ継続を持っているが、さらにその後には「そこに\texttt{fun a -> a}を適用する」という継続を合成したいのに、継続を capture する時点では \texttt{fun a -> a} についての情報は見えないからである。関数 \texttt{eval} 内の \texttt{(k' k) v2} という部分で、この関数 \texttt{(fun k'' -> fun v -> ...)} に継続の適用の後の継続 \texttt{k} を渡すことで合成された継続を作り、そこに値を渡している。
